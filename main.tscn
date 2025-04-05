@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://ioy1d1qd0grx"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_a1fbw"]
+[ext_resource type="PackedScene" uid="uid://ctascef0av2kr" path="res://scenes/ui/main_menu.tscn" id="2_jdul5"]
+[ext_resource type="PackedScene" uid="uid://o4dnquijjfx5" path="res://scenes/game_world.tscn" id="2_ygnli"]
+
+[node name="main" type="Node" node_paths=PackedStringArray("MainMenu")]
+script = ExtResource("1_a1fbw")
+GameScene = ExtResource("2_ygnli")
+MainMenu = NodePath("MainMenu")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_jdul5")]

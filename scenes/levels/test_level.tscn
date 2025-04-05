@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck7ax5ot0uil0"]
+
+[ext_resource type="PackedScene" uid="uid://dyqgnosvp35fn" path="res://scenes/enemies/enemy_spawner.tscn" id="2_ownsw"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="enemySpawner" parent="." instance=ExtResource("2_ownsw")]
