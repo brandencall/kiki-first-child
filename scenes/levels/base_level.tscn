@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbvnu25cdjs7v"]
 
 [ext_resource type="PackedScene" uid="uid://dyqgnosvp35fn" path="res://scenes/enemies/enemy_spawner.tscn" id="1_o88bn"]
-[ext_resource type="Script" path="res://scripts/levels/BaseLevel.cs" id="1_wr0yw"]
+[ext_resource type="Script" uid="uid://d1ufngvssu73o" path="res://scripts/levels/BaseLevel.cs" id="1_wr0yw"]
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_wr0yw")
