@@ -6,6 +6,8 @@ public partial class Player : CharacterBody2D
     public BasePlayerStats Stats { get; set; }
     [Signal]
     public delegate void PlayerMovedEventHandler(Vector2 newPosition);
+    [Signal]
+    public delegate void PlayerDiedEventHandler();
 
     public override void _Ready()
     {
@@ -34,5 +36,6 @@ public partial class Player : CharacterBody2D
     private void Die()
     {
         GD.Print("Player died");
+        EmitSignal(SignalName.PlayerDied);
     }
 }

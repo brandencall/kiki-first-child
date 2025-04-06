@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public partial class LevelManager : Node
 {
+    [Export]
+    private Player _player { get; set; }
     public string CurrentLevel { get; private set; }
     private List<string> _levelPaths = new()
     {
@@ -14,6 +16,7 @@ public partial class LevelManager : Node
     {
         _currentLevelIndex = 0;
         CurrentLevel = _levelPaths[_currentLevelIndex];
+        _player.PlayerDied += OnPlayerDied;
     }
 
     public string GetNextLevel()
@@ -28,5 +31,10 @@ public partial class LevelManager : Node
         {
             return _levelPaths[_currentLevelIndex];
         }
+    }
+
+    private void OnPlayerDied()
+    {
+        GD.Print("Play death screen");
     }
 }
