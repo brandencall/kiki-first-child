@@ -32,26 +32,37 @@ public partial class EnemySpawner : Node
 
     private Vector2 SpawnLocation()
     {
-        Vector2 playerPostion = _player.Position;
-        return new Vector2(
-                playerPostion.X + GetRandomNumber(),
-                playerPostion.Y + GetRandomNumber()
-                );
+        Vector2 bounds = _player.GetCameraBounds();
+        return RandomSpawnLocation(bounds);
     }
 
-    private int GetRandomNumber()
+    private Vector2 RandomSpawnLocation(Vector2 cameraBounds)
     {
-        int randomNumber;
-        int minNumber = 650;
-        int maxNumber = 650;
-        if (_random.Next(0, 2) == 0)
+        int distanceOutsideScreen = 100;
+        var rng = new RandomNumberGenerator();
+        rng.Randomize();
+
+        float randomX, randomY;
+
+        if (rng.Randi() % 2 == 0)
         {
-            randomNumber = _random.Next(minNumber, maxNumber);
+            // Top or Bottom
+            randomX = rng.RandiRange(-(int)cameraBounds.X, (int)cameraBounds.X);
+            randomY = rng.Randi() % 2 == 0
+                ? cameraBounds.Y - distanceOutsideScreen
+                : -cameraBounds.Y + distanceOutsideScreen;
         }
         else
         {
-            randomNumber = _random.Next(-maxNumber, minNumber);
+            // Left or Right
+            randomY = rng.RandiRange(-(int)cameraBounds.Y, (int)cameraBounds.Y);
+            randomX = rng.Randi() % 2 == 0
+                ? cameraBounds.X - distanceOutsideScreen        
+                : -cameraBounds.X + distanceOutsideScreen;        
         }
-        return randomNumber;
+
+        GD.Print("randomX: " + randomX + ", randomY: " + randomY);
+
+        return new Vector2(randomX, randomY);
     }
 }

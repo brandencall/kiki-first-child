@@ -4,6 +4,8 @@ public partial class Player : CharacterBody2D
 {
     [Export]
     public BasePlayerStats Stats { get; set; }
+    [Export]
+    private Camera2D _camera;
     [Signal]
     public delegate void PlayerMovedEventHandler(Vector2 newPosition);
     [Signal]
@@ -26,11 +28,19 @@ public partial class Player : CharacterBody2D
     {
         GD.Print("Player took " + damage);
         Stats.Health -= damage;
-        
+
         if (Stats.Health <= 0)
         {
             Die();
         }
+    }
+
+    public Vector2 GetCameraBounds()
+    {
+        var screenSize = GetViewportRect().Size;
+        Vector2 zoomedSize = screenSize / _camera.Zoom;
+        Vector2 topLeft = _camera.GlobalPosition - zoomedSize / 2;
+        return topLeft;
     }
 
     private void Die()
