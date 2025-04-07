@@ -18,3 +18,4 @@ _player = NodePath("../player")
 [node name="player" parent="." instance=ExtResource("1_p5yyv")]
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(0.8, 0.8)
