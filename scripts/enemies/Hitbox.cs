@@ -17,7 +17,6 @@ public partial class Hitbox : Area2D
 
     public void OnHitboxAreaEntered(AttackArea attackArea)
     {
-        GD.Print("here");
         if (attackArea == null)
         {
             return;

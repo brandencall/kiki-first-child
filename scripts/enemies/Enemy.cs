@@ -53,6 +53,5 @@ public partial class Enemy : CharacterBody2D
 
     public void OnTakeDamage(int damage)
     {
-        GD.Print("Enemy taking damage! Damage: " + damage);
     }
 }
