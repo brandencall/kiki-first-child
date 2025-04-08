@@ -4,6 +4,8 @@ public partial class Enemy : CharacterBody2D
 {
 
     [Export]
+    public Hitbox Hitbox { get; set; }
+    [Export]
     protected int speed = 200;
     [Export]
     protected int damage = 10;
@@ -22,6 +24,7 @@ public partial class Enemy : CharacterBody2D
         {
             _player.PlayerMoved += UpdatePlayerPosition;
         }
+        Hitbox.TakeDamage += OnTakeDamage;
     }
 
     private void UpdatePlayerPosition(Vector2 newPosition)
@@ -45,7 +48,11 @@ public partial class Enemy : CharacterBody2D
         
     public void Attack()
     {
-        GD.Print("Attacking player");
         _player.TakeDamage(damage);
+    }
+
+    public void OnTakeDamage(int damage)
+    {
+        GD.Print("Enemy taking damage! Damage: " + damage);
     }
 }

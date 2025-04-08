@@ -61,8 +61,6 @@ public partial class EnemySpawner : Node
                 : -cameraBounds.X + distanceOutsideScreen;        
         }
 
-        GD.Print("randomX: " + randomX + ", randomY: " + randomY);
-
         return new Vector2(randomX, randomY);
     }
 }
