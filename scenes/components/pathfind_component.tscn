@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3seqv6e5bdw0"]
+
+[ext_resource type="Script" uid="uid://ma2qgq8hdhp7" path="res://scripts/components/PathfindComponent.cs" id="1_y07gc"]
+
+[node name="PathfindComponent" type="Node2D"]
+script = ExtResource("1_y07gc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true

@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://g2nuveh0mj60"]
+
+[ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
+[ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
+[ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="2_b84d3"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_75qt5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b84d3"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jcgl"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75qt5"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcjc4"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkq1h"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tngb"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lgr16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b84d3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jcgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75qt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcjc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkq1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tngb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wxwfn"]
+radius = 41.1947
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcgl"]
+size = Vector2(32, 68)
+
+[node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("_healthComponent")]
+script = ExtResource("1_7jcgl")
+_healthComponent = NodePath("HealthComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lgr16")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wxwfn")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_b84d3")]
+collision_layer = 2
+collision_mask = 0
+Damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(48, -2)
+shape = SubResource("RectangleShape2D_7jcgl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_75qt5")]

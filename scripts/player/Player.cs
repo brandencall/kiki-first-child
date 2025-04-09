@@ -20,7 +20,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        AddToGroup("players");
+        AddToGroup("player");
         attackCollision = AttackArea.GetNode<CollisionShape2D>("AttackCollision");
         AttackArea.AttackDamage = Stats.Damage;
     }
