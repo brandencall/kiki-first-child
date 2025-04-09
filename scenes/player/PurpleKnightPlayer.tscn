@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://g2nuveh0mj60"]
+[gd_scene load_steps=20 format=3 uid="uid://g2nuveh0mj60"]
 
 [ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
@@ -29,6 +29,30 @@ region = Rect2(768, 0, 192, 192)
 atlas = ExtResource("1_wxwfn")
 region = Rect2(960, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lx0ax"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu564"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omh1f"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lktgj"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsk8h"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11lgb"]
+atlas = ExtResource("1_wxwfn")
+region = Rect2(960, 192, 192, 192)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgr16"]
 animations = [{
 "frames": [{
@@ -51,7 +75,30 @@ animations = [{
 "texture": SubResource("AtlasTexture_5tngb")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lx0ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu564")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omh1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lktgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsk8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11lgb")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 10.0
 }]
 
@@ -61,12 +108,15 @@ radius = 41.1947
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcgl"]
 size = Vector2(32, 68)
 
-[node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("_healthComponent")]
+[node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("_healthComponent", "Animations")]
 script = ExtResource("1_7jcgl")
 _healthComponent = NodePath("HealthComponent")
+Animations = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lgr16")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wxwfn")
