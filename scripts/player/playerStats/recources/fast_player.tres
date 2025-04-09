@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="BasePlayerStats" load_steps=2 format=3 uid="uid://b0iqpnbujpt63"]
-
-[ext_resource type="Script" uid="uid://bypj5cj0wkh8f" path="res://scripts/player/playerStats/BasePlayerStats.cs" id="1_vr416"]
-
-[resource]
-script = ExtResource("1_vr416")
-Health = 40
-Speed = 350
-Damage = 10
