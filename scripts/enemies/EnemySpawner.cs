@@ -7,32 +7,33 @@ public partial class EnemySpawner : Node
     public PackedScene EnemyScene;
     private Random _random = new Random();
     private CharacterBody2D _player;
-    private Vector2 _cameraBounds;
+    private Camera2D _camera;
+
+    //TODO: This is NOT the right way to do this. But does make the enemies spawn outside of camera.
+    //Might need to do something similar to this: https://www.youtube.com/watch?v=7rijR1_PBBQ
+    private Vector2 _topLeftCamera = new Vector2(0, 0);
+    private Vector2 _topRightCamera = new Vector2(0, 0);
+    private Vector2 _bottomLeftCamera = new Vector2(0, 0);
+    private Vector2 _bottomRightCamera = new Vector2(0, 0);
+
+    public override void _Notification(int what)
+    {
+        base._Notification(what);
+        if (what == NotificationWMSizeChanged)
+        {
+            var screenSize = GetViewport().GetVisibleRect().Size;
+            GD.Print("screenSize: " + screenSize);
+        }
+    }
 
     public override void _Ready()
     {
         var timer = GetNode<Timer>("Timer");
         timer.Timeout += OnTimerTimeout;
         _player = this.GetPlayer();
-        _cameraBounds = GetCameraBounds();
-    }
-
-    private Vector2 GetCameraBounds()
-    {
-        Camera2D camera = _player.GetNode<Camera2D>("Camera2D"); 
-        if (camera != null)
+        if (_player != null)
         {
-            GD.Print("Player has a camera");
-
-            var screenSize = camera.GetViewportRect().Size;
-            Vector2 zoomedSize = screenSize / camera.Zoom;
-            Vector2 topLeft = camera.GlobalPosition - zoomedSize / 2;
-            return topLeft;
-        }
-        else
-        {
-            GD.Print("No camera");
-            return new Vector2(0, 0);
+            _camera = _player.GetNode<Camera2D>("Camera2D");
         }
     }
 
@@ -52,10 +53,24 @@ public partial class EnemySpawner : Node
 
     private Vector2 SpawnLocation()
     {
-        return RandomSpawnLocation(_cameraBounds);
+        GetCameraBounds();
+        return RandomSpawnLocation();
     }
 
-    private Vector2 RandomSpawnLocation(Vector2 cameraBounds)
+    private void GetCameraBounds()
+    {
+        if (_camera != null)
+        {
+            var screenSize = GetViewport().GetVisibleRect().Size;
+            Vector2 zoomedSize = screenSize / _camera.Zoom;
+            _topLeftCamera = _camera.GlobalPosition - zoomedSize / 2;
+            _topRightCamera = new Vector2(_topLeftCamera.X + zoomedSize.X, _topLeftCamera.Y);
+            _bottomLeftCamera = new Vector2(_topLeftCamera.X, _topLeftCamera.Y + zoomedSize.Y);
+            _bottomRightCamera = new Vector2(_topLeftCamera.X + zoomedSize.X, _topRightCamera.Y + zoomedSize.Y);
+        }
+    }
+
+    private Vector2 RandomSpawnLocation()
     {
         int distanceOutsideScreen = 100;
         var rng = new RandomNumberGenerator();
@@ -66,18 +81,14 @@ public partial class EnemySpawner : Node
         if (rng.Randi() % 2 == 0)
         {
             // Top or Bottom
-            randomX = rng.RandiRange(-(int)cameraBounds.X, (int)cameraBounds.X);
-            randomY = rng.Randi() % 2 == 0
-                ? cameraBounds.Y - distanceOutsideScreen
-                : -cameraBounds.Y + distanceOutsideScreen;
+            randomX = rng.RandiRange((int)_topLeftCamera.X, (int)_topRightCamera.X);
+            randomY = rng.Randi() % 2 == 0 ? _topLeftCamera.Y - distanceOutsideScreen : _bottomLeftCamera.Y + distanceOutsideScreen;
         }
         else
         {
             // Left or Right
-            randomY = rng.RandiRange(-(int)cameraBounds.Y, (int)cameraBounds.Y);
-            randomX = rng.Randi() % 2 == 0
-                ? cameraBounds.X - distanceOutsideScreen
-                : -cameraBounds.X + distanceOutsideScreen;
+            randomY = rng.RandiRange((int)_topLeftCamera.Y, (int)_bottomLeftCamera.Y);
+            randomX = rng.Randi() % 2 == 0 ? _topLeftCamera.X - distanceOutsideScreen : _topRightCamera.X + distanceOutsideScreen;
         }
 
         return new Vector2(randomX, randomY);
