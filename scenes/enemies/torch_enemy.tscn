@@ -96,7 +96,7 @@ _healthComponent = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_7ixfx")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_5g05m")]
-_accelerationCoefficient = 20.0
+_accelerationCoefficient = 10.0
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_rpgxn")]
 _velocityComponent = NodePath("../VelocityComponent")

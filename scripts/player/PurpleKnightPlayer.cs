@@ -3,11 +3,11 @@ using Godot;
 public partial class PurpleKnightPlayer : CharacterBody2D
 {
     [Export]
+    public AnimatedSprite2D Animations { get; set; }
+    [Export]
     private HealthComponent _healthComponent;
     [Export]
-    public AnimatedSprite2D Animations { get; set; }
-
-    public float Speed = 200;
+    private VelocityComponent _velocityComponent;
 
     public override void _Ready()
     {
@@ -18,7 +18,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        Velocity = inputDirection * Speed;
+        _velocityComponent.AccelerateInDirection(inputDirection);
         if (inputDirection.X != 0)
         {
             if (inputDirection.X < 0)
@@ -31,8 +31,9 @@ public partial class PurpleKnightPlayer : CharacterBody2D
             }
         }
 
-        if (Velocity == Vector2.Zero)
+        if (inputDirection.IsZeroApprox())
         {
+            _velocityComponent.Declerate();
             Animations.Play("idle");
         }
         else if (Velocity != Vector2.Zero)
@@ -40,7 +41,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
             Animations.Play("walk");
         }
 
-        MoveAndSlide();
+        _velocityComponent.Move(this);
     }
 
     private void Die()

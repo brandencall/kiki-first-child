@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://g2nuveh0mj60"]
+[gd_scene load_steps=22 format=3 uid="uid://g2nuveh0mj60"]
 
 [ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
 [ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="2_b84d3"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_75qt5"]
 [ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawn_path.tscn" id="5_wu564"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="6_omh1f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b84d3"]
 atlas = ExtResource("1_wxwfn")
@@ -109,10 +110,11 @@ radius = 41.1947
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcgl"]
 size = Vector2(32, 68)
 
-[node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("_healthComponent", "Animations")]
+[node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "_healthComponent", "_velocityComponent")]
 script = ExtResource("1_7jcgl")
-_healthComponent = NodePath("HealthComponent")
 Animations = NodePath("AnimatedSprite2D")
+_healthComponent = NodePath("HealthComponent")
+_velocityComponent = NodePath("VelocityComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lgr16")
@@ -133,7 +135,12 @@ shape = SubResource("RectangleShape2D_7jcgl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_75qt5")]
 
 [node name="EnemySpawnPath" parent="." instance=ExtResource("5_wu564")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("6_omh1f")]
+_maxSpeed = 200.0
+_accelerationCoefficient = 10.0
