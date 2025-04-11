@@ -7,24 +7,8 @@ public partial class EnemySpawner : Node
     public PackedScene EnemyScene;
     private Random _random = new Random();
     private CharacterBody2D _player;
-    private Camera2D _camera;
-
-    //TODO: This is NOT the right way to do this. But does make the enemies spawn outside of camera.
-    //Might need to do something similar to this: https://www.youtube.com/watch?v=7rijR1_PBBQ
-    private Vector2 _topLeftCamera = new Vector2(0, 0);
-    private Vector2 _topRightCamera = new Vector2(0, 0);
-    private Vector2 _bottomLeftCamera = new Vector2(0, 0);
-    private Vector2 _bottomRightCamera = new Vector2(0, 0);
-
-    public override void _Notification(int what)
-    {
-        base._Notification(what);
-        if (what == NotificationWMSizeChanged)
-        {
-            var screenSize = GetViewport().GetVisibleRect().Size;
-            GD.Print("screenSize: " + screenSize);
-        }
-    }
+    private PathFollow2D _spawnPath;
+    private Marker2D _spawnMarker;
 
     public override void _Ready()
     {
@@ -33,7 +17,9 @@ public partial class EnemySpawner : Node
         _player = this.GetPlayer();
         if (_player != null)
         {
-            _camera = _player.GetNode<Camera2D>("Camera2D");
+            Path2D path = _player.GetNode<Path2D>("EnemySpawnPath");
+            _spawnPath = path.GetChild<PathFollow2D>(0);
+            _spawnMarker = _spawnPath.GetChild<Marker2D>(0);
         }
     }
 
@@ -42,6 +28,8 @@ public partial class EnemySpawner : Node
         SpawnEnemy();
     }
 
+    //TODO: Create a spawn manager that hands this what kind of enemy to spawn.
+    //Make a method for spawning enemies off camera and one for on camera?
     public void SpawnEnemy()
     {
         if (EnemyScene == null) return;
@@ -53,44 +41,14 @@ public partial class EnemySpawner : Node
 
     private Vector2 SpawnLocation()
     {
-        GetCameraBounds();
-        return RandomSpawnLocation();
+        return SpawnEnemyOutsideOfCamera();
     }
 
-    private void GetCameraBounds()
+    private Vector2 SpawnEnemyOutsideOfCamera()
     {
-        if (_camera != null)
-        {
-            var screenSize = GetViewport().GetVisibleRect().Size;
-            Vector2 zoomedSize = screenSize / _camera.Zoom;
-            _topLeftCamera = _camera.GlobalPosition - zoomedSize / 2;
-            _topRightCamera = new Vector2(_topLeftCamera.X + zoomedSize.X, _topLeftCamera.Y);
-            _bottomLeftCamera = new Vector2(_topLeftCamera.X, _topLeftCamera.Y + zoomedSize.Y);
-            _bottomRightCamera = new Vector2(_topLeftCamera.X + zoomedSize.X, _topRightCamera.Y + zoomedSize.Y);
-        }
-    }
+        if (_spawnPath == null) return new Vector2(0, 0);
 
-    private Vector2 RandomSpawnLocation()
-    {
-        int distanceOutsideScreen = 100;
-        var rng = new RandomNumberGenerator();
-        rng.Randomize();
-
-        float randomX, randomY;
-
-        if (rng.Randi() % 2 == 0)
-        {
-            // Top or Bottom
-            randomX = rng.RandiRange((int)_topLeftCamera.X, (int)_topRightCamera.X);
-            randomY = rng.Randi() % 2 == 0 ? _topLeftCamera.Y - distanceOutsideScreen : _bottomLeftCamera.Y + distanceOutsideScreen;
-        }
-        else
-        {
-            // Left or Right
-            randomY = rng.RandiRange((int)_topLeftCamera.Y, (int)_bottomLeftCamera.Y);
-            randomX = rng.Randi() % 2 == 0 ? _topLeftCamera.X - distanceOutsideScreen : _topRightCamera.X + distanceOutsideScreen;
-        }
-
-        return new Vector2(randomX, randomY);
+        _spawnPath.ProgressRatio = (float)_random.NextDouble();
+        return _spawnMarker.GlobalPosition;
     }
 }
