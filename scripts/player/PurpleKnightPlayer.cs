@@ -11,6 +11,8 @@ public partial class PurpleKnightPlayer : CharacterBody2D
 
     public override void _Ready()
     {
+        CollisionLayer = 8;
+        CollisionMask = 0;
         AddToGroup("player");
         _healthComponent.Died += Die;
     }

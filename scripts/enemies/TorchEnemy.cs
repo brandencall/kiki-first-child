@@ -13,6 +13,8 @@ public partial class TorchEnemy : CharacterBody2D
 
     public override void _Ready()
     {
+        CollisionLayer = 16;
+        CollisionMask = 0 | 16;
         _player = this.GetPlayer();
         _healthComponent.Died += Die;
     }
