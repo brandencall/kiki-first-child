@@ -117,6 +117,7 @@ _healthComponent = NodePath("HealthComponent")
 _velocityComponent = NodePath("VelocityComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lgr16")
 animation = &"idle"
 autoplay = "idle"
@@ -135,6 +136,7 @@ shape = SubResource("RectangleShape2D_7jcgl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_75qt5")]
