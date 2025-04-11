@@ -13,6 +13,7 @@ public partial class PathfindComponent : Node2D
         NavigationAgent2D = GetNode<NavigationAgent2D>("NavigationAgent2D");
         NavigationAgent2D.AvoidanceEnabled = true;
         NavigationAgent2D.Radius = 30;
+        NavigationAgent2D.TargetDesiredDistance = 50;
         NavigationAgent2D.VelocityComputed += OnVelocityComputed;
     }
 

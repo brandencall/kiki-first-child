@@ -111,6 +111,7 @@ radius = 41.1947
 size = Vector2(32, 68)
 
 [node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "_healthComponent", "_velocityComponent")]
+collision_layer = 8
 script = ExtResource("1_7jcgl")
 Animations = NodePath("AnimatedSprite2D")
 _healthComponent = NodePath("HealthComponent")
@@ -128,20 +129,22 @@ shape = SubResource("CircleShape2D_wxwfn")
 [node name="HitboxComponent" parent="." instance=ExtResource("2_b84d3")]
 collision_layer = 2
 collision_mask = 0
-Damage = 5.0
+Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(48, -2)
 shape = SubResource("RectangleShape2D_7jcgl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(0.6, 0.6)
 process_callback = 0
 position_smoothing_enabled = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_75qt5")]
 
 [node name="EnemySpawnPath" parent="." instance=ExtResource("5_wu564")]
+position = Vector2(-15.1876, -13.4656)
+scale = Vector2(1.29692, 1.3082)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("6_omh1f")]
 _maxSpeed = 200.0
