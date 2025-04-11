@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://g2nuveh0mj60"]
+[gd_scene load_steps=25 format=3 uid="uid://g2nuveh0mj60"]
 
 [ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_75qt5"]
 [ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawn_path.tscn" id="5_wu564"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="6_omh1f"]
+[ext_resource type="PackedScene" uid="uid://boypsm2a2wu72" path="res://scenes/player/player_hurtbox.tscn" id="7_lktgj"]
+[ext_resource type="Script" uid="uid://ccrqj8ik3slbo" path="res://scripts/player/PlayerHurtbox.cs" id="8_vsk8h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b84d3"]
 atlas = ExtResource("1_wxwfn")
@@ -110,6 +112,9 @@ radius = 41.1947
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jcgl"]
 size = Vector2(32, 68)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsk8h"]
+radius = 25.02
+
 [node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "_healthComponent", "_velocityComponent")]
 collision_layer = 8
 script = ExtResource("1_7jcgl")
@@ -124,6 +129,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_wxwfn")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_b84d3")]
@@ -132,6 +138,7 @@ collision_mask = 0
 Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
 position = Vector2(48, -2)
 shape = SubResource("RectangleShape2D_7jcgl")
 
@@ -149,3 +156,10 @@ scale = Vector2(1.29692, 1.3082)
 [node name="VelocityComponent" parent="." instance=ExtResource("6_omh1f")]
 _maxSpeed = 200.0
 _accelerationCoefficient = 10.0
+
+[node name="PlayerHurtbox" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_lktgj")]
+script = ExtResource("8_vsk8h")
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CircleShape2D_vsk8h")

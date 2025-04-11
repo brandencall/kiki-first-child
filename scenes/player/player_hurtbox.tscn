@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://boypsm2a2wu72"]
+
+[node name="PlayerHurtbox" type="Area2D"]

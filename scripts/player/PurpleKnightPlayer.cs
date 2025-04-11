@@ -46,6 +46,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         _velocityComponent.Move(this);
     }
 
+    //TODO: Handle player dying
     private void Die()
     {
         GD.Print("Player has died");

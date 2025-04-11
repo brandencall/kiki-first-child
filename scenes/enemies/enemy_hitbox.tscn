@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://tk3k1hq6bh4c"]
+
+[ext_resource type="Script" uid="uid://mvftw82rbnh3" path="res://scripts/enemies/EnemyHitbox.cs" id="1_p5qyl"]
+
+[node name="EnemyHitbox" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_p5qyl")

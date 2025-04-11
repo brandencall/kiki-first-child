@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://21jh3phd8im0"]
+[gd_scene load_steps=19 format=3 uid="uid://21jh3phd8im0"]
 
 [ext_resource type="Script" uid="uid://ny6fmsepu1q0" path="res://scripts/enemies/TorchEnemy.cs" id="1_51h4k"]
 [ext_resource type="Texture2D" uid="uid://eiuu1b88umeh" path="res://assets/PlaceholderAssets/Enemies/Torch_Red.png" id="1_hnyor"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="2_7ixfx"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_5g05m"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_rpgxn"]
+[ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_cvp63"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ccw1"]
 atlas = ExtResource("1_hnyor")
@@ -70,6 +71,9 @@ radius = 24.0832
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ixfx"]
 radius = 39.0128
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvp63"]
+radius = 24.0208
+
 [node name="TorchEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent")]
 collision_layer = 16
 collision_mask = 17
@@ -84,12 +88,14 @@ animation = &"idle"
 frame_progress = 0.778117
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_ypue0")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_7ixfx")]
 MaxHealth = 10.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("2_4ccw1")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 _healthComponent = NodePath("../HealthComponent")
@@ -102,3 +108,9 @@ _accelerationCoefficient = 10.0
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_rpgxn")]
 _velocityComponent = NodePath("../VelocityComponent")
+
+[node name="EnemyHitbox" parent="." instance=ExtResource("7_cvp63")]
+Damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+shape = SubResource("CircleShape2D_cvp63")
