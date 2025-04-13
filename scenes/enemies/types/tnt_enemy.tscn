@@ -1,0 +1,111 @@
+[gd_scene load_steps=19 format=3 uid="uid://cdchnwbwchdgc"]
+
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_2kf4r"]
+[ext_resource type="Script" uid="uid://by18ujttbgfgi" path="res://scripts/enemies/types/TNTEnemy.cs" id="2_fn4nn"]
+[ext_resource type="Texture2D" uid="uid://b2knnfe1m0j54" path="res://assets/PlaceholderAssets/Enemies/TNT_Red.png" id="2_kxu1x"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_nsg18"]
+[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_kvfa0"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_ixoyh"]
+[ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_fn4nn"]
+[ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_o6vva"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3ynh"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsg18"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvfa0"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgvgl"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixoyh"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn4nn"]
+atlas = ExtResource("2_kxu1x")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6vva"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3ynh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsg18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvfa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgvgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixoyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn4nn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y66mr"]
+radius = 28.0179
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tgvgl"]
+radius = 25.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4ju3"]
+radius = 29.0172
+
+[node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_2kf4r")]
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("2_fn4nn")
+_velocityComponent = NodePath("VelocityComponent")
+_pathfindComponent = NodePath("PathfindComponent")
+_healthComponent = NodePath("HealthComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_o6vva")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, 5)
+shape = SubResource("CircleShape2D_y66mr")
+
+[node name="HealthComponent" parent="." index="2" instance=ExtResource("3_nsg18")]
+MaxHealth = 20.0
+
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_kvfa0")]
+collision_layer = 0
+collision_mask = 2
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+visible = false
+position = Vector2(-1, 5)
+shape = SubResource("CircleShape2D_tgvgl")
+
+[node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_ixoyh")]
+
+[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_fn4nn")]
+_velocityComponent = NodePath("../VelocityComponent")
+
+[node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_o6vva")]
+visible = false
+Damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_u4ju3")

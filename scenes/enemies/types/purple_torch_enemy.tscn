@@ -1,0 +1,103 @@
+[gd_scene load_steps=18 format=3 uid="uid://cuamgj4h45el0"]
+
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_0twls"]
+[ext_resource type="Texture2D" uid="uid://hj8dd7t6s13y" path="res://assets/PlaceholderAssets/Enemies/Torch_Purple.png" id="2_0u8o0"]
+[ext_resource type="Script" uid="uid://sswo4thgq60t" path="res://scripts/enemies/types/PurpleTorchEnemy.cs" id="2_rhybd"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_rhybd"]
+[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_7un2t"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_0xeva"]
+[ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_tvn5i"]
+[ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_x01fy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx74f"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5b6r"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2ls4"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjlds"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qgsa"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0g7m"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d453"]
+atlas = ExtResource("2_0u8o0")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j8ksk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx74f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5b6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2ls4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjlds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qgsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0g7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d453")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7d0x"]
+radius = 26.0
+
+[node name="PurpleTorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_0twls")]
+script = ExtResource("2_rhybd")
+_velocityComponent = NodePath("VelocityComponent")
+_pathfindComponent = NodePath("PathfindComponent")
+_healthComponent = NodePath("HealthComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_j8ksk")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_a7d0x")
+
+[node name="HealthComponent" parent="." index="2" instance=ExtResource("3_rhybd")]
+MaxHealth = 20.0
+
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_7un2t")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_a7d0x")
+
+[node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_0xeva")]
+
+[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_tvn5i")]
+_velocityComponent = NodePath("../VelocityComponent")
+
+[node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_x01fy")]
+Damage = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
+shape = SubResource("CircleShape2D_a7d0x")

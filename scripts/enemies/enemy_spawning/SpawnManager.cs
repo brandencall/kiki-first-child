@@ -30,7 +30,6 @@ public partial class SpawnManager : Node
             await StartWave(wave);
             await ToSignal(GetTree().CreateTimer(_timeBetweenWaves), "timeout");
         }
-        GD.Print("Finished");
     }
 
     private async Task StartWave(WaveInfo wave)

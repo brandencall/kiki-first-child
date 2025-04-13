@@ -1,6 +1,7 @@
 using Godot;
+using System;
 
-public partial class TorchEnemy : CharacterBody2D
+public partial class TNTEnemy : BaseEnemy
 {
     [Export]
     private VelocityComponent _velocityComponent;
@@ -9,13 +10,9 @@ public partial class TorchEnemy : CharacterBody2D
     [Export]
     private HealthComponent _healthComponent;
 
-    private CharacterBody2D _player;
-
     public override void _Ready()
     {
-        CollisionLayer = 16;
-        CollisionMask = 0 | 16;
-        _player = this.GetPlayer();
+        base._Ready();
         _healthComponent.Died += Die;
     }
 
