@@ -3,8 +3,6 @@ using System;
 
 public partial class EnemySpawner : Node
 {
-    [Export]
-    public PackedScene EnemyScene;
     private Random _random = new Random();
     private CharacterBody2D _player;
     private PathFollow2D _spawnPath;
@@ -12,8 +10,6 @@ public partial class EnemySpawner : Node
 
     public override void _Ready()
     {
-        var timer = GetNode<Timer>("Timer");
-        timer.Timeout += OnTimerTimeout;
         _player = this.GetPlayer();
         if (_player != null)
         {
@@ -23,18 +19,11 @@ public partial class EnemySpawner : Node
         }
     }
 
-    private void OnTimerTimeout()
+    public void SpawnEnemy(PackedScene enemyScene)
     {
-        SpawnEnemy();
-    }
+        if (enemyScene == null) return;
 
-    //TODO: Create a spawn manager that hands this what kind of enemy to spawn.
-    //Make a method for spawning enemies off camera and one for on camera?
-    public void SpawnEnemy()
-    {
-        if (EnemyScene == null) return;
-
-        var enemy = EnemyScene.Instantiate<TorchEnemy>();
+        CharacterBody2D enemy = enemyScene.Instantiate<CharacterBody2D>();
         enemy.Position = SpawnLocation();
         GetParent().AddChild(enemy);
     }

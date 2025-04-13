@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5cfuuhobaaqf" path="res://assets/PlaceholderAssets/Terrain/Tilemap_Flat.png" id="1_w856r"]
 [ext_resource type="PackedScene" uid="uid://g2nuveh0mj60" path="res://scenes/player/PurpleKnightPlayer.tscn" id="1_wkkac"]
-[ext_resource type="PackedScene" uid="uid://dyqgnosvp35fn" path="res://scenes/enemies/enemy_spawner.tscn" id="3_w856r"]
+[ext_resource type="PackedScene" uid="uid://cc3hyajmwapp4" path="res://scenes/enemies/enemy_spawning/spawn_manager.tscn" id="3_w856r"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_mvnfp"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -64,4 +64,4 @@ tile_set = SubResource("TileSet_wkkac")
 [node name="PurpleKnightPlayer" parent="." instance=ExtResource("1_wkkac")]
 position = Vector2(450, 332)
 
-[node name="enemySpawner" parent="." instance=ExtResource("3_w856r")]
+[node name="SpawnManager" parent="." instance=ExtResource("3_w856r")]

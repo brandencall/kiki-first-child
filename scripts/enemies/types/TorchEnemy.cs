@@ -31,7 +31,6 @@ public partial class TorchEnemy : CharacterBody2D
 
     private void Die()
     {
-        GD.Print("Enemy has died");
         QueueFree();
     }
 }

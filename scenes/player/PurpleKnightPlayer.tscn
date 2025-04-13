@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
 [ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="2_b84d3"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_75qt5"]
-[ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawn_path.tscn" id="5_wu564"]
+[ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawning/enemy_spawn_path.tscn" id="5_wu564"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="6_omh1f"]
 [ext_resource type="PackedScene" uid="uid://boypsm2a2wu72" path="res://scenes/player/player_hurtbox.tscn" id="7_lktgj"]
 [ext_resource type="Script" uid="uid://ccrqj8ik3slbo" path="res://scripts/player/PlayerHurtbox.cs" id="8_vsk8h"]

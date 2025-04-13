@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc3hyajmwapp4"]
+
+[ext_resource type="Script" uid="uid://doejjvppl3f5o" path="res://scripts/enemies/enemy_spawning/SpawnManager.cs" id="1_oo7ng"]
+[ext_resource type="PackedScene" uid="uid://dyqgnosvp35fn" path="res://scenes/enemies/enemy_spawning/enemy_spawner.tscn" id="2_h4oht"]
+
+[node name="SpawnManager" type="Node" node_paths=PackedStringArray("_enemySpawner")]
+script = ExtResource("1_oo7ng")
+_enemyConfigString = "res://Data/waves.json"
+_enemySpawner = NodePath("enemySpawner")
+
+[node name="enemySpawner" parent="." instance=ExtResource("2_h4oht")]
