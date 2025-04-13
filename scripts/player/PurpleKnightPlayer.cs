@@ -8,6 +8,15 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     private HealthComponent _healthComponent;
     [Export]
     private VelocityComponent _velocityComponent;
+    //TODO: May want to create a seperate "AttackComponent". This might help with implementing abiltities
+    //and different weapons.
+    [Export]
+    private Area2D _hitboxComponent;
+    [Export]
+    private float _baseAttackCooldown = 1.5f;
+
+    private CollisionShape2D _hitboxCollision;
+    private bool _isAttacking = false;
 
     public override void _Ready()
     {
@@ -15,6 +24,24 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         CollisionMask = 0;
         AddToGroup("player");
         _healthComponent.Died += Die;
+
+        _hitboxCollision = _hitboxComponent.GetNode<CollisionShape2D>("CollisionShape2D");
+        _hitboxCollision.Disabled = true;
+
+        Timer baseAttackTimer = new Timer();
+        AddChild(baseAttackTimer);
+        baseAttackTimer.WaitTime += _baseAttackCooldown;
+        baseAttackTimer.OneShot = false;
+        baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
+        baseAttackTimer.Start();
+    }
+
+    private void OnBaseAttackTimerTimeout()
+    {
+        GD.Print("Attack");
+        _isAttacking = true;
+        Animations.Play("attack");
+        _hitboxCollision.Disabled = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -26,19 +53,21 @@ public partial class PurpleKnightPlayer : CharacterBody2D
             if (inputDirection.X < 0)
             {
                 Animations.FlipH = true;
+                _hitboxComponent.SetScale(new Vector2(-1, 1));
             }
-            else 
+            else
             {
                 Animations.FlipH = false;
+                _hitboxComponent.SetScale(new Vector2(1, 1));
             }
         }
 
-        if (inputDirection.IsZeroApprox())
+        if (inputDirection.IsZeroApprox() && !_isAttacking)
         {
             _velocityComponent.Declerate();
             Animations.Play("idle");
         }
-        else if (Velocity != Vector2.Zero)
+        else if (Velocity != Vector2.Zero && !_isAttacking)
         {
             Animations.Play("walk");
         }
@@ -50,5 +79,14 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     private void Die()
     {
         GD.Print("Player has died");
+    }
+
+    public void OnAnimatedSprite2dAnimationFinished()
+    {
+        if (Animations.Animation == "attack")
+        {
+            _isAttacking = false;
+            _hitboxCollision.Disabled = true;
+        }
     }
 }
