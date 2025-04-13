@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cuamgj4h45el0"]
+[gd_scene load_steps=19 format=3 uid="uid://cuamgj4h45el0"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_0twls"]
 [ext_resource type="Texture2D" uid="uid://hj8dd7t6s13y" path="res://assets/PlaceholderAssets/Enemies/Torch_Purple.png" id="2_0u8o0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_0xeva"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_tvn5i"]
 [ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_x01fy"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="9_rhybd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gx74f"]
 atlas = ExtResource("2_0u8o0")
@@ -101,3 +102,10 @@ Damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
 shape = SubResource("CircleShape2D_a7d0x")
+
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("9_rhybd")]
+offset_left = -44.0
+offset_top = 41.0
+offset_right = 51.0
+offset_bottom = 45.0
+_healthComponent = NodePath("../HealthComponent")

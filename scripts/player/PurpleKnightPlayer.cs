@@ -38,7 +38,6 @@ public partial class PurpleKnightPlayer : CharacterBody2D
 
     private void OnBaseAttackTimerTimeout()
     {
-        GD.Print("Attack");
         _isAttacking = true;
         Animations.Play("attack");
         _hitboxCollision.Disabled = false;

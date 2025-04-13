@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdchnwbwchdgc"]
+[gd_scene load_steps=20 format=3 uid="uid://cdchnwbwchdgc"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_2kf4r"]
 [ext_resource type="Script" uid="uid://by18ujttbgfgi" path="res://scripts/enemies/types/TNTEnemy.cs" id="2_fn4nn"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_ixoyh"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_fn4nn"]
 [ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_o6vva"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="9_o6vva"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3ynh"]
 atlas = ExtResource("2_kxu1x")
@@ -109,3 +110,10 @@ Damage = 10.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_u4ju3")
+
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("9_o6vva")]
+offset_left = -44.0
+offset_top = 43.0
+offset_right = 51.0
+offset_bottom = 47.0
+_healthComponent = NodePath("../HealthComponent")
