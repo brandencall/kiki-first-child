@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://g2nuveh0mj60"]
+[gd_scene load_steps=32 format=3 uid="uid://g2nuveh0mj60"]
 
 [ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
@@ -162,6 +162,9 @@ size = Vector2(63, 92)
 [sub_resource type="CircleShape2D" id="CircleShape2D_vsk8h"]
 radius = 25.02
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_11lgb"]
+radius = 47.676
+
 [node name="PurpleKnightPlayer" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "_healthComponent", "_velocityComponent", "_hitboxComponent")]
 collision_layer = 8
 script = ExtResource("1_7jcgl")
@@ -211,5 +214,10 @@ _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource("CircleShape2D_vsk8h")
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_11lgb")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimatedSprite2dAnimationFinished"]

@@ -24,9 +24,4 @@ public partial class PurpleTorchEnemy : BaseEnemy
             _velocityComponent.Move(this);
         }
     }
-
-    private void Die()
-    {
-        QueueFree();
-    }
 }

@@ -76,11 +76,12 @@ radius = 39.0128
 [sub_resource type="CircleShape2D" id="CircleShape2D_iglkb"]
 radius = 24.0208
 
-[node name="TorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_dgeln")]
+[node name="TorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_dgeln")]
 script = ExtResource("2_h11a2")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_itemDropper = NodePath("ItemDropper")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_u6nml")

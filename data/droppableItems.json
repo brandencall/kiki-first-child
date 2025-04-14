@@ -1,0 +1,14 @@
+[
+  {
+	"name": null,
+	"experience": 0,
+	"probability": 0.3,
+	"scene": null
+  },
+  {
+	"name": "coin",
+	"experience": 1,
+	"probability": 0.7,
+	"scene": "res://scenes/enemies/droppable_items/coin.tscn"
+  }
+]

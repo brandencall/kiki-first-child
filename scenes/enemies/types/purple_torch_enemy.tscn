@@ -70,11 +70,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7d0x"]
 radius = 26.0
 
-[node name="PurpleTorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_0twls")]
+[node name="PurpleTorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_0twls")]
 script = ExtResource("2_rhybd")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_itemDropper = NodePath("ItemDropper")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_j8ksk")

@@ -34,6 +34,8 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         baseAttackTimer.OneShot = false;
         baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
         baseAttackTimer.Start();
+
+        GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
     }
 
     private void OnBaseAttackTimerTimeout()
@@ -86,6 +88,16 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         {
             _isAttacking = false;
             _hitboxCollision.Disabled = true;
+        }
+    }
+    
+    //TODO: add some pickup logic
+    private void OnPickupAreaEntered(Area2D area)
+    {
+        if (area is DroppableItem item)
+        {
+            GD.Print("Pick up item");
+            item.QueueFree();
         }
     }
 }

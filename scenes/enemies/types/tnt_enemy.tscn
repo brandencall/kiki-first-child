@@ -69,13 +69,14 @@ radius = 25.02
 [sub_resource type="CircleShape2D" id="CircleShape2D_u4ju3"]
 radius = 29.0172
 
-[node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_2kf4r")]
+[node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_2kf4r")]
 collision_layer = 16
 collision_mask = 17
 script = ExtResource("2_fn4nn")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_itemDropper = NodePath("ItemDropper")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_o6vva")

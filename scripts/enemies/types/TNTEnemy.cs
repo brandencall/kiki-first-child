@@ -25,9 +25,4 @@ public partial class TNTEnemy : BaseEnemy
             _velocityComponent.Move(this);
         }
     }
-
-    private void Die()
-    {
-        QueueFree();
-    }
 }

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://sn8kaa4vbna8"]
+
+[ext_resource type="PackedScene" uid="uid://bj645pajtwfnk" path="res://scenes/enemies/droppable_items/droppable_item.tscn" id="1_dpxfs"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_g7hdo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4fcj"]
+size = Vector2(34, 34)
+
+[node name="coin" instance=ExtResource("1_dpxfs")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_g7hdo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_f4fcj")
