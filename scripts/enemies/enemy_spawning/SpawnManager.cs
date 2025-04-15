@@ -25,6 +25,7 @@ public partial class SpawnManager : Node
 
     private async void Start(List<WaveInfo> waves)
     {
+        await ToSignal(GetTree().CreateTimer(1), "timeout");
         foreach (var wave in waves)
         {
             await StartWave(wave);

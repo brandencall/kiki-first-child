@@ -9,9 +9,14 @@ public partial class BaseEnemy : CharacterBody2D
 
     public override void _Ready()
     {
+        CallDeferred(nameof(InitPlayer));
         CollisionLayer = 16;
         CollisionMask = 0 | 16;
         AddToGroup("enemy");
+    }
+
+    private void InitPlayer()
+    {
         _player = this.GetPlayer();
     }
 

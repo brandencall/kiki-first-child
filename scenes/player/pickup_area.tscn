@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b2hqa4riqa7kt"]
+
+[node name="PickupArea" type="Area2D"]

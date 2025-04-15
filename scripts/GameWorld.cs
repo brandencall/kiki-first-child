@@ -10,7 +10,7 @@ public partial class GameWorld : Node2D
     public Node2D Levels { get; set; }
     // Need to change this to a generic Player object.
     [Export]
-    public PurpleKnightPlayer Player { get; set; }
+    public BasePlayer Player { get; set; }
     private Node2D _currentLevel;
 
     public override void _Ready()

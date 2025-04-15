@@ -10,6 +10,11 @@ public partial class EnemySpawner : Node
 
     public override void _Ready()
     {
+        CallDeferred(nameof(InitPlayer));
+    }
+
+    private void InitPlayer()
+    {
         _player = this.GetPlayer();
         if (_player != null)
         {
@@ -17,7 +22,7 @@ public partial class EnemySpawner : Node
             _spawnPath = path.GetChild<PathFollow2D>(0);
             _spawnMarker = _spawnPath.GetChild<Marker2D>(0);
         }
-    }
+    }   
 
     public void SpawnEnemy(PackedScene enemyScene)
     {

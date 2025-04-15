@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuyvun3yd2fmw"]
+
+[ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="1_gdqlq"]
+[ext_resource type="Script" uid="uid://dknsnugxkekln" path="res://scripts/player/BasePlayer.cs" id="1_rtfjh"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="2_rtfjh"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="3_u1830"]
+[ext_resource type="PackedScene" uid="uid://boypsm2a2wu72" path="res://scenes/player/player_hurtbox.tscn" id="4_3r7lq"]
+[ext_resource type="PackedScene" uid="uid://b2hqa4riqa7kt" path="res://scenes/player/pickup_area.tscn" id="5_gcpci"]
+[ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawning/enemy_spawn_path.tscn" id="6_l4eab"]
+
+[node name="BasePlayer" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "_healthComponent", "_velocityComponent", "_hitboxComponent") groups=["player"]]
+collision_layer = 8
+script = ExtResource("1_rtfjh")
+Animations = NodePath("AnimatedSprite2D")
+_healthComponent = NodePath("HealthComponent")
+_velocityComponent = NodePath("VelocityComponent")
+_hitboxComponent = NodePath("HitboxComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("1_gdqlq")]
+collision_layer = 2
+collision_mask = 0
+Damage = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_rtfjh")]
+
+[node name="EnemySpawnPath" parent="." instance=ExtResource("6_l4eab")]
+position = Vector2(-26.9987, -17.4179)
+scale = Vector2(1.37468, 1.36475)
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_u1830")]
+
+[node name="PlayerHurtbox" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_3r7lq")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="PickupArea" parent="." instance=ExtResource("5_gcpci")]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimatedSprite2dAnimationFinished"]

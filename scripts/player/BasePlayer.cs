@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PurpleKnightPlayer : CharacterBody2D
+public partial class BasePlayer : CharacterBody2D
 {
     [Export]
     public AnimatedSprite2D Animations { get; set; }
@@ -8,6 +8,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     private HealthComponent _healthComponent;
     [Export]
     private VelocityComponent _velocityComponent;
+
     //TODO: May want to create a seperate "AttackComponent". This might help with implementing abiltities
     //and different weapons.
     [Export]
@@ -27,6 +28,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         CollisionMask = 0;
         AddToGroup("player");
         _healthComponent.Died += Die;
+        GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
         _hitboxCollision = _hitboxComponent.GetNode<CollisionShape2D>("CollisionShape2D");
         _hitboxCollision.Disabled = true;
@@ -37,8 +39,6 @@ public partial class PurpleKnightPlayer : CharacterBody2D
         baseAttackTimer.OneShot = false;
         baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
         baseAttackTimer.Start();
-
-        GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
     }
 
     private void OnBaseAttackTimerTimeout()
@@ -84,7 +84,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     {
         GD.Print("Player has died");
     }
-
+    
     public void OnAnimatedSprite2dAnimationFinished()
     {
         if (Animations.Animation == "attack")
@@ -93,7 +93,7 @@ public partial class PurpleKnightPlayer : CharacterBody2D
             _hitboxCollision.Disabled = true;
         }
     }
-    
+
     //TODO: add some pickup logic
     private void OnPickupAreaEntered(Area2D area)
     {
