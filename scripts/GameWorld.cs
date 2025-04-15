@@ -24,7 +24,6 @@ public partial class GameWorld : Node2D
 
     private void HandleExperienceChange(float experience)
     {
-        GD.Print("experience signal recieved");
         Hud.IncreaseExperience(experience);
     }
 }

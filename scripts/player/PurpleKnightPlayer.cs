@@ -99,7 +99,6 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     {
         if (area is IExperience item)
         {
-            GD.Print("Pick up item: " + item.Experience);
             EmitSignal(SignalName.ExperiencePickedup, item.Experience);
             item.QueueFree();
         }
