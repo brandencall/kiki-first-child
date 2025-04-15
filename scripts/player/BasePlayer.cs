@@ -39,6 +39,8 @@ public partial class BasePlayer : CharacterBody2D
         baseAttackTimer.OneShot = false;
         baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
         baseAttackTimer.Start();
+
+        GodotUtilities.RegisterPlayer(this);
     }
 
     private void OnBaseAttackTimerTimeout()

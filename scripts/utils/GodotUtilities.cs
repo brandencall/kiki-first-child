@@ -2,9 +2,20 @@ using Godot;
 
 public static class GodotUtilities 
 {
-    public static CharacterBody2D GetPlayer(this Node node)
+    private static BasePlayer _cachedPlayer;
+
+    public static void RegisterPlayer(BasePlayer player)
     {
-        var players = node.GetTree().GetNodesInGroup("player");
-        return players.Count > 0 ? players[0] as CharacterBody2D : null;
+        _cachedPlayer = player;
+    }
+
+    public static BasePlayer GetPlayer()
+    {
+        return _cachedPlayer;
+    }
+
+    public static BasePlayer GetPlayer(this Node node)
+    {
+        return GetPlayer();
     }
 }
