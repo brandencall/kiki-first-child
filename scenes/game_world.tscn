@@ -1,13 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://o4dnquijjfx5"]
+[gd_scene load_steps=5 format=3 uid="uid://o4dnquijjfx5"]
 
 [ext_resource type="Script" uid="uid://vy43rve06ntw" path="res://scripts/GameWorld.cs" id="1_j6q4g"]
 [ext_resource type="Script" uid="uid://bld5bqivrpnby" path="res://scripts/managers/LevelManager.cs" id="3_2xjoy"]
 [ext_resource type="PackedScene" uid="uid://g2nuveh0mj60" path="res://scenes/player/PurpleKnightPlayer.tscn" id="3_ywgp6"]
+[ext_resource type="PackedScene" uid="uid://cwkoal1cishu0" path="res://scenes/ui/hud.tscn" id="4_0vfqx"]
 
-[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("LevelManager", "Levels")]
+[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "LevelManager", "Levels", "Player")]
 script = ExtResource("1_j6q4g")
+Hud = NodePath("CanvasLayer/HUD")
 LevelManager = NodePath("LevelManager")
 Levels = NodePath("Levels")
+Player = NodePath("PurpleKnightPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_0vfqx")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -689.0
+offset_bottom = 366.0
+grow_horizontal = 0
+grow_vertical = 1
+size_flags_horizontal = 4
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("3_2xjoy")

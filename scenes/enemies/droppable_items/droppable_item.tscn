@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj645pajtwfnk"]
-
-[ext_resource type="Script" uid="uid://cw3kob4eblqpr" path="res://scripts/enemies/droppable_items/DroppableItem.cs" id="1_p8nhc"]
-
-[node name="DroppableItem" type="Area2D"]
-script = ExtResource("1_p8nhc")
-
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

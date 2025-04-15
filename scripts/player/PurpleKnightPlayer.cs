@@ -18,6 +18,9 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     private CollisionShape2D _hitboxCollision;
     private bool _isAttacking = false;
 
+    [Signal]
+    public delegate void ExperiencePickedupEventHandler(float experience);
+
     public override void _Ready()
     {
         CollisionLayer = 8;
@@ -94,9 +97,10 @@ public partial class PurpleKnightPlayer : CharacterBody2D
     //TODO: add some pickup logic
     private void OnPickupAreaEntered(Area2D area)
     {
-        if (area is DroppableItem item)
+        if (area is IExperience item)
         {
-            GD.Print("Pick up item");
+            GD.Print("Pick up item: " + item.Experience);
+            EmitSignal(SignalName.ExperiencePickedup, item.Experience);
             item.QueueFree();
         }
     }

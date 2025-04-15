@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://g2nuveh0mj60"]
+[gd_scene load_steps=33 format=3 uid="uid://g2nuveh0mj60"]
 
 [ext_resource type="Script" uid="uid://dc8w3l3p1rk1t" path="res://scripts/player/PurpleKnightPlayer.cs" id="1_7jcgl"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="1_wxwfn"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="6_omh1f"]
 [ext_resource type="PackedScene" uid="uid://boypsm2a2wu72" path="res://scenes/player/player_hurtbox.tscn" id="7_lktgj"]
 [ext_resource type="Script" uid="uid://ccrqj8ik3slbo" path="res://scripts/player/PlayerHurtbox.cs" id="8_vsk8h"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="9_11lgb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c30wx"]
 atlas = ExtResource("1_wxwfn")
@@ -219,5 +220,12 @@ shape = SubResource("CircleShape2D_vsk8h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_11lgb")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("9_11lgb")]
+offset_left = -69.0
+offset_top = 38.0
+offset_right = 73.0
+offset_bottom = 47.0
+_healthComponent = NodePath("../HealthComponent")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimatedSprite2dAnimationFinished"]
