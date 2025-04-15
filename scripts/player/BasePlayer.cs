@@ -12,6 +12,8 @@ public partial class BasePlayer : CharacterBody2D
     //TODO: May want to create a seperate "AttackComponent". This might help with implementing abiltities
     //and different weapons.
     [Export]
+    private AttackComponent _attackComponent;
+    [Export]
     private Area2D _hitboxComponent;
     [Export]
     private float _baseAttackCooldown = 1.5f;
