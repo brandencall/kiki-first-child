@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://x40yopaq33uq"]
 
-[ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/ui/AbilityResource.cs" id="1_dbaa6"]
+[ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_dbaa6"]
 
 [resource]
 script = ExtResource("1_dbaa6")

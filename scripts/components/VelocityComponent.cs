@@ -3,7 +3,7 @@ using Godot;
 public partial class VelocityComponent : Node
 {
     [Export]
-    private float _maxSpeed = 100f;
+    public float MaxSpeed { get; set; } = 100f;
     [Export]
     private float _accelerationCoefficient = 2f;
 
@@ -20,7 +20,7 @@ public partial class VelocityComponent : Node
 
     public void AccelerateInDirection(Vector2 direction)
     {
-        AccelerateToVelocity(direction * _maxSpeed);
+        AccelerateToVelocity(direction * MaxSpeed);
     }
 
     public void Declerate()
@@ -36,6 +36,6 @@ public partial class VelocityComponent : Node
 
     public float GetMaxSpeed()
     {
-        return _maxSpeed;
+        return MaxSpeed;
     }
 }

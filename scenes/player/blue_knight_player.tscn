@@ -174,7 +174,7 @@ shape = SubResource("RectangleShape2D_stneq")
 disabled = true
 
 [node name="VelocityComponent" parent="." index="6"]
-_maxSpeed = 200.0
+MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox" index="0"]

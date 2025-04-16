@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cvsyni0r0in7o"]
+
+[ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_1kobx"]
+[ext_resource type="PackedScene" uid="uid://g1ruaprkb80l" path="res://scenes/abilities/speed_boost_ability.tscn" id="1_ofunh"]
+
+[resource]
+script = ExtResource("1_1kobx")
+AbilityName = "Speed boost"
+Description = "Get a speed boost of 1.5x"
+AbilityScene = ExtResource("1_ofunh")
+metadata/_custom_type_script = "uid://blh5glfywfv43"

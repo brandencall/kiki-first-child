@@ -5,9 +5,9 @@ public partial class BasePlayer : CharacterBody2D
     [Export]
     public AnimatedSprite2D Animations { get; set; }
     [Export]
-    private HealthComponent _healthComponent;
+    public VelocityComponent VelocityComponent { get; set; }
     [Export]
-    private VelocityComponent _velocityComponent;
+    private HealthComponent _healthComponent;
 
     //TODO: May want to create a seperate "AttackComponent". This might help with implementing abiltities
     //and different weapons.
@@ -55,7 +55,7 @@ public partial class BasePlayer : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        _velocityComponent.AccelerateInDirection(inputDirection);
+        VelocityComponent.AccelerateInDirection(inputDirection);
         if (inputDirection.X != 0)
         {
             if (inputDirection.X < 0)
@@ -72,7 +72,7 @@ public partial class BasePlayer : CharacterBody2D
 
         if (inputDirection.IsZeroApprox() && !_isAttacking)
         {
-            _velocityComponent.Declerate();
+            VelocityComponent.Declerate();
             Animations.Play("idle");
         }
         else if (Velocity != Vector2.Zero && !_isAttacking)
@@ -80,7 +80,7 @@ public partial class BasePlayer : CharacterBody2D
             Animations.Play("walk");
         }
 
-        _velocityComponent.Move(this);
+        VelocityComponent.Move(this);
     }
 
     //TODO: Handle player dying
