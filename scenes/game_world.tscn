@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://o4dnquijjfx5"]
+[gd_scene load_steps=6 format=3 uid="uid://o4dnquijjfx5"]
 
 [ext_resource type="Script" uid="uid://vy43rve06ntw" path="res://scripts/GameWorld.cs" id="1_j6q4g"]
 [ext_resource type="Script" uid="uid://bld5bqivrpnby" path="res://scripts/managers/LevelManager.cs" id="3_2xjoy"]
 [ext_resource type="PackedScene" uid="uid://cwkoal1cishu0" path="res://scenes/ui/hud.tscn" id="4_0vfqx"]
 [ext_resource type="PackedScene" uid="uid://2i8euktrm4j8" path="res://scenes/player/blue_knight_player.tscn" id="4_wbbl4"]
+[ext_resource type="Script" uid="uid://ced4ybvxth8h6" path="res://scripts/managers/ExperienceManager.cs" id="5_wbbl4"]
 
-[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "LevelManager", "Levels", "Player")]
+[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "LevelManager", "Levels", "Player", "ExperienceManager")]
 script = ExtResource("1_j6q4g")
 Hud = NodePath("CanvasLayer/HUD")
 LevelManager = NodePath("LevelManager")
 Levels = NodePath("Levels")
 Player = NodePath("BasePlayer")
+ExperienceManager = NodePath("ExperienceManager")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -31,3 +33,6 @@ script = ExtResource("3_2xjoy")
 
 [node name="BasePlayer" parent="." instance=ExtResource("4_wbbl4")]
 position = Vector2(512, 413)
+
+[node name="ExperienceManager" type="Node" parent="."]
+script = ExtResource("5_wbbl4")

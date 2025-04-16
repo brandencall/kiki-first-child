@@ -17,9 +17,13 @@ public partial class Hud : Control
         ExperienceBar.MaxValue = _maxValue;
     }
 
-    public void IncreaseExperience(float experience)
+    public void SetExperience(float experience)
     {
-        _currentValue += experience;
-        ExperienceBar.Value = _currentValue;
+        ExperienceBar.Value = experience;
+    }
+
+    public void SetMaxExperience(float maxExperience)
+    {
+        ExperienceBar.MaxValue = maxExperience;
     }
 }

@@ -8,9 +8,10 @@ public partial class GameWorld : Node2D
     public LevelManager LevelManager { get; set; }
     [Export]
     public Node2D Levels { get; set; }
-    // Need to change this to a generic Player object.
     [Export]
     public BasePlayer Player { get; set; }
+    [Export]
+    public ExperienceManager ExperienceManager { get; set; }
     private Node2D _currentLevel;
 
     public override void _Ready()
@@ -20,10 +21,17 @@ public partial class GameWorld : Node2D
         Levels.AddChild(_currentLevel);
 
         Player.ExperiencePickedup += HandleExperienceChange;
+        ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
     }
 
     private void HandleExperienceChange(float experience)
     {
-        Hud.IncreaseExperience(experience);
+        ExperienceManager.IncreaseExperience(experience);
+        Hud.SetExperience(ExperienceManager.CurrentExperience);
+    }
+
+    private void HandleExperienceLevelIncrease()
+    {
+        Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
     }
 }
