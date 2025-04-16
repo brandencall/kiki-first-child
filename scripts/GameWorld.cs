@@ -1,9 +1,12 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class GameWorld : Node2D
 {
     [Export]
     public Hud Hud { get; set; }
+    [Export]
+    public AbilityUi AbilityUi { get; set; }
     [Export]
     public LevelManager LevelManager { get; set; }
     [Export]
@@ -12,6 +15,9 @@ public partial class GameWorld : Node2D
     public BasePlayer Player { get; set; }
     [Export]
     public ExperienceManager ExperienceManager { get; set; }
+    [Export]
+    public AbilityManager AbilityManager { get; set; }
+
     private Node2D _currentLevel;
 
     public override void _Ready()
@@ -22,6 +28,7 @@ public partial class GameWorld : Node2D
 
         Player.ExperiencePickedup += HandleExperienceChange;
         ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
+        AbilityUi.AbilitySelected += HandleAbilitySelection;
     }
 
     private void HandleExperienceChange(float experience)
@@ -32,6 +39,18 @@ public partial class GameWorld : Node2D
 
     private void HandleExperienceLevelIncrease()
     {
+        List<AbilityResource> abilities = AbilityManager.GetRandomAbilities();
+
+        foreach (var ability in abilities)
+        {
+            AbilityUi.AddAbilityCard(ability);
+        }
+        AbilityUi.ShowAbilities();
         Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
+    }
+
+    private void HandleAbilitySelection(AbilityResource selectedAbility)
+    {
+        AbilityUi.ClearAbilities();
     }
 }

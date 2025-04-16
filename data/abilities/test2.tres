@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://sxtnwu8sbspm"]
+
+[ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/ui/AbilityResource.cs" id="1_ljdjv"]
+
+[resource]
+script = ExtResource("1_ljdjv")
+AbilityName = "Test 2"
+Description = "Testing"
+metadata/_custom_type_script = "uid://blh5glfywfv43"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvhbvvrm3nkfx"]
+
+[ext_resource type="Script" uid="uid://i72v47gh4p6p" path="res://scripts/ui/AbilityCard.cs" id="1_unr5y"]
+
+[node name="AbilityCard" type="VBoxContainer" node_paths=PackedStringArray("AbilityName", "Description", "PickButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -52.0
+offset_right = 209.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_unr5y")
+AbilityName = NodePath("AbilityName")
+Description = NodePath("Description")
+PickButton = NodePath("PickButton")
+
+[node name="AbilityName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ability Label"
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Description "
+fit_content = true
+horizontal_alignment = 1
+
+[node name="PickButton" type="Button" parent="."]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select"
