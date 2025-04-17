@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b66ujafuybpnj"]
+
+[ext_resource type="Script" uid="uid://cxjyrnbmvp4ne" path="res://_debug/ability_testing/FireballAbility.cs" id="1_i1lf2"]
+[ext_resource type="PackedScene" uid="uid://cpoke66vxnmh3" path="res://_debug/ability_testing/fireball.tscn" id="2_e5pog"]
+
+[node name="FireballAbility" type="Node"]
+script = ExtResource("1_i1lf2")
+FireballScene = ExtResource("2_e5pog")
