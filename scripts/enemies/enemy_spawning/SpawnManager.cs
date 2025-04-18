@@ -29,7 +29,7 @@ public partial class SpawnManager : Node
         foreach (var wave in waves)
         {
             await StartWave(wave);
-            await ToSignal(GetTree().CreateTimer(_timeBetweenWaves), "timeout");
+            await ToSignal(GetTree().CreateTimer(_timeBetweenWaves, true), "timeout");
         }
     }
 
@@ -40,10 +40,19 @@ public partial class SpawnManager : Node
 
         for (int i = 0; i < wave.TotalEnemies; i++)
         {
+            await WaitUntilUnpaused();
             EnemyConfig enemy = GetRandomEnemy(wave.Enemies);
             PackedScene enemyScene = GD.Load<PackedScene>(enemy.Scene);
             _enemySpawner.SpawnEnemy(enemyScene);
-            await ToSignal(GetTree().CreateTimer(wave.SpawnInterval), "timeout");
+            await ToSignal(GetTree().CreateTimer(wave.SpawnInterval, true), "timeout");
+        }
+    }
+
+    private async Task WaitUntilUnpaused()
+    {
+        while (GetTree().Paused)
+        {
+            await ToSignal(GetTree(), "process_frame");
         }
     }
 
