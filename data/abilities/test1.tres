@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://x40yopaq33uq"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://x40yopaq33uq"]
 
 [ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_dbaa6"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="1_r4u8l"]
 
 [resource]
 script = ExtResource("1_dbaa6")
 AbilityName = "Test 1"
 Description = "Testing"
+Icon = ExtResource("1_r4u8l")
 metadata/_custom_type_script = "uid://blh5glfywfv43"

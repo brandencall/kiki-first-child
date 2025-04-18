@@ -1,38 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvhbvvrm3nkfx"]
+[gd_scene load_steps=3 format=3 uid="uid://bvhbvvrm3nkfx"]
 
 [ext_resource type="Script" uid="uid://i72v47gh4p6p" path="res://scripts/ui/AbilityCard.cs" id="1_unr5y"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_aghsq"]
 
-[node name="AbilityCard" type="VBoxContainer" node_paths=PackedStringArray("AbilityName", "Description", "PickButton")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -209.0
-offset_top = -52.0
-offset_right = 209.0
-offset_bottom = 52.0
+[node name="AbilityCard" type="Button" node_paths=PackedStringArray("AbilityName", "Description", "AbilityIcon")]
+process_mode = 3
+custom_minimum_size = Vector2(400, 150)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.12, 0.92)
 script = ExtResource("1_unr5y")
-AbilityName = NodePath("AbilityName")
-Description = NodePath("Description")
-PickButton = NodePath("PickButton")
+AbilityName = NodePath("HBoxContainer/VBoxContainer/AbilityName")
+Description = NodePath("HBoxContainer/VBoxContainer/Description")
+AbilityIcon = NodePath("HBoxContainer/TextureRect")
 
-[node name="AbilityName" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_aghsq")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AbilityName" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Ability Label"
 
-[node name="Description" type="RichTextLabel" parent="."]
+[node name="Description" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Description "
+text = "Description of the ability. This might be a sentance or two long so showcasing what that might look like.
+"
 fit_content = true
 horizontal_alignment = 1
-
-[node name="PickButton" type="Button" parent="."]
-process_mode = 3
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Select"

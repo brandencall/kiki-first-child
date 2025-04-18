@@ -1,15 +1,13 @@
 using Godot;
 
-public partial class AbilityCard : VBoxContainer
+public partial class AbilityCard : Button 
 {
     [Export]
     public Label AbilityName { get; set; }
     [Export]
     public RichTextLabel Description { get; set; }
     [Export]
-    public TextureRect Icon { get; set; }
-    [Export]
-    public Button PickButton { get; set; }
+    public TextureRect AbilityIcon { get; set; }
 
     [Signal]
     public delegate void AbilitySelectedEventHandler(AbilityResource ability);
@@ -18,7 +16,7 @@ public partial class AbilityCard : VBoxContainer
 
     public override void _Ready()
     {
-        PickButton.Pressed += () => OnPickButtonPressed();
+        this.Pressed += () => OnPickButtonPressed();
     }
 
     private void OnPickButtonPressed()
@@ -31,7 +29,7 @@ public partial class AbilityCard : VBoxContainer
         _ability = ability;
         AbilityName.Text = ability.AbilityName;
         Description.Text = ability.Description;
-        //Icon.Texture = ability.Icon;
+        AbilityIcon.Texture = ability.Icon;
     }
 
 }
