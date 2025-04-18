@@ -46,6 +46,7 @@ text = "Ability Label"
 [node name="Description" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
+mouse_filter = 2
 text = "Description of the ability. This might be a sentance or two long so showcasing what that might look like.
 "
 fit_content = true
