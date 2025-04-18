@@ -1,8 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs4svgsompak7"]
+[gd_scene load_steps=7 format=3 uid="uid://bs4svgsompak7"]
 
 [ext_resource type="Script" uid="uid://1tovhu8pjh6s" path="res://scripts/ui/AbilityUi.cs" id="1_eel0r"]
+[ext_resource type="Shader" uid="uid://2giagtmrelrp" path="res://scripts/ui/ability_ui.gdshader" id="2_eel0r"]
 
-[node name="AbilityUI" type="Control" node_paths=PackedStringArray("AbilityContainer")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1d616"]
+shader = ExtResource("2_eel0r")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_eel0r"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.02, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1d616"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwwtx"]
+_data = {
+&"RESET": SubResource("Animation_1d616"),
+&"blur": SubResource("Animation_eel0r")
+}
+
+[node name="AbilityUI" type="Control" node_paths=PackedStringArray("AbilityContainer", "Animations")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
@@ -10,8 +77,16 @@ offset_bottom = 650.0
 mouse_filter = 2
 script = ExtResource("1_eel0r")
 AbilityContainer = NodePath("PanelContainer/VBoxContainer")
+Animations = NodePath("AnimationPlayer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1d616")
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 646.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,3 +105,8 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vwwtx")
+}

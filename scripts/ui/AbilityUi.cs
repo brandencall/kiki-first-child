@@ -4,6 +4,8 @@ public partial class AbilityUi : Control
 {
     [Export]
     public VBoxContainer AbilityContainer { get; set; }
+    [Export]
+    public AnimationPlayer Animations { get; set; }
 
     [Signal]
     public delegate void AbilitySelectedEventHandler(AbilityResource ability);
@@ -19,12 +21,14 @@ public partial class AbilityUi : Control
     {
         Visible = true;
         GetTree().Paused = true;
+        Animations.Play("blur");
     }
 
     public void ClearAbilities()
     {
         Visible = false;
         GetTree().Paused = false;
+        Animations.PlayBackwards("blur");
         foreach (Node child in AbilityContainer.GetChildren())
         {
             child.QueueFree();
