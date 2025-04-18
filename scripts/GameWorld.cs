@@ -26,6 +26,8 @@ public partial class GameWorld : Node2D
         _currentLevel = (Node2D)currentScene.Instantiate();
         Levels.AddChild(_currentLevel);
 
+        Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
+
         Player.ExperiencePickedup += HandleExperienceChange;
         ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
         AbilityUi.AbilitySelected += HandleAbilitySelection;
@@ -47,6 +49,7 @@ public partial class GameWorld : Node2D
         }
         AbilityUi.ShowAbilities();
         Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
+        Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
     }
 
     private void HandleAbilitySelection(AbilityResource selectedAbility)

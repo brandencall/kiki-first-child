@@ -4,6 +4,8 @@ public partial class Hud : Control
 {
     [Export]
     public ProgressBar ExperienceBar { get; set; }
+    [Export]
+    public Label CurrentExperienceLevel { get; set; }
 
     private float _currentScore = 0;
 
@@ -25,5 +27,10 @@ public partial class Hud : Control
     public void SetMaxExperience(float maxExperience)
     {
         ExperienceBar.MaxValue = maxExperience;
+    }
+
+    public void SetCurrentExperienceLevel(int experienceLevel)
+    {
+        CurrentExperienceLevel.Text = experienceLevel.ToString();
     }
 }
