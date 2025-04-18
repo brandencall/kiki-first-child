@@ -11,5 +11,5 @@ public partial class AbilityResource : Resource
     public Texture2D Icon { get; set; }
     //May need to add PackedScene for the actual ability.
     [Export]
-    public PackedScene AbilityScene { get; set; }
+    public PackedScene AbilityLogic { get; set; }
 }

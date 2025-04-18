@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cy8ndkajrtjxp"]
 
 [ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_m6s5y"]
-[ext_resource type="PackedScene" uid="uid://cpoke66vxnmh3" path="res://_debug/ability_testing/fireball.tscn" id="1_uofo4"]
+[ext_resource type="PackedScene" uid="uid://12dmywq6a115" path="res://_debug/ability_testing/fireball_ability_logic.tscn" id="1_uofo4"]
 
 [resource]
 script = ExtResource("1_m6s5y")
 AbilityName = "Fire ball"
 Description = "Testing fire ball"
-AbilityScene = ExtResource("1_uofo4")
+AbilityLogic = ExtResource("1_uofo4")
 metadata/_custom_type_script = "uid://blh5glfywfv43"
