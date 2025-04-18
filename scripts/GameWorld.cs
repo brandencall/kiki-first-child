@@ -51,8 +51,9 @@ public partial class GameWorld : Node2D
 
     private void HandleAbilitySelection(AbilityResource selectedAbility)
     {
-        Ability ability = (Ability)selectedAbility.AbilityScene.Instantiate();
-        ability.Apply(Player);
+        Node ability = selectedAbility.AbilityScene.Instantiate();
+        GetTree().CurrentScene.AddChild(ability);
+        //Player.AddChild(ability);
         AbilityUi.ClearAbilities();
     }
 }

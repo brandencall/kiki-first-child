@@ -18,6 +18,8 @@ public partial class Fireball : Node2D
 
     public override void _Ready()
     {
+        BasePlayer player = this.GetPlayer();
+        GlobalPosition = player.GlobalPosition;
         GetNode<Area2D>("Area2D").AreaEntered += OnAreaEntered;
     }
 }

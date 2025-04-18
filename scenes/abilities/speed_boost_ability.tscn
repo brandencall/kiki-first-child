@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://g1ruaprkb80l"]
+[gd_scene load_steps=2 format=3 uid="uid://v25vub0rgprp"]
 
-[ext_resource type="Script" uid="uid://ctfvti3iiwe4i" path="res://scripts/abilities/SpeedBoostAbility.cs" id="1_aitb0"]
+[sub_resource type="CSharpScript" id="CSharpScript_irp2o"]
+script/source = "using Godot;
+
+public partial class SpeedBoostAbility : Ability
+{
+    [Export]
+    public float SpeedMultiplier = 1.5f;
+
+    public override void Apply(BasePlayer player)
+    {
+        player.VelocityComponent.MaxSpeed *= SpeedMultiplier;
+        GD.Print(player.VelocityComponent.MaxSpeed);
+    }
+}   
+"
 
 [node name="SpeedBoostAbility" type="Node"]
-script = ExtResource("1_aitb0")
+script = SubResource("CSharpScript_irp2o")
+SpeedMultiplier = null
