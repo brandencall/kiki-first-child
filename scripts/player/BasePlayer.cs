@@ -23,6 +23,8 @@ public partial class BasePlayer : CharacterBody2D
 
     [Signal]
     public delegate void ExperiencePickedupEventHandler(float experience);
+    [Signal]
+    public delegate void OnPlayerDiedEventHandler();
 
     public override void _Ready()
     {
@@ -87,6 +89,7 @@ public partial class BasePlayer : CharacterBody2D
     private void Die()
     {
         GD.Print("Player has died");
+        EmitSignal(SignalName.OnPlayerDied);
     }
     
     public void OnAnimatedSprite2dAnimationFinished()

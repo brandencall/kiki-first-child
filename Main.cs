@@ -14,8 +14,15 @@ public partial class Main : Node
 
     public void StartGame()
     {
-        Node2D gameWorld = (Node2D)GameScene.Instantiate();
+        MainMenu.Visible = false;
+        GameWorld gameWorld = GameScene.Instantiate<GameWorld>();
+        gameWorld.GameFinished += OnGameFinished;
         AddChild(gameWorld);
+    }
+
+    private void OnGameFinished()
+    {
+        MainMenu.Visible = true; 
     }
 
 }

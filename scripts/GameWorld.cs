@@ -18,6 +18,9 @@ public partial class GameWorld : Node2D
     [Export]
     public AbilityManager AbilityManager { get; set; }
 
+    [Signal]
+    public delegate void GameFinishedEventHandler();
+
     private Node2D _currentLevel;
 
     public override void _Ready()
@@ -29,6 +32,7 @@ public partial class GameWorld : Node2D
         Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 
         Player.ExperiencePickedup += HandleExperienceChange;
+        Player.OnPlayerDied += HandlePlayerDeath;
         ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
         AbilityUi.AbilitySelected += HandleAbilitySelection;
     }
@@ -57,5 +61,11 @@ public partial class GameWorld : Node2D
         AbilityLogic ability = selectedAbility.AbilityLogic.Instantiate<AbilityLogic>();
         ability.Apply(Player);
         AbilityUi.ClearAbilities();
+    }
+
+    private void HandlePlayerDeath()
+    {
+        EmitSignal(SignalName.GameFinished);
+        QueueFree();
     }
 }

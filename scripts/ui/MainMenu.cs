@@ -11,7 +11,6 @@ public partial class MainMenu : Control
     public void OnStartButtonPressed()
     {
         EmitSignal(SignalName.StartGame);
-        QueueFree();
     }
 
     public void OnOptionPressed()
