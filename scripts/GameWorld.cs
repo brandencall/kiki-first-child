@@ -21,6 +21,8 @@ public partial class GameWorld : Node2D
     [Signal]
     public delegate void GameFinishedEventHandler();
 
+    private List<AbilityResource> _currentAbilities = new();
+
     private Node2D _currentLevel;
 
     public override void _Ready()
@@ -61,6 +63,7 @@ public partial class GameWorld : Node2D
         if (selectedAbility.AbilityLogic == null)
         {
             selectedAbility.InitializeAbilityLogic();
+            _currentAbilities.Add(selectedAbility);
         }
         AbilityLogic ability = selectedAbility.AbilityLogic;
         ability.Upgrade();
