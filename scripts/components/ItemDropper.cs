@@ -24,7 +24,9 @@ public partial class ItemDropper : Node2D
         PackedScene itemScene = GD.Load<PackedScene>(item.Scene);
         Area2D itemNode = (Area2D)itemScene.Instantiate();
         itemNode.GlobalPosition = GlobalPosition;
-        GetTree().Root.CallDeferred("add_child", itemNode);
+        //TODO: theres got to be a better way to drop the items....
+        var gameWorld = GetTree().Root.GetNode("main").GetNode("GameWorld");
+        gameWorld.CallDeferred("add_child", itemNode);
     }
 
     private DropItemEntry GetRandomItem()
