@@ -9,7 +9,16 @@ public partial class AbilityResource : Resource
     public string Description { get; set; }
     [Export]
     public Texture2D Icon { get; set; }
-    //May need to add PackedScene for the actual ability.
     [Export]
-    public PackedScene AbilityLogic { get; set; }
+    public PackedScene AbilityLogicScene { get; set; }
+
+    public AbilityLogic AbilityLogic { get; private set; }
+
+    public void InitializeAbilityLogic()
+    {
+        if (AbilityLogicScene != null)
+        {
+            AbilityLogic = AbilityLogicScene.Instantiate<AbilityLogic>();
+        }
+    }
 }

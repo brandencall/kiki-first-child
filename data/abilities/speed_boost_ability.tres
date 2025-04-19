@@ -9,5 +9,5 @@ script = ExtResource("1_1kobx")
 AbilityName = "Speed boost"
 Description = "Get a speed boost of 1.5x"
 Icon = ExtResource("2_unf4d")
-AbilityLogic = ExtResource("1_ofunh")
+AbilityLogicScene = ExtResource("1_ofunh")
 metadata/_custom_type_script = "uid://blh5glfywfv43"

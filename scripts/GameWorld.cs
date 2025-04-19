@@ -58,7 +58,12 @@ public partial class GameWorld : Node2D
 
     private void HandleAbilitySelection(AbilityResource selectedAbility)
     {
-        AbilityLogic ability = selectedAbility.AbilityLogic.Instantiate<AbilityLogic>();
+        if (selectedAbility.AbilityLogic == null)
+        {
+            selectedAbility.InitializeAbilityLogic();
+        }
+        AbilityLogic ability = selectedAbility.AbilityLogic;
+        ability.Upgrade();
         ability.Apply(Player);
         AbilityUi.ClearAbilities();
     }

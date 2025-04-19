@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://i72v47gh4p6p" path="res://scripts/ui/AbilityCard.cs" id="1_unr5y"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_aghsq"]
 
-[node name="AbilityCard" type="Button" node_paths=PackedStringArray("AbilityName", "Description", "AbilityIcon")]
+[node name="AbilityCard" type="Button" node_paths=PackedStringArray("AbilityName", "Description", "AbilityIcon", "CurrentLevel")]
 custom_minimum_size = Vector2(400, 150)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ script = ExtResource("1_unr5y")
 AbilityName = NodePath("HBoxContainer/VBoxContainer/AbilityName")
 Description = NodePath("HBoxContainer/VBoxContainer/Description")
 AbilityIcon = NodePath("HBoxContainer/MarginContainer/TextureRect")
+CurrentLevel = NodePath("HBoxContainer/MarginContainer/CurrentLevel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -33,10 +34,16 @@ size_flags_horizontal = 8
 theme_override_constants/margin_left = 20
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 texture = ExtResource("2_aghsq")
-stretch_mode = 3
+stretch_mode = 4
+
+[node name="CurrentLevel" type="Label" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Current Level: 1"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)

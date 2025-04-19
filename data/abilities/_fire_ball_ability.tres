@@ -9,5 +9,5 @@ script = ExtResource("3_c0d7g")
 AbilityName = "Fire ball"
 Description = "Testing fire ball"
 Icon = ExtResource("2_pa7be")
-AbilityLogic = ExtResource("1_g7rpr")
+AbilityLogicScene = ExtResource("1_g7rpr")
 metadata/_custom_type_script = "uid://blh5glfywfv43"
