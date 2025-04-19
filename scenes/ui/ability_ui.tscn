@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs4svgsompak7"]
+[gd_scene load_steps=8 format=3 uid="uid://bs4svgsompak7"]
 
 [ext_resource type="Script" uid="uid://1tovhu8pjh6s" path="res://scripts/ui/AbilityUi.cs" id="1_eel0r"]
 [ext_resource type="Shader" uid="uid://2giagtmrelrp" path="res://scripts/ui/ability_ui.gdshader" id="2_eel0r"]
@@ -6,6 +6,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1d616"]
 shader = ExtResource("2_eel0r")
 shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d616"]
+draw_center = false
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="Animation" id="Animation_1d616"]
 length = 0.3
@@ -100,6 +107,7 @@ offset_bottom = 222.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1d616")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
