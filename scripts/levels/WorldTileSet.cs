@@ -9,7 +9,7 @@ public partial class WorldTileSet : TileMapLayer
     [Export]
     public BasePlayer Player { get; set; }
 
-    public List<Vector2I> chunks = new();
+    public HashSet<Vector2I> chunks = new();
 
     public override void _Ready()
     {
@@ -32,7 +32,6 @@ public partial class WorldTileSet : TileMapLayer
             {
                 var mapX = position.X + x - _width / 2;
                 var mapY = position.Y + y - _height / 2;
-
                 SetCell(new Vector2I(mapX, mapY), 0, new Vector2I(1, 1), 0);
             }
         }
@@ -46,18 +45,23 @@ public partial class WorldTileSet : TileMapLayer
     private void UnloadDistantChunks(Vector2I playerPos)
     {
         int threshold = (_width * 2) + 1;
+        var toUnload = new List<Vector2I>();
 
-        for (int i = chunks.Count - 1; i >= 0; i--)
+        foreach (var chunk in chunks)
         {
-            Vector2I chunk = chunks[i];
             float dist = GetDist(chunk, playerPos);
 
             if (dist > threshold)
             {
-                GD.Print(chunks[i]);
+                GD.Print(chunk);
                 ClearChunk(chunk);
-                chunks.RemoveAt(i);
+                toUnload.Add(chunk);
             }
+        }
+
+        foreach (var chunk in toUnload)
+        {
+            chunks.Remove(chunk);
         }
     }
 
