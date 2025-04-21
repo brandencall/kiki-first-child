@@ -17,55 +17,20 @@ public partial class WorldTileSet : TileMapLayer
         Player.VelocityComponent.MaxSpeed *= 2;
     }
 
-    public override void _Process(double delta)
+    public void Generate(Vector2I position, int chunkSize)
     {
-        var tilePosition = LocalToMap(Player.Position);
-        GenerateChunk(tilePosition);
-        UnloadDistantChunks(tilePosition);
-    }
-
-    private void GenerateChunk(Vector2I position)
-    {
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < chunkSize; x++)
         {
-            for (int y = 0; y < _height; y++)
+            for (int y = 0; y < chunkSize; y++)
             {
-                var mapX = position.X + x - _width / 2;
-                var mapY = position.Y + y - _height / 2;
+                var mapX = position.X + x;
+                var mapY = position.Y + y;
                 SetCell(new Vector2I(mapX, mapY), 0, new Vector2I(1, 1), 0);
             }
         }
-
-        if (!chunks.Contains(position))
-        {
-            chunks.Add(position);
-        }
     }
 
-    private void UnloadDistantChunks(Vector2I playerPos)
-    {
-        int threshold = (_width * 2) + 1;
-        var toUnload = new List<Vector2I>();
-
-        foreach (var chunk in chunks)
-        {
-            float dist = GetDist(chunk, playerPos);
-
-            if (dist > threshold)
-            {
-                GD.Print(chunk);
-                ClearChunk(chunk);
-                toUnload.Add(chunk);
-            }
-        }
-
-        foreach (var chunk in toUnload)
-        {
-            chunks.Remove(chunk);
-        }
-    }
-
-    private void ClearChunk(Vector2I pos)
+    public void ClearChunk(Vector2I pos, int chunkSize)
     {
         for (int x = 0; x < _width; x++)
         {
