@@ -6,7 +6,8 @@ public partial class LevelManager : Node
     public string CurrentLevel { get; private set; }
     private List<string> _levelPaths = new()
     {
-        "res://scenes/levels/test_level.tscn",
+        "res://scenes/levels/open_world_test.tscn",
+        //"res://scenes/levels/test_level.tscn",
     };
     private int _currentLevelIndex;
 

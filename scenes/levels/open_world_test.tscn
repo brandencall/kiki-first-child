@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bynj5k5fw2scq"]
+[gd_scene load_steps=8 format=3 uid="uid://bynj5k5fw2scq"]
 
 [ext_resource type="Texture2D" uid="uid://c5cfuuhobaaqf" path="res://assets/PlaceholderAssets/Terrain/Tilemap_Flat.png" id="1_ky271"]
 [ext_resource type="Script" uid="uid://cobd0y5hac545" path="res://scripts/levels/WorldTileSet.cs" id="2_a1xjp"]
-[ext_resource type="PackedScene" uid="uid://2i8euktrm4j8" path="res://scenes/player/blue_knight_player.tscn" id="3_40bav"]
 [ext_resource type="Script" uid="uid://yhndlykrhsbm" path="res://scripts/levels/ChunkManager.cs" id="4_a1xjp"]
 [ext_resource type="PackedScene" uid="uid://cc3hyajmwapp4" path="res://scenes/enemies/enemy_spawning/spawn_manager.tscn" id="5_40bav"]
 
@@ -59,16 +58,12 @@ sources/0 = SubResource("TileSetAtlasSource_ky271")
 
 [node name="OpenWorldTest" type="Node2D"]
 
-[node name="WorldTileSet" type="TileMapLayer" parent="." node_paths=PackedStringArray("Player")]
+[node name="WorldTileSet" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_a1xjp")
 script = ExtResource("2_a1xjp")
-Player = NodePath("../BasePlayer")
 
-[node name="BasePlayer" parent="." instance=ExtResource("3_40bav")]
-
-[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("Player", "TileMap", "ChunkLoadTimer")]
+[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("TileMap", "ChunkLoadTimer")]
 script = ExtResource("4_a1xjp")
-Player = NodePath("../BasePlayer")
 TileMap = NodePath("../WorldTileSet")
 ChunkLoadTimer = NodePath("ChunkLoadTimer")
 renderDistance = 3

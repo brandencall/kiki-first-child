@@ -6,15 +6,13 @@ public partial class WorldTileSet : TileMapLayer
     private FastNoiseLite _noise = new FastNoiseLite();
     private int _width = 8;
     private int _height = 8;
-    [Export]
-    public BasePlayer Player { get; set; }
 
     public HashSet<Vector2I> chunks = new();
 
     public override void _Ready()
     {
+        
         _noise.Seed = (int)GD.Randi();
-        Player.VelocityComponent.MaxSpeed *= 2;
     }
 
     public void Generate(Vector2I position, int chunkSize)

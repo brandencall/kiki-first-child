@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 public partial class ChunkManager : Node2D
 {
-    [Export]
-    public BasePlayer Player { get; set; }
+    public BasePlayer Player { get; set; } 
     [Export]
     public WorldTileSet TileMap { get; set; }
     [Export]
@@ -21,7 +20,8 @@ public partial class ChunkManager : Node2D
 
     public override void _Ready()
     {
-        currentChunk = GetCurrentChunk(Player.GlobalPosition);
+        Player = this.GetPlayer();
+        currentChunk = (Vector2I)CallDeferred(nameof(GetCurrentChunk), Player.GlobalPosition);
         activeChunks.Add(currentChunk);
         TileMap.Generate(currentChunk, chunkSize);
         ChunkLoadTimer.Timeout += OnChunkLoadTimerTimeOut;
