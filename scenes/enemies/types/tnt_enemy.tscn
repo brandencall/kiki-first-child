@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdchnwbwchdgc"]
+[gd_scene load_steps=18 format=3 uid="uid://cdchnwbwchdgc"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_2kf4r"]
 [ext_resource type="Script" uid="uid://by18ujttbgfgi" path="res://scripts/enemies/types/TNTEnemy.cs" id="2_fn4nn"]
 [ext_resource type="Texture2D" uid="uid://b2knnfe1m0j54" path="res://assets/PlaceholderAssets/Enemies/TNT_Red.png" id="2_kxu1x"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_nsg18"]
 [ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_kvfa0"]
+[ext_resource type="Shape2D" uid="uid://6gnys0eer5gp" path="res://scenes/enemies/types/tnt_enemy_shape.tres" id="4_y66mr"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_ixoyh"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_fn4nn"]
 [ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_o6vva"]
@@ -60,15 +61,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y66mr"]
-radius = 28.0179
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_tgvgl"]
-radius = 25.02
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_u4ju3"]
-radius = 29.0172
-
 [node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_pathTimer", "_itemDropper") instance=ExtResource("1_2kf4r")]
 collision_layer = 16
 collision_mask = 17
@@ -84,8 +76,7 @@ sprite_frames = SubResource("SpriteFrames_o6vva")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-position = Vector2(-3, 5)
-shape = SubResource("CircleShape2D_y66mr")
+shape = ExtResource("4_y66mr")
 
 [node name="HealthComponent" parent="." index="2" instance=ExtResource("3_nsg18")]
 MaxHealth = 20.0
@@ -96,9 +87,7 @@ collision_mask = 2
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
-visible = false
-position = Vector2(-1, 5)
-shape = SubResource("CircleShape2D_tgvgl")
+shape = ExtResource("4_y66mr")
 
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_ixoyh")]
 MaxSpeed = 150.0
@@ -108,12 +97,10 @@ _accelerationCoefficient = 20.0
 _velocityComponent = NodePath("../VelocityComponent")
 
 [node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_o6vva")]
-visible = false
 Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_u4ju3")
+shape = ExtResource("4_y66mr")
 
 [node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("9_o6vva")]
 offset_left = -44.0

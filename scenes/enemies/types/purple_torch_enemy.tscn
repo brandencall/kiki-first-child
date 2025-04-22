@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hj8dd7t6s13y" path="res://assets/PlaceholderAssets/Enemies/Torch_Purple.png" id="2_0u8o0"]
 [ext_resource type="Script" uid="uid://sswo4thgq60t" path="res://scripts/enemies/types/PurpleTorchEnemy.cs" id="2_rhybd"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_rhybd"]
+[ext_resource type="Shape2D" uid="uid://b4e6u04100has" path="res://scenes/enemies/types/purple_torch_enemy_shape.tres" id="4_0xeva"]
 [ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_7un2t"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_0xeva"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_tvn5i"]
@@ -67,9 +68,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a7d0x"]
-radius = 26.0
-
 [node name="PurpleTorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_pathTimer", "_itemDropper") instance=ExtResource("1_0twls")]
 script = ExtResource("2_rhybd")
 _velocityComponent = NodePath("VelocityComponent")
@@ -83,7 +81,7 @@ sprite_frames = SubResource("SpriteFrames_j8ksk")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-shape = SubResource("CircleShape2D_a7d0x")
+shape = ExtResource("4_0xeva")
 
 [node name="HealthComponent" parent="." index="2" instance=ExtResource("3_rhybd")]
 MaxHealth = 20.0
@@ -92,7 +90,7 @@ MaxHealth = 20.0
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
-shape = SubResource("CircleShape2D_a7d0x")
+shape = ExtResource("4_0xeva")
 
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_0xeva")]
 _accelerationCoefficient = 10.0
@@ -104,7 +102,7 @@ _velocityComponent = NodePath("../VelocityComponent")
 Damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
-shape = SubResource("CircleShape2D_a7d0x")
+shape = ExtResource("4_0xeva")
 
 [node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("9_rhybd")]
 offset_left = -44.0
