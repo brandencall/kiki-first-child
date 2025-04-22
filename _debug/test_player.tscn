@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://4hxhld2uqujg"]
+
+[ext_resource type="Script" uid="uid://dj5wtedvaannw" path="res://_debug/TestPlayer.cs" id="1_0dea3"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="1_qf88k"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="2_dwtgg"]
+[ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="3_0dea3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r82li"]
+size = Vector2(42.9068, 118)
+
+[node name="TestPlayer" type="CharacterBody2D" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_pathTimer")]
+script = ExtResource("1_0dea3")
+_velocityComponent = NodePath("VelocityComponent")
+_pathfindComponent = NodePath("PathfindComponent")
+_pathTimer = NodePath("PathTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qf88k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.75015, 1)
+shape = SubResource("RectangleShape2D_r82li")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_dwtgg")]
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("3_0dea3")]
+_velocityComponent = NodePath("../VelocityComponent")
+
+[node name="PathTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true

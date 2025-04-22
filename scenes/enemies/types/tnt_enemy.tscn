@@ -69,13 +69,14 @@ radius = 25.02
 [sub_resource type="CircleShape2D" id="CircleShape2D_u4ju3"]
 radius = 29.0172
 
-[node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_2kf4r")]
+[node name="TNTEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_pathTimer", "_itemDropper") instance=ExtResource("1_2kf4r")]
 collision_layer = 16
 collision_mask = 17
 script = ExtResource("2_fn4nn")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_pathTimer = NodePath("PathTimer")
 _itemDropper = NodePath("ItemDropper")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
@@ -100,6 +101,8 @@ position = Vector2(-1, 5)
 shape = SubResource("CircleShape2D_tgvgl")
 
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_ixoyh")]
+MaxSpeed = 150.0
+_accelerationCoefficient = 10.0
 
 [node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_fn4nn")]
 _velocityComponent = NodePath("../VelocityComponent")
@@ -118,3 +121,7 @@ offset_top = 43.0
 offset_right = 51.0
 offset_bottom = 47.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="PathTimer" type="Timer" parent="." index="9"]
+wait_time = 0.2
+autostart = true

@@ -1,20 +1,18 @@
 using Godot;
+using System;
 
-public partial class RedTorchEnemy : BaseEnemy 
+public partial class TestPlayer : BaseEnemy
 {
     [Export]
     private VelocityComponent _velocityComponent;
     [Export]
     private PathfindComponent _pathfindComponent;
     [Export]
-    private HealthComponent _healthComponent;
-    [Export]
     private Timer _pathTimer;
 
     public override void _Ready()
     {
         base._Ready();
-        _healthComponent.Died += Die;
         _pathTimer.Timeout += UpdatePath;
     }
 
@@ -31,6 +29,4 @@ public partial class RedTorchEnemy : BaseEnemy
     {
         _velocityComponent.Move(this);
     }
-
-
 }

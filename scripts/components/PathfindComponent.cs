@@ -12,7 +12,7 @@ public partial class PathfindComponent : Node2D
         await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
         NavigationAgent2D = GetNode<NavigationAgent2D>("NavigationAgent2D");
         NavigationAgent2D.AvoidanceEnabled = true;
-        NavigationAgent2D.Radius = 40;
+        NavigationAgent2D.Radius = 30;
         NavigationAgent2D.TargetDesiredDistance = 50;
         NavigationAgent2D.VelocityComputed += OnVelocityComputed;
     }

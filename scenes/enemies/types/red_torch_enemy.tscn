@@ -76,11 +76,12 @@ radius = 39.0128
 [sub_resource type="CircleShape2D" id="CircleShape2D_iglkb"]
 radius = 24.0208
 
-[node name="TorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_dgeln")]
+[node name="TorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_pathTimer", "_itemDropper") instance=ExtResource("1_dgeln")]
 script = ExtResource("2_h11a2")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_pathTimer = NodePath("PathTimer")
 _itemDropper = NodePath("ItemDropper")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
@@ -104,6 +105,7 @@ _healthComponent = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_kuj4o")
 
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("6_8vmqk")]
+_accelerationCoefficient = 10.0
 
 [node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("7_chh3n")]
 _velocityComponent = NodePath("../VelocityComponent")
@@ -120,3 +122,7 @@ offset_top = 41.0
 offset_right = 51.0
 offset_bottom = 45.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="PathTimer" type="Timer" parent="." index="9"]
+wait_time = 0.2
+autostart = true
