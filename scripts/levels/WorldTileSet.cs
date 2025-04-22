@@ -32,11 +32,11 @@ public partial class WorldTileSet : TileMapLayer
 
     public void ClearChunk(Vector2I pos, int chunkSize)
     {
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < chunkSize; x++)
         {
-            for (int y = 0; y < _height; y++)
+            for (int y = 0; y < chunkSize; y++)
             {
-                Vector2I tilePos = new(pos.X - (_width / 2) + x, pos.Y - (_height / 2) + y);
+                Vector2I tilePos = new(pos.X + x, pos.Y + y);
                 EraseCell(tilePos);
             }
         }

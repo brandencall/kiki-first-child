@@ -67,12 +67,31 @@ public partial class ChunkManager : Node2D
                 int chunkPositionY = chunkY * chunkSize;
 
                 Vector2I chunk = new Vector2I(chunkX, chunkY);
+                newChunks.Add(chunk);
                 if (!activeChunks.Contains(chunk))
                 {
                     TileMap.Generate(new Vector2I(chunkPositionX, chunkPositionY), chunkSize);
                     activeChunks.Add(chunk);
                 }
             }
+        }
+
+        List<Vector2I> chunksToDelete = new();
+        for (int i = 0; i < activeChunks.Count; i++)
+        {
+            var chunk = activeChunks[i];
+            if (Mathf.Abs(chunk.X - currentChunk.X) > renderDistance
+                        || Mathf.Abs(chunk.Y - currentChunk.Y) > renderDistance)
+            {
+                Vector2I chunkToRemove = new Vector2I(chunk.X * chunkSize, chunk.Y * chunkSize);
+                TileMap.ClearChunk(chunkToRemove, chunkSize);
+                chunksToDelete.Add(chunk);
+            }
+        }
+
+        foreach (var chunk in chunksToDelete)
+        {
+            activeChunks.Remove(chunk);
         }
     }
 }
