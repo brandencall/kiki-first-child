@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PurpleTorchEnemy : BaseEnemy 
+public partial class PurpleTorchEnemy : BaseEnemy
 {
     [Export]
     private VelocityComponent _velocityComponent;
@@ -23,12 +23,12 @@ public partial class PurpleTorchEnemy : BaseEnemy
         if (_player != null)
         {
             _pathfindComponent.SetTargetPosition(_player.GlobalPosition);
-            _pathfindComponent.FollowPath();
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        _pathfindComponent.FollowPath();
         _velocityComponent.Move(this);
     }
 

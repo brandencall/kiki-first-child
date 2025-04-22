@@ -124,5 +124,5 @@ offset_bottom = 45.0
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="PathTimer" type="Timer" parent="." index="9"]
-wait_time = 0.2
+wait_time = 0.5
 autostart = true

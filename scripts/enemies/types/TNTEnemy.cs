@@ -23,12 +23,12 @@ public partial class TNTEnemy : BaseEnemy
         if (_player != null)
         {
             _pathfindComponent.SetTargetPosition(_player.GlobalPosition);
-            _pathfindComponent.FollowPath();
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        _pathfindComponent.FollowPath();
         _velocityComponent.Move(this);
     }
 

@@ -11,7 +11,6 @@ public partial class VelocityComponent : Node
     public float AccelerationCoefficient => _accelerationCoefficient;
     public Vector2 Velocity { get; set; }
 
-    //TODO: Figure out the right way to do acceleration to velocity.
     public void AccelerateToVelocity(Vector2 velocity)
     {
         float delta = (float)GetPhysicsProcessDeltaTime();
