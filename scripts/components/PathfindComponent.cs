@@ -12,7 +12,7 @@ public partial class PathfindComponent : Node2D
         await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
         NavigationAgent2D = GetNode<NavigationAgent2D>("NavigationAgent2D");
         NavigationAgent2D.AvoidanceEnabled = true;
-        NavigationAgent2D.Radius = 30;
+        NavigationAgent2D.Radius = 40;
         NavigationAgent2D.TargetDesiredDistance = 50;
         NavigationAgent2D.VelocityComputed += OnVelocityComputed;
     }
@@ -42,11 +42,7 @@ public partial class PathfindComponent : Node2D
 
     private void OnVelocityComputed(Vector2 safeVelocity)
     {
-        var newDirection = safeVelocity.Normalized();
-        var currentDirection = _velocityComponent.Velocity.Normalized();
-        float delta = (float)GetPhysicsProcessDeltaTime();
-        var halfway = newDirection.Lerp(currentDirection, 1f - Mathf.Exp(_velocityComponent.AccelerationCoefficient * delta));
-        _velocityComponent.Velocity = halfway * _velocityComponent.Velocity.Length();
+        _velocityComponent.AccelerateToVelocity(safeVelocity);
     }
 
 }
