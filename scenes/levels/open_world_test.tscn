@@ -56,7 +56,11 @@ Player = NodePath("../BasePlayer")
 
 [node name="BasePlayer" parent="." instance=ExtResource("3_40bav")]
 
-[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("Player", "TileMap")]
+[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("Player", "TileMap", "ChunkLoadTimer")]
 script = ExtResource("4_a1xjp")
 Player = NodePath("../BasePlayer")
 TileMap = NodePath("../WorldTileSet")
+ChunkLoadTimer = NodePath("ChunkLoadTimer")
+
+[node name="ChunkLoadTimer" type="Timer" parent="ChunkManager"]
+autostart = true
