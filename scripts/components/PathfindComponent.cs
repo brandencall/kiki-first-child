@@ -45,8 +45,8 @@ public partial class PathfindComponent : Node2D
         var newDirection = safeVelocity.Normalized();
         var currentDirection = _velocityComponent.Velocity.Normalized();
         float delta = (float)GetPhysicsProcessDeltaTime();
-        var halfwary = newDirection.Lerp(currentDirection, 1f - Mathf.Exp(_velocityComponent.AccelerationCoefficient * delta));
-        _velocityComponent.Velocity = halfwary * _velocityComponent.Velocity.Length();
+        var halfway = newDirection.Lerp(currentDirection, 1f - Mathf.Exp(_velocityComponent.AccelerationCoefficient * delta));
+        _velocityComponent.Velocity = halfway * _velocityComponent.Velocity.Length();
     }
 
 }
