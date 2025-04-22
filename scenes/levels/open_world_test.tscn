@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bynj5k5fw2scq"]
+[gd_scene load_steps=9 format=3 uid="uid://bynj5k5fw2scq"]
 
 [ext_resource type="Texture2D" uid="uid://c5cfuuhobaaqf" path="res://assets/PlaceholderAssets/Terrain/Tilemap_Flat.png" id="1_ky271"]
 [ext_resource type="Script" uid="uid://cobd0y5hac545" path="res://scripts/levels/WorldTileSet.cs" id="2_a1xjp"]
 [ext_resource type="PackedScene" uid="uid://2i8euktrm4j8" path="res://scenes/player/blue_knight_player.tscn" id="3_40bav"]
 [ext_resource type="Script" uid="uid://yhndlykrhsbm" path="res://scripts/levels/ChunkManager.cs" id="4_a1xjp"]
+[ext_resource type="PackedScene" uid="uid://cc3hyajmwapp4" path="res://scenes/enemies/enemy_spawning/spawn_manager.tscn" id="5_40bav"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_a1xjp"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ky271"]
 texture = ExtResource("1_ky271")
@@ -20,6 +27,7 @@ texture_region_size = Vector2i(64, 64)
 9:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_a1xjp")
 2:1/0 = 0
 3:1/0 = 0
 5:1/0 = 0
@@ -45,6 +53,8 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSet" id="TileSet_a1xjp"]
 tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ky271")
 
 [node name="OpenWorldTest" type="Node2D"]
@@ -61,6 +71,9 @@ script = ExtResource("4_a1xjp")
 Player = NodePath("../BasePlayer")
 TileMap = NodePath("../WorldTileSet")
 ChunkLoadTimer = NodePath("ChunkLoadTimer")
+renderDistance = 3
 
 [node name="ChunkLoadTimer" type="Timer" parent="ChunkManager"]
 autostart = true
+
+[node name="SpawnManager" parent="." instance=ExtResource("5_40bav")]

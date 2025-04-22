@@ -30,7 +30,6 @@ public partial class ChunkManager : Node2D
 
     private void OnChunkLoadTimerTimeOut()
     {
-        GD.Print("here");
         currentChunk = GetCurrentChunk(Player.GlobalPosition);
         if (currentChunk != previousChunk)
         {
