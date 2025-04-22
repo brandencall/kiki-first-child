@@ -101,8 +101,8 @@ position = Vector2(-1, 5)
 shape = SubResource("CircleShape2D_tgvgl")
 
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_ixoyh")]
-MaxSpeed = 150.0
-_accelerationCoefficient = 10.0
+MaxSpeed = 250.0
+_accelerationCoefficient = 20.0
 
 [node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_fn4nn")]
 _velocityComponent = NodePath("../VelocityComponent")

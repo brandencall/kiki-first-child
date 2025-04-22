@@ -15,7 +15,7 @@ public partial class VelocityComponent : Node
     public void AccelerateToVelocity(Vector2 velocity)
     {
         float delta = (float)GetPhysicsProcessDeltaTime();
-        Velocity = Velocity.Lerp(velocity, (float)delta * _accelerationCoefficient);
+        Velocity = Velocity.Lerp(velocity, 1f - Mathf.Exp(-_accelerationCoefficient * AccelerationCoefficientMultiplier * delta));
     }
 
     public void AccelerateInDirection(Vector2 direction)
