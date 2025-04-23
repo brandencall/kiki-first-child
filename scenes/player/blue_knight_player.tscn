@@ -165,10 +165,12 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+visible = false
 position = Vector2(-2, -9)
 shape = SubResource("CircleShape2D_5g3hu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+visible = false
 position = Vector2(44.25, -13.75)
 shape = SubResource("RectangleShape2D_stneq")
 disabled = true
@@ -178,9 +180,11 @@ MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_e6w54")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_e6w54")
 
 [node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_6xqdu")]

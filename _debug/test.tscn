@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://be7tufxd2cgr3"]
+[gd_scene load_steps=9 format=3 uid="uid://be7tufxd2cgr3"]
 
 [ext_resource type="Script" uid="uid://vy43rve06ntw" path="res://scripts/GameWorld.cs" id="1_0r8sa"]
 [ext_resource type="PackedScene" uid="uid://cwkoal1cishu0" path="res://scenes/ui/hud.tscn" id="2_4mg5l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bld5bqivrpnby" path="res://scripts/managers/LevelManager.cs" id="4_s4wh7"]
 [ext_resource type="Script" uid="uid://ced4ybvxth8h6" path="res://scripts/managers/ExperienceManager.cs" id="6_wh0c3"]
 [ext_resource type="Script" uid="uid://cafredyqsie72" path="res://scripts/managers/AbilityManager.cs" id="7_qms6p"]
+[ext_resource type="PackedScene" uid="uid://sn8kaa4vbna8" path="res://scenes/items/coin.tscn" id="8_4mg5l"]
 
 [node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "AbilityUi", "LevelManager", "Levels", "Player", "ExperienceManager", "AbilityManager")]
 script = ExtResource("1_0r8sa")
@@ -46,3 +47,65 @@ script = ExtResource("6_wh0c3")
 
 [node name="AbilityManager" type="Node" parent="."]
 script = ExtResource("7_qms6p")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="coin" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin2" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin3" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin4" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin5" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin6" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin7" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin8" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin9" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin10" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(216, 432)
+
+[node name="coin11" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin12" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin13" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin14" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin15" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin16" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin17" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin18" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin19" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 261)
+
+[node name="coin20" parent="Node2D" instance=ExtResource("8_4mg5l")]
+position = Vector2(176, 271)
