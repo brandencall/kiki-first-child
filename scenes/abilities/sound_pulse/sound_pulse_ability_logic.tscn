@@ -5,4 +5,4 @@
 
 [node name="SoundPulseAbilityLogic" type="Node"]
 script = ExtResource("1_75jyx")
-SoundPulse = ExtResource("2_8pipu")
+SoundPulseScene = ExtResource("2_8pipu")

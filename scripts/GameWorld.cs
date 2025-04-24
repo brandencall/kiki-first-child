@@ -64,10 +64,9 @@ public partial class GameWorld : Node2D
         {
             selectedAbility.InitializeAbilityLogic();
             _currentAbilities.Add(selectedAbility);
+            selectedAbility.AbilityLogic.Apply(Player);
         }
-        AbilityLogic ability = selectedAbility.AbilityLogic;
-        ability.Upgrade();
-        ability.Apply(Player);
+        selectedAbility.AbilityLogic.Upgrade(selectedAbility);
         AbilityUi.ClearAbilities();
     }
 
