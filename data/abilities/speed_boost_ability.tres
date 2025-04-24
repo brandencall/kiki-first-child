@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_1kobx"]
 [ext_resource type="PackedScene" uid="uid://v25vub0rgprp" path="res://scenes/abilities/speed_boost/speed_boost_ability.tscn" id="1_ofunh"]
-[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_unf4d"]
+[ext_resource type="Texture2D" uid="uid://op7n7rayx3uv" path="res://assets/SpeedBoostIcon.png" id="2_unf4d"]
 
 [resource]
 script = ExtResource("1_1kobx")
