@@ -39,6 +39,11 @@ public partial class AbilityCard : Button
         else
         {
             CurrentLevel.Text = "Current Level: " + ability.AbilityLogic.CurrentLevel.ToString();
+            
+            if (_ability.AbilityLogic.OnLastLevel) 
+            {
+                Disabled = true;
+            }
         }
     }
 }
