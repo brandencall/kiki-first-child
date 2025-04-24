@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://blh5glfywfv43" path="res://scripts/abilities/AbilityResource.cs" id="1_joub7"]
 [ext_resource type="PackedScene" uid="uid://c8ub87il3u02x" path="res://scenes/abilities/sound_pulse/sound_pulse_ability_logic.tscn" id="1_w4k2i"]
-[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_qsh5n"]
+[ext_resource type="Texture2D" uid="uid://bnu4sklhfcpfs" path="res://assets/SoundPulseIcon.png" id="2_w4k2i"]
 
 [resource]
 script = ExtResource("1_joub7")
 AbilityName = "Sound Wave"
 Description = "Distribute a sound wave around you to fight off enemies"
-Icon = ExtResource("2_qsh5n")
+Icon = ExtResource("2_w4k2i")
 AbilityLogicScene = ExtResource("1_w4k2i")
 metadata/_custom_type_script = "uid://blh5glfywfv43"
