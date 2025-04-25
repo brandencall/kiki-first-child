@@ -21,7 +21,7 @@ public partial class GameWorld : Node2D
     [Signal]
     public delegate void GameFinishedEventHandler();
 
-    private List<AbilityResource> _currentAbilities = new();
+    private List<IAbility> _currentIAbilities = new();
 
     private Node2D _currentLevel;
 
@@ -47,26 +47,26 @@ public partial class GameWorld : Node2D
 
     private void HandleExperienceLevelIncrease()
     {
-        List<AbilityResource> abilities = AbilityManager.GetRandomAbilities();
+        List<IAbility> iAbility = AbilityManager.GetRandomAbilities();
 
-        foreach (var ability in abilities)
+        foreach (var ability in iAbility)
         {
             AbilityUi.AddAbilityCard(ability);
         }
+
         AbilityUi.ShowAbilities();
         Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
         Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
     }
 
-    private void HandleAbilitySelection(AbilityResource selectedAbility)
+    private void HandleAbilitySelection(IAbility selectedAbility)
     {
-        if (selectedAbility.AbilityLogic == null)
+        if (!AbilityManager.CurrentAbilities.Contains(selectedAbility))
         {
-            selectedAbility.InitializeAbilityLogic();
-            _currentAbilities.Add(selectedAbility);
-            selectedAbility.AbilityLogic.Apply(Player);
+            AbilityManager.CurrentAbilities.Add(selectedAbility);
+            selectedAbility.Apply(Player);
         }
-        selectedAbility.AbilityLogic.Upgrade(selectedAbility);
+        selectedAbility.Upgrade();
         AbilityUi.ClearAbilities();
     }
 

@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class AbilityUi : Control
 {
@@ -7,8 +8,7 @@ public partial class AbilityUi : Control
     [Export]
     public AnimationPlayer Animations { get; set; }
 
-    [Signal]
-    public delegate void AbilitySelectedEventHandler(AbilityResource ability);
+    public event Action<IAbility> AbilitySelected;
 
     private PackedScene _abilityCardScene = ResourceLoader.Load<PackedScene>("res://scenes/ui/ability_card.tscn");
 
@@ -35,8 +35,7 @@ public partial class AbilityUi : Control
         }
     }
 
-
-    public void AddAbilityCard(AbilityResource ability)
+    public void AddAbilityCard(IAbility ability)
     {
         var card = _abilityCardScene.Instantiate<AbilityCard>();
         card.SetAbility(ability);
@@ -44,8 +43,8 @@ public partial class AbilityUi : Control
         AbilityContainer.AddChild(card);
     }
 
-    public void OnAbilitySelected(AbilityResource selectedAbility)
+    public void OnAbilitySelected(IAbility selectedAbility)
     {
-        EmitSignal(SignalName.AbilitySelected, selectedAbility);
+        AbilitySelected?.Invoke(selectedAbility);
     }
 }

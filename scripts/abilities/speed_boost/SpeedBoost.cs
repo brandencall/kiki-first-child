@@ -1,19 +1,26 @@
+using Godot;
 
-public partial class SpeedBoostAbility : AbilityLogic
+public class SpeedBoost : IAbility
 {
+    public string AbilityName { get; set; } = "Speed Boost";
+    public string Description { get; set; } = "20% speed increase!";
+    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/SpeedBoostIcon.png");
+    public int CurrentLevel { get; set; } = 1;
+    public bool OnLastLevel { get; set; } = false;
+
     private BasePlayer _player;
 
-    public override void Apply(BasePlayer player)
+    public void Apply(BasePlayer player)
     {
         _player = player;
         player.VelocityComponent.MaxSpeed += player.VelocityComponent.MaxSpeed * 0.2f;
     }
 
-    public override void Upgrade(AbilityResource abilityResource)
+    public void Upgrade()
     {
         UpgradeBasedOnLevel();
-        base.Upgrade(abilityResource);
-        SetupNextLevelAbilityResource(abilityResource);
+        CurrentLevel++;
+        SetupNextLevelAbilityResource();
     }
 
     private void UpgradeBasedOnLevel()
@@ -44,31 +51,32 @@ public partial class SpeedBoostAbility : AbilityLogic
         }
     }
 
-    private void SetupNextLevelAbilityResource(AbilityResource abilityResource)
+    private void SetupNextLevelAbilityResource()
     {
         switch (CurrentLevel)
         {
             case 2:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 3:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 4:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 5:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 6:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 7:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
             case 8:
-                abilityResource.Description = "+20% speed increase!";
+                Description = "+20% speed increase!";
                 break;
         }
     }
+
 }

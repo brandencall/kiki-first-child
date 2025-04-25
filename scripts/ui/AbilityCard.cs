@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class AbilityCard : Button
 {
@@ -11,10 +12,9 @@ public partial class AbilityCard : Button
     [Export]
     public Label CurrentLevel { get; set; }
 
-    [Signal]
-    public delegate void AbilitySelectedEventHandler(AbilityResource ability);
+    public event Action<IAbility> AbilitySelected;
 
-    private AbilityResource _ability;
+    private IAbility _ability;
 
     public override void _Ready()
     {
@@ -23,27 +23,20 @@ public partial class AbilityCard : Button
 
     private void OnPickButtonPressed()
     {
-        EmitSignal(SignalName.AbilitySelected, _ability);
+        AbilitySelected?.Invoke(_ability);
     }
 
-    public void SetAbility(AbilityResource ability)
+    public void SetAbility(IAbility ability)
     {
         _ability = ability;
         AbilityName.Text = ability.AbilityName;
         Description.Text = ability.Description;
-        AbilityIcon.Texture = ability.Icon;
-        if (ability.AbilityLogic == null)
+        AbilityIcon.Texture = ability.AbilityIcon;
+        CurrentLevel.Text = "Current Level: " + ability.CurrentLevel.ToString();
+
+        if (_ability.OnLastLevel)
         {
-            CurrentLevel.Text = "Current Level: 1"; 
-        }
-        else
-        {
-            CurrentLevel.Text = "Current Level: " + ability.AbilityLogic.CurrentLevel.ToString();
-            
-            if (_ability.AbilityLogic.OnLastLevel) 
-            {
-                Disabled = true;
-            }
+            Disabled = true;
         }
     }
 }

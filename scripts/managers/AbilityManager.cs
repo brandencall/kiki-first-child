@@ -6,35 +6,24 @@ using System.Linq;
 public partial class AbilityManager : Node
 {
     public int NumberOfAbilitiesToChoose { get; private set; } = 3;
-    private string _abilityDirectory = "res://data/abilities";
-    private List<AbilityResource> _allAbilities = new();
+    public List<IAbility> CurrentAbilities = new();
+    private List<IAbility> _allAbilities = new();
 
     public override void _Ready()
     {
-        LoadAllAbilities();
+        LoadAllIAbilities();
     }
 
-    public void LoadAllAbilities()
+    private void LoadAllIAbilities()
     {
-        var dir = DirAccess.Open(_abilityDirectory);
-        if (dir == null) return;
-
-        dir.ListDirBegin();
-        string fileName;
-        while ((fileName = dir.GetNext()) != "")
-        {
-            if (!fileName.EndsWith(".tres")) continue;
-            var ability = GD.Load<AbilityResource>(_abilityDirectory + "/" + fileName);
-            if (ability != null)
-                _allAbilities.Add(ability);
-        }
-        dir.ListDirEnd();
+        _allAbilities.Add(new SoundPulse());
+        _allAbilities.Add(new SpeedBoost());
     }
 
-    public List<AbilityResource> GetRandomAbilities()
+    public List<IAbility> GetRandomAbilities()
     {
         Random random = new Random();
-        List<AbilityResource> result = _allAbilities.OrderBy(_ => random.Next())
+        List<IAbility> result = _allAbilities.OrderBy(_ => random.Next())
                                        .Take(NumberOfAbilitiesToChoose).ToList();
         return result;
     }

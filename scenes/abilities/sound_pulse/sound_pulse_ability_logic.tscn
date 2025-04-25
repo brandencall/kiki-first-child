@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8ub87il3u02x"]
-
-[ext_resource type="Script" uid="uid://cajxcnc3c1mg4" path="res://scripts/abilities/sound_pulse/SoundPulseAbilityLogic.cs" id="1_75jyx"]
-[ext_resource type="PackedScene" uid="uid://bddfmlv2c2466" path="res://scenes/abilities/sound_pulse/sound_pulse_ability.tscn" id="2_8pipu"]
-
-[node name="SoundPulseAbilityLogic" type="Node"]
-script = ExtResource("1_75jyx")
-SoundPulseScene = ExtResource("2_8pipu")

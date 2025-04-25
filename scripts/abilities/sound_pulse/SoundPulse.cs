@@ -1,22 +1,27 @@
 using Godot;
 
-public partial class SoundPulseAbilityLogic : AbilityLogic 
+public class SoundPulse : IAbility
 {
-    [Export]
-    public PackedScene SoundPulseScene { get; set; }
+    public string AbilityName { get; set; } = "Sound Pulse Ability";
+    public string Description { get; set; } = "Distribute a sound wave around the player";
+    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/SoundPulseIcon.png");
+    public int CurrentLevel { get; set; } = 1;
+    public bool OnLastLevel { get; set; } = false;
+
+    private PackedScene _soundPulseScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/sound_pulse/sound_pulse_ability.tscn"); 
     private SoundPulseAbility _soundPulse;
 
-    public override void Apply(BasePlayer player)
+    public void Apply(BasePlayer player)
     {
-        _soundPulse = SoundPulseScene.Instantiate<SoundPulseAbility>();
+        _soundPulse = _soundPulseScene.Instantiate<SoundPulseAbility>();
         player.AddChild(_soundPulse);
-    }   
+    }
 
-    public override void Upgrade(AbilityResource abilityResource)
+    public void Upgrade()
     {
         UpgradeBasedOnLevel();
-        base.Upgrade(abilityResource);
-        SetupNextLevelAbilityResource(abilityResource);
+        CurrentLevel++;
+        SetupNextLevelAbilityResource();
     }
 
     private void UpgradeBasedOnLevel()
@@ -50,30 +55,30 @@ public partial class SoundPulseAbilityLogic : AbilityLogic
         }
     }
 
-    private void SetupNextLevelAbilityResource(AbilityResource abilityResource)
+    private void SetupNextLevelAbilityResource()
     {
         switch (CurrentLevel)
         {
             case 2:
-                abilityResource.Description = "+5 Damage increase!";
+                Description = "+5 Damage increase!";
                 break;
             case 3:
-                abilityResource.Description = "20% Wave Speed increase!";
+                Description = "20% Wave Speed increase!";
                 break;
             case 4:
-                abilityResource.Description = "+5 Damage increase and 20% Wave Speed increase";
+                Description = "+5 Damage increase and 20% Wave Speed increase";
                 break;
             case 5:
-                abilityResource.Description = "+10 Damage increase";
+                Description = "+10 Damage increase";
                 break;
             case 6:
-                abilityResource.Description = "+10 Damage increase";
+                Description = "+10 Damage increase";
                 break;
             case 7:
-                abilityResource.Description = "25% Wave Speed increase";
+                Description = "25% Wave Speed increase";
                 break;
             case 8:
-                abilityResource.Description = "+15 Damage increase and 25% Wave Speed increase";
+                Description = "+15 Damage increase and 25% Wave Speed increase";
                 break;
         }
     }
