@@ -18,6 +18,7 @@ public partial class AbilityManager : Node
     {
         _allAbilities.Add(new SoundPulse());
         _allAbilities.Add(new SpeedBoost());
+        _allAbilities.Add(new Football());
     }
 
     public List<IAbility> GetRandomAbilities()

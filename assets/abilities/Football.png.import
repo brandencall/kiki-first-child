@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnu4sklhfcpfs"
-path="res://.godot/imported/SoundPulseIcon.png-6d8c8ff657fb58f129fdb6082dc4ac0e.ctex"
+uid="uid://b6acbbm03vmue"
+path="res://.godot/imported/Football.png-166637ade63ab05c338f171c384a74fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SoundPulseIcon.png"
-dest_files=["res://.godot/imported/SoundPulseIcon.png-6d8c8ff657fb58f129fdb6082dc4ac0e.ctex"]
+source_file="res://assets/abilities/Football.png"
+dest_files=["res://.godot/imported/Football.png-166637ade63ab05c338f171c384a74fe.ctex"]
 
 [params]
 

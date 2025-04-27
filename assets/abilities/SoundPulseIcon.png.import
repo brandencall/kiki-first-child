@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://op7n7rayx3uv"
-path="res://.godot/imported/SpeedBoostIcon.png-cb1bb9e3d4c615f75241b2c1062c79ea.ctex"
+uid="uid://bnu4sklhfcpfs"
+path="res://.godot/imported/SoundPulseIcon.png-0704ef2f901616056725d593ec96bb0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SpeedBoostIcon.png"
-dest_files=["res://.godot/imported/SpeedBoostIcon.png-cb1bb9e3d4c615f75241b2c1062c79ea.ctex"]
+source_file="res://assets/abilities/SoundPulseIcon.png"
+dest_files=["res://.godot/imported/SoundPulseIcon.png-0704ef2f901616056725d593ec96bb0e.ctex"]
 
 [params]
 

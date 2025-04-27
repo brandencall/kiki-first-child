@@ -4,7 +4,7 @@ public class SpeedBoost : IAbility
 {
     public string AbilityName { get; set; } = "Speed Boost";
     public string Description { get; set; } = "20% speed increase!";
-    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/SpeedBoostIcon.png");
+    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/abilities/SpeedBoostIcon.png");
     public int CurrentLevel { get; set; } = 1;
     public bool OnLastLevel { get; set; } = false;
 

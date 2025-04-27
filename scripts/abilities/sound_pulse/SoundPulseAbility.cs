@@ -14,6 +14,7 @@ public partial class SoundPulseAbility : HitboxComponent
 
     public override void _Ready()
     {
+        base._Ready();
         _material = (ShaderMaterial)_waveRect.Material;
         _waveRect.Visible = true;
     }

@@ -4,7 +4,7 @@ public class SoundPulse : IAbility
 {
     public string AbilityName { get; set; } = "Sound Pulse Ability";
     public string Description { get; set; } = "Distribute a sound wave around the player";
-    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/SoundPulseIcon.png");
+    public Texture2D AbilityIcon { get; set; } = ResourceLoader.Load<Texture2D>("res://assets/abilities/SoundPulseIcon.png");
     public int CurrentLevel { get; set; } = 1;
     public bool OnLastLevel { get; set; } = false;
 
