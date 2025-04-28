@@ -8,14 +8,10 @@ public partial class HurtboxComponent : Area2D
     [Export]
     private HealthComponent _healthComponent;
 
-    public HurtboxComponent()
-    {
-        CollisionLayer = 0;
-        CollisionMask = 2;
-    }
-
     public override void _Ready()
     {
+        CollisionLayer = 32;
+        CollisionMask = 2;
         Connect("area_entered", new Callable(this, nameof(OnAreaEntered)));
     }
 

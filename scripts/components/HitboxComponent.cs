@@ -7,7 +7,7 @@ public partial class HitboxComponent : Area2D
 
     public override void _Ready()
     { 
+        CollisionMask = 32;
         CollisionLayer = 2;
-        CollisionMask = 0;
     }
 }

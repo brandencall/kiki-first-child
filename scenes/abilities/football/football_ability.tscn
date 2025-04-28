@@ -14,7 +14,8 @@ script = ExtResource("2_hk8hy")
 Sprite = NodePath("Sprite2D")
 Collision = NodePath("CollisionShape2D")
 Cooldown = NodePath("Cooldown")
-Speed = 400.0
+Speed = 700.0
+MaxNumberOfEnemiesHit = 1
 Damage = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
