@@ -34,7 +34,6 @@ public partial class FootballAbility : HitboxComponent
 
     private void OnAreaEntered(Area2D otherArea)
     {
-        GD.Print("area_entered");
         if (otherArea is HurtboxComponent hurtbox)
         {
             _currentEnemiesHit++;
