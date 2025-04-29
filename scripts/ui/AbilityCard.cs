@@ -18,6 +18,7 @@ public partial class AbilityCard : Button
     private ShaderMaterial _shaderAbilityIcon;
     private Vector2 _originalSize = new Vector2(400, 150);
     private Vector2 _scaledSize = new Vector2(430, 170);
+    private Tween _shineTween;
 
     public override void _Ready()
     {
@@ -32,8 +33,8 @@ public partial class AbilityCard : Button
         CustomMinimumSize = _scaledSize;
         if (_shaderAbilityIcon != null)
         {
-            var tween = CreateTween();
-            tween.TweenProperty(_shaderAbilityIcon, "shader_parameter/shine_progress", 1.0f, 1.5f)
+            _shineTween = CreateTween();
+            _shineTween.TweenProperty(_shaderAbilityIcon, "shader_parameter/shine_progress", 1.0f, 1.5f)
                 .From(0.0f);
         }
     }
@@ -42,6 +43,8 @@ public partial class AbilityCard : Button
     private void OnMouseExited()
     {
         CustomMinimumSize = _originalSize;
+        _shineTween?.Kill();
+        _shaderAbilityIcon.SetShaderParameter("shine_progress", 0.0f);
     }
 
     private void OnPickButtonPressed()
