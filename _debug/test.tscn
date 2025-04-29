@@ -40,7 +40,6 @@ process_mode = 1
 script = ExtResource("4_s4wh7")
 
 [node name="BasePlayer" parent="." instance=ExtResource("3_mvnfp")]
-position = Vector2(512, 413)
 
 [node name="ExperienceManager" type="Node" parent="."]
 script = ExtResource("6_wh0c3")

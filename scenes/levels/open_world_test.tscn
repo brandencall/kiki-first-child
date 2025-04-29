@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bynj5k5fw2scq"]
+[gd_scene load_steps=10 format=3 uid="uid://bynj5k5fw2scq"]
 
+[ext_resource type="Script" uid="uid://ba1g6xj8bwr3x" path="res://scripts/levels/FlowFieldDebug.cs" id="1_g4pm7"]
 [ext_resource type="Texture2D" uid="uid://c5cfuuhobaaqf" path="res://assets/PlaceholderAssets/Terrain/Tilemap_Flat.png" id="1_ky271"]
 [ext_resource type="Script" uid="uid://cobd0y5hac545" path="res://scripts/levels/WorldTileSet.cs" id="2_a1xjp"]
 [ext_resource type="Script" uid="uid://yhndlykrhsbm" path="res://scripts/levels/ChunkManager.cs" id="4_a1xjp"]
 [ext_resource type="PackedScene" uid="uid://cc3hyajmwapp4" path="res://scenes/enemies/enemy_spawning/spawn_manager.tscn" id="5_40bav"]
+[ext_resource type="Script" uid="uid://bih5gt1xanqeq" path="res://scripts/levels/FlowFieldManager.cs" id="5_g4pm7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_a1xjp"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -62,9 +64,16 @@ sources/0 = SubResource("TileSetAtlasSource_ky271")
 tile_set = SubResource("TileSet_a1xjp")
 script = ExtResource("2_a1xjp")
 
-[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("TileMap", "ChunkLoadTimer")]
+[node name="FlowFieldDebug" type="Node2D" parent="." node_paths=PackedStringArray("ChunkManager", "TileMap")]
+script = ExtResource("1_g4pm7")
+ChunkManager = NodePath("../ChunkManager")
+TileMap = NodePath("../WorldTileSet")
+
+[node name="ChunkManager" type="Node2D" parent="." node_paths=PackedStringArray("TileMap", "Debugger", "FlowField", "ChunkLoadTimer")]
 script = ExtResource("4_a1xjp")
 TileMap = NodePath("../WorldTileSet")
+Debugger = NodePath("../FlowFieldDebug")
+FlowField = NodePath("../FlowFieldManager")
 ChunkLoadTimer = NodePath("ChunkLoadTimer")
 renderDistance = 3
 
@@ -72,3 +81,7 @@ renderDistance = 3
 autostart = true
 
 [node name="SpawnManager" parent="." instance=ExtResource("5_40bav")]
+
+[node name="FlowFieldManager" type="Node2D" parent="." node_paths=PackedStringArray("ChunkManager")]
+script = ExtResource("5_g4pm7")
+ChunkManager = NodePath("../ChunkManager")

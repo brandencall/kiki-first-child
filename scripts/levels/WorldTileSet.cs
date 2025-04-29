@@ -11,7 +11,7 @@ public partial class WorldTileSet : TileMapLayer
 
     public override void _Ready()
     {
-        
+
         _noise.Seed = (int)GD.Randi();
     }
 
@@ -40,10 +40,20 @@ public partial class WorldTileSet : TileMapLayer
         }
     }
 
-    private float GetDist(Vector2I p1, Vector2I p2)
+    public List<Vector2I> GetTilesInChunk(Vector2I chunkOrigin, int chunkSize)
     {
-        Vector2I diff = p1 - p2;
-        return Mathf.Sqrt(diff.X * diff.X + diff.Y * diff.Y);
+        var tiles = new List<Vector2I>();
+
+        for (int x = 0; x < chunkSize; x++)
+        {
+            for (int y = 0; y < chunkSize; y++)
+            {
+                var mapX = chunkOrigin.X + x;
+                var mapY = chunkOrigin.Y + y;
+                tiles.Add(new Vector2I(mapX, mapY));
+            }
+        }
+        return tiles;
     }
 
 }

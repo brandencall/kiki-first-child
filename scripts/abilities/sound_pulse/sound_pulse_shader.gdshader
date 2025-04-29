@@ -19,7 +19,7 @@ void fragment() {
     // Add wavy distortion to the radius using sin(angle ± time)
     float wavy_radius = radius + sin(angle * wave_frequency + TIME * wave_speed) * wave_amplitude;
 
-    float alpha = smoothstep(wavy_radius - width, wavy_radius, dist) * 
+    float alpha = smoothstep(wavy_radius - width, wavy_radius, dist) *
                   (1.0 - smoothstep(wavy_radius, wavy_radius + width, dist));
 
     COLOR = wave_color * alpha;
