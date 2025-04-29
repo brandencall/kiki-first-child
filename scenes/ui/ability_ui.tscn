@@ -8,6 +8,7 @@ shader = ExtResource("2_eel0r")
 shader_parameter/lod = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d616"]
+bg_color = Color(0.423651, 0.423651, 0.423651, 1)
 draw_center = false
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -112,6 +113,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1d616")
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 5
 alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

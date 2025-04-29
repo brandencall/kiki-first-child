@@ -15,10 +15,33 @@ public partial class AbilityCard : Button
     public event Action<IAbility> AbilitySelected;
 
     private IAbility _ability;
+    private ShaderMaterial _shaderAbilityIcon;
+    private Vector2 _originalSize = new Vector2(400, 150);
+    private Vector2 _scaledSize = new Vector2(430, 170);
 
     public override void _Ready()
     {
+        _shaderAbilityIcon = AbilityIcon.Material as ShaderMaterial;
+        this.MouseEntered += OnMouseEntered;
+        this.MouseExited += OnMouseExited;
         this.Pressed += () => OnPickButtonPressed();
+    }
+
+    private void OnMouseEntered()
+    {
+        CustomMinimumSize = _scaledSize;
+        if (_shaderAbilityIcon != null)
+        {
+            var tween = CreateTween();
+            tween.TweenProperty(_shaderAbilityIcon, "shader_parameter/shine_progress", 1.0f, 1.5f)
+                .From(0.0f);
+        }
+    }
+
+    // Need to stop the tween on mouse exit.
+    private void OnMouseExited()
+    {
+        CustomMinimumSize = _originalSize;
     }
 
     private void OnPickButtonPressed()

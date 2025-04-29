@@ -1,7 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvhbvvrm3nkfx"]
+[gd_scene load_steps=7 format=3 uid="uid://bvhbvvrm3nkfx"]
 
 [ext_resource type="Script" uid="uid://i72v47gh4p6p" path="res://scripts/ui/AbilityCard.cs" id="1_unr5y"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_aghsq"]
+[ext_resource type="Shader" uid="uid://duuqjhqeruaul" path="res://scenes/ui/ability_card_icon.gdshader" id="2_jvgna"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvgna"]
+bg_color = Color(0.54099, 0.540991, 0.54099, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aghsq"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1hqt"]
+resource_local_to_scene = true
+shader = ExtResource("2_jvgna")
+shader_parameter/shine_color = Vector4(1, 1, 1, 1)
+shader_parameter/shine_progress = 0.0
+shader_parameter/shine_size = 0.1
+shader_parameter/shine_angle = 45.0
+shader_parameter/shine_strength = 0.71
 
 [node name="AbilityCard" type="Button" node_paths=PackedStringArray("AbilityName", "Description", "AbilityIcon", "CurrentLevel")]
 custom_minimum_size = Vector2(400, 150)
@@ -12,7 +35,9 @@ offset_right = -643.0
 offset_bottom = -409.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.12, 0.92)
+size_flags_horizontal = 4
+theme_override_styles/hover = SubResource("StyleBoxFlat_jvgna")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aghsq")
 script = ExtResource("1_unr5y")
 AbilityName = NodePath("HBoxContainer/VBoxContainer/AbilityName")
 Description = NodePath("HBoxContainer/VBoxContainer/Description")
@@ -34,6 +59,7 @@ size_flags_horizontal = 8
 theme_override_constants/margin_left = 20
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer"]
+material = SubResource("ShaderMaterial_f1hqt")
 custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
 size_flags_horizontal = 4
