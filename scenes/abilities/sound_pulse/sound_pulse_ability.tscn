@@ -6,9 +6,12 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kantk"]
 shader = ExtResource("3_blh1k")
-shader_parameter/radius = 98.159
-shader_parameter/width = 10.0
+shader_parameter/radius = 250.0
+shader_parameter/width = 20.0
 shader_parameter/wave_color = Color(1, 1, 1, 1)
+shader_parameter/wave_frequency = 10.0
+shader_parameter/wave_amplitude = 3.651
+shader_parameter/wave_speed = 10.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kqgjv"]
 radius = 10.7143
