@@ -27,6 +27,7 @@ public partial class ChunkManager : Node2D
         Player = this.GetPlayer();
         _currentChunk = (Vector2I)CallDeferred(nameof(GetCurrentChunk), Player.GlobalPosition);
         _activeChunks.Add(_currentChunk);
+        FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
         TileMap.Generate(_currentChunk, chunkSize);
         ChunkLoadTimer.Timeout += OnChunkLoadTimerTimeOut;
         RenderChunk();
@@ -37,23 +38,21 @@ public partial class ChunkManager : Node2D
         base._PhysicsProcess(delta);
 
         FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
-        Debugger.SetDetailedFlow(FlowField.DetailedFlowFields);
     }
 
     private void OnChunkLoadTimerTimeOut()
     {
         _currentChunk = GetCurrentChunk(Player.GlobalPosition);
-        FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
+        FlowField.ValidateChunkMapWithCurrent(_currentChunk);
         if (_currentChunk != _previousChunk)
         {
             RenderChunk();
-            //Debugger.SetFlowVectors(FlowField._chunkDirectionMap);
         }
 
         _previousChunk = _currentChunk;
     }
 
-    private Vector2I GetCurrentChunk(Vector2 position)
+    public Vector2I GetCurrentChunk(Vector2 position)
     {
         Vector2I result;
         result.X = (int)(position.X / (chunkSize * tileSize));
@@ -106,6 +105,7 @@ public partial class ChunkManager : Node2D
 
         foreach (var chunk in chunksToDelete)
         {
+            FlowField.ChunkDirectionMap.Remove(chunk);
             _activeChunks.Remove(chunk);
         }
     }

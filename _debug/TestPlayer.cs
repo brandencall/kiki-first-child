@@ -20,7 +20,7 @@ public partial class TestPlayer : BaseEnemy
         if (_player != null)
         {
             _pathfindComponent.SetTargetPosition(_player.GlobalPosition);
-            _pathfindComponent.FollowPath();
+            _pathfindComponent.FollowPath(GlobalPosition);
         }
     }
 

@@ -15,7 +15,7 @@ public partial class PurpleTorchEnemy : BaseEnemy
     {
         base._Ready();
         _healthComponent.Died += Die;
-        _pathTimer.Timeout += UpdatePath;
+        //_pathTimer.Timeout += UpdatePath;
     }
 
     private void UpdatePath()
@@ -28,7 +28,7 @@ public partial class PurpleTorchEnemy : BaseEnemy
 
     public override void _PhysicsProcess(double delta)
     {
-        _pathfindComponent.FollowPath();
+        _pathfindComponent.FollowPath(GlobalPosition);
         _velocityComponent.Move(this);
     }
 

@@ -3,6 +3,7 @@ using Godot;
 public static class GodotUtilities 
 {
     private static BasePlayer _cachedPlayer;
+    private static FlowFieldManager _flowField;
 
     public static void RegisterPlayer(BasePlayer player)
     {
@@ -17,5 +18,15 @@ public static class GodotUtilities
     public static BasePlayer GetPlayer(this Node node)
     {
         return GetPlayer();
+    }
+
+    public static void RegisterFlowField(FlowFieldManager flowField)
+    {
+        _flowField = flowField;
+    }
+
+    public static FlowFieldManager GetFlowField(this Node node)
+    {
+        return _flowField;
     }
 }

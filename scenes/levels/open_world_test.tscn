@@ -78,6 +78,7 @@ ChunkLoadTimer = NodePath("ChunkLoadTimer")
 renderDistance = 3
 
 [node name="ChunkLoadTimer" type="Timer" parent="ChunkManager"]
+wait_time = 0.5
 autostart = true
 
 [node name="SpawnManager" parent="." instance=ExtResource("5_40bav")]
