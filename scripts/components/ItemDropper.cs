@@ -7,7 +7,7 @@ public partial class ItemDropper : Node2D
 {
     private Random _random = new Random();
     private List<DropItemEntry> _droppableItems;
-    private string _itemConfiguration = "res://Data/droppableItems.json";
+    private string _itemConfiguration = "res://data/droppableItems.json";
 
     public override void _Ready()
     {
