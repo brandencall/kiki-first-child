@@ -21,11 +21,14 @@ public partial class ChunkManager : Node2D
     private Vector2I _currentChunk;
     private Vector2I _previousChunk;
     private HashSet<Vector2I> _activeChunks = new();
+    private Vector2I _currentGridCell;
+    private Vector2I _previousGridCell;
 
     public override void _Ready()
     {
         Player = this.GetPlayer();
         _currentChunk = (Vector2I)CallDeferred(nameof(GetCurrentChunk), Player.GlobalPosition);
+        _currentGridCell = TileMap.LocalToMap(Player.GlobalPosition);
         _activeChunks.Add(_currentChunk);
         FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
         TileMap.Generate(_currentChunk, chunkSize);
@@ -36,8 +39,16 @@ public partial class ChunkManager : Node2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        _currentGridCell = TileMap.LocalToMap(Player.GlobalPosition);
 
-        FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
+        if (_currentGridCell != _previousGridCell)
+        {
+            FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
+            Debugger.SetFlowVectors(FlowField.DetailedFlowFields);
+            _previousGridCell = _currentGridCell;
+        }
+
+
     }
 
     private void OnChunkLoadTimerTimeOut()
@@ -47,6 +58,7 @@ public partial class ChunkManager : Node2D
         if (_currentChunk != _previousChunk)
         {
             RenderChunk();
+            //Debugger.SetFlowVectors(FlowField.ChunkDirectionMap);
         }
 
         _previousChunk = _currentChunk;

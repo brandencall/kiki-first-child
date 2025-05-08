@@ -98,7 +98,8 @@ public partial class FlowFieldManager : Node2D
         // This should be replaced with actual checks from your world data (e.g., TileMap or ChunkManager)
         Vector2I[] directions = new Vector2I[]
         {
-            new(1, 0), new(-1, 0), new(0, 1), new(0, -1)
+            Vector2I.Up, Vector2I.Down, Vector2I.Left, Vector2I.Right,
+            new(-1, -1), new(-1, 1), new(1, -1),new(1, 1),
         };
 
         foreach (Vector2I dir in directions)
