@@ -11,10 +11,11 @@ public partial class FlowFieldManager : Node2D
 
     private Dictionary<Vector2I, Vector2> _flowChart = new();
     private Dictionary<Vector2I, int> _costField = new();
+    private Dictionary<Vector2I, int> _occupiedTiles = new();
 
     public override void _Ready()
     {
-       GodotUtilities.RegisterFlowField(this); 
+        GodotUtilities.RegisterFlowField(this);
     }
 
     public void GenerateHighResField(Vector2I chunkCoord, Vector2 playerPos)
@@ -22,7 +23,7 @@ public partial class FlowFieldManager : Node2D
         DetailedFlowFields.Clear();
         var flowField = new Dictionary<Vector2I, Vector2>();
         Vector2I goalGrid = ChunkManager.TileMap.LocalToMap(playerPos);
-         
+
         List<Vector2I> localTiles = ChunkManager.GetTilesInChunk(chunkCoord);
 
         Dictionary<Vector2I, int> costField = new();
@@ -44,7 +45,14 @@ public partial class FlowFieldManager : Node2D
                 }
                 if (!costField.ContainsKey(neighbor) || costField[neighbor] > currentCost + 1)
                 {
-                    costField[neighbor] = currentCost + 1;
+                    if (_occupiedTiles.ContainsKey(neighbor))
+                    {
+                        costField[neighbor] = currentCost + _occupiedTiles[neighbor] + 1;
+                    }
+                    else
+                    {
+                        costField[neighbor] = currentCost + 1;
+                    }
                     DetailedFlowFields[neighbor] = (GridToWorld(current) - GridToWorld(neighbor)).Normalized();
                     openQueue.Enqueue(neighbor);
                 }
@@ -57,10 +65,10 @@ public partial class FlowFieldManager : Node2D
         Vector2 chunkWorldCenter = ChunkManager.GetChunkCenter(chunkCoor);
         Vector2 playerChunkCenter = ChunkManager.GetChunkCenter(playerChunkCoor);
         Vector2 direction = (playerChunkCenter - chunkWorldCenter).Normalized();
-         
+
         ChunkDirectionMap[chunkCoor] = direction;
     }
-    
+
     public Vector2 GetFlowVector(Vector2 gloabalPos)
     {
         Vector2I gridPos = ChunkManager.TileMap.LocalToMap(gloabalPos);
@@ -77,7 +85,31 @@ public partial class FlowFieldManager : Node2D
         }
 
         return Vector2.Zero;
-            
+
+    }
+
+    public void RegisterCurrentTile(Vector2I tilePos)
+    {
+        if (!_occupiedTiles.ContainsKey(tilePos))
+        {
+            _occupiedTiles[tilePos] = 1;
+        }
+        else
+        {
+            _occupiedTiles[tilePos]++;
+        }
+    }
+
+    public void UnRegisterTile(Vector2I tilePos)
+    {
+        if (_occupiedTiles.ContainsKey(tilePos))
+        {
+            _occupiedTiles[tilePos]--;
+            if (_occupiedTiles[tilePos] <= 0)
+            {
+                _occupiedTiles.Remove(tilePos);
+            }
+        }
     }
 
     private Vector2I WorldToGrid(Vector2 worldPos)
@@ -123,5 +155,5 @@ public partial class FlowFieldManager : Node2D
             ChunkDirectionMap.Remove(currentChunk);
         }
     }
-        
+
 }
