@@ -11,7 +11,6 @@ public partial class FlowFieldManager : Node2D
 
     private Dictionary<Vector2I, Vector2> _flowChart = new();
     private Dictionary<Vector2I, int> _costField = new();
-    private Dictionary<Vector2I, int> _occupiedTiles = new();
 
     public override void _Ready()
     {
@@ -45,14 +44,7 @@ public partial class FlowFieldManager : Node2D
                 }
                 if (!costField.ContainsKey(neighbor) || costField[neighbor] > currentCost + 1)
                 {
-                    if (_occupiedTiles.ContainsKey(neighbor))
-                    {
-                        costField[neighbor] = currentCost + _occupiedTiles[neighbor] + 1;
-                    }
-                    else
-                    {
-                        costField[neighbor] = currentCost + 1;
-                    }
+                    costField[neighbor] = currentCost + 1;
                     DetailedFlowFields[neighbor] = (GridToWorld(current) - GridToWorld(neighbor)).Normalized();
                     openQueue.Enqueue(neighbor);
                 }
@@ -86,30 +78,6 @@ public partial class FlowFieldManager : Node2D
 
         return Vector2.Zero;
 
-    }
-
-    public void RegisterCurrentTile(Vector2I tilePos)
-    {
-        if (!_occupiedTiles.ContainsKey(tilePos))
-        {
-            _occupiedTiles[tilePos] = 1;
-        }
-        else
-        {
-            _occupiedTiles[tilePos]++;
-        }
-    }
-
-    public void UnRegisterTile(Vector2I tilePos)
-    {
-        if (_occupiedTiles.ContainsKey(tilePos))
-        {
-            _occupiedTiles[tilePos]--;
-            if (_occupiedTiles[tilePos] <= 0)
-            {
-                _occupiedTiles.Remove(tilePos);
-            }
-        }
     }
 
     private Vector2I WorldToGrid(Vector2 worldPos)

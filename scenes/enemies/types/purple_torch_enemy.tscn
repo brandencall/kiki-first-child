@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuamgj4h45el0"]
+[gd_scene load_steps=21 format=3 uid="uid://cuamgj4h45el0"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_0twls"]
 [ext_resource type="Texture2D" uid="uid://hj8dd7t6s13y" path="res://assets/PlaceholderAssets/Enemies/Torch_Purple.png" id="2_0u8o0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_tvn5i"]
 [ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_x01fy"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="9_rhybd"]
+[ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="11_0xeva"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gx74f"]
 atlas = ExtResource("2_0u8o0")
@@ -68,6 +69,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xeva"]
+radius = 45.0444
+
 [node name="PurpleTorchEnemy" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_pathTimer", "_itemDropper") instance=ExtResource("1_0twls")]
 script = ExtResource("2_rhybd")
 _velocityComponent = NodePath("VelocityComponent")
@@ -95,8 +99,9 @@ shape = ExtResource("4_0xeva")
 [node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_0xeva")]
 _accelerationCoefficient = 10.0
 
-[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent") instance=ExtResource("6_tvn5i")]
+[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_tvn5i")]
 _velocityComponent = NodePath("../VelocityComponent")
+_avoidance = NodePath("../CollisionAvoidance")
 
 [node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_x01fy")]
 Damage = 20.0
@@ -114,3 +119,8 @@ _healthComponent = NodePath("../HealthComponent")
 [node name="PathTimer" type="Timer" parent="." index="9"]
 wait_time = 0.5
 autostart = true
+
+[node name="CollisionAvoidance" parent="." index="10" instance=ExtResource("11_0xeva")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance" index="0"]
+shape = SubResource("CircleShape2D_0xeva")

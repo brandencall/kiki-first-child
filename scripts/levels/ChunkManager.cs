@@ -44,7 +44,7 @@ public partial class ChunkManager : Node2D
         if (_currentGridCell != _previousGridCell)
         {
             FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
-            Debugger.SetFlowVectors(FlowField.DetailedFlowFields);
+            // Debugger.SetFlowVectors(FlowField.DetailedFlowFields);
             _previousGridCell = _currentGridCell;
         }
 

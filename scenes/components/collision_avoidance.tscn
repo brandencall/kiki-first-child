@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4r3gkpimwmlo"]
+
+[ext_resource type="Script" uid="uid://dh20s7woohml6" path="res://scripts/components/CollisionAvoidance.cs" id="1_55s1i"]
+
+[node name="CollisionAvoidance" type="Area2D"]
+script = ExtResource("1_55s1i")
