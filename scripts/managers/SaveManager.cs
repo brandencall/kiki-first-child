@@ -4,19 +4,22 @@ using System.Collections.Generic;
 
 public partial class SaveManager : Node
 {
+    public CharacterData DefaultCharacter { get; private set; }
+    public CharacterData DefaultWeapon { get; private set; }
+
     public const string SavePath = "user://savegame.json";
     private GameState _gameState = new();
     // Make this a config with a list of characters.
-    private readonly List<CharacterData> _defaultCharacters = new List<CharacterData>
+    private readonly List<CharacterData> _defaultCharacterList = new List<CharacterData>
     {
-        new CharacterData { Id = "Test", IsUnlocked = true, Path = "path/to/character" },
-        new CharacterData { Id = "Test1", IsUnlocked = false, Path = "path/to/character" }
+        new CharacterData { Id = "Test", IsUnlocked = true, Scene = "path/to/character" },
+        new CharacterData { Id = "Test1", IsUnlocked = false, Scene = "path/to/character" }
     }
     // Make this a config with a list of weapons.
-    private readonly List<WeaponData> _defaultWeapons = new List<WeaponData>
+    private readonly List<WeaponData> _defaultWeaponList = new List<WeaponData>
     {
-        new WeaponData{ Id = "Test", IsUnlocked = true, Path = "path/to/weapon" },
-        new WeaponData { Id = "Test1", IsUnlocked = false, Path = "path/to/weapon" }
+        new WeaponData{ Id = "Test", IsUnlocked = true, Scene = "path/to/weapon" },
+        new WeaponData { Id = "Test1", IsUnlocked = false, Scene = "path/to/weapon" }
     }
 
     public override void _Ready()
@@ -68,7 +71,7 @@ public partial class SaveManager : Node
 
     private void EnsureAllCharactersExist()
     {
-        foreach (var defaultChar in _defaultCharacters)
+        foreach (var defaultChar in _defaultCharacterList)
         {
             if (!_gameState.Characters.Exists(c => c.Id == defaultChar.Id))
             {
@@ -76,7 +79,7 @@ public partial class SaveManager : Node
                 {
                     Id = defaultChar.Id,
                     IsUnlocked = defaultChar.IsUnlocked,
-                    Path = defaultChar.Path
+                    Scene = defaultChar.Scene
                 });
             }
         }
@@ -84,7 +87,7 @@ public partial class SaveManager : Node
 
     private void EnsureAllWeaponsExist()
     {
-        foreach (var defaultWep in _defaultWeapons)
+        foreach (var defaultWep in _defaultWeaponList)
         {
             if (!_gameState.Characters.Exists(c => c.Id == defaultWep.Id))
             {
@@ -92,7 +95,7 @@ public partial class SaveManager : Node
                 {
                     Id = defaultWep.Id,
                     IsUnlocked = defaultWep.IsUnlocked,
-                    Path = defaultWep.Path
+                    Scene = defaultWep.Scene
                 });
             }
         }
@@ -100,8 +103,8 @@ public partial class SaveManager : Node
 
     public void InitializeNewGame()
     {
-        _gameState.Characters = new List<CharacterData>(_defaultCharacters);
-        _gameState.Weapons = new List<WeaponData>(_defaultWeapons);
+        _gameState.Characters = new List<CharacterData>(_defaultCharacterList);
+        _gameState.Weapons = new List<WeaponData>(_defaultWeaponList);
     }
 
     public void UnlockCharacter(string characterId)
