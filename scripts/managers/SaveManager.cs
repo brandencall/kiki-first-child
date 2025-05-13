@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class SaveManager : Node
 {
     public CharacterData DefaultCharacter { get; private set; }
-    public CharacterData DefaultWeapon { get; private set; }
+    public WeaponData DefaultWeapon { get; private set; }
 
     public const string SavePath = "user://savegame.json";
     private GameState _gameState = new();
@@ -24,6 +24,18 @@ public partial class SaveManager : Node
 
     public override void _Ready()
     {
+        DefaultCharacter = new CharacterData
+        {
+            Id = "Default",
+            IsUnlocked = true,
+            Scene = "path/to/defaultScene"
+        };
+        DefaultWeapon = new WeaponData 
+        {
+            Id = "Default",
+            IsUnlocked = true,
+            Scene = "path/to/defaultScene"
+        };
         LoadGame();
     }
 
