@@ -3,76 +3,76 @@ using System.Collections.Generic;
 
 public partial class GameWorld : Node2D
 {
-    [Export]
-    public Hud Hud { get; set; }
-    [Export]
-    public AbilityUi AbilityUi { get; set; }
-    [Export]
-    public LevelManager LevelManager { get; set; }
-    [Export]
-    public Node2D Levels { get; set; }
-    [Export]
-    public BasePlayer Player { get; set; }
-    [Export]
-    public ExperienceManager ExperienceManager { get; set; }
-    [Export]
-    public AbilityManager AbilityManager { get; set; }
+	[Export]
+	public Hud Hud { get; set; }
+	[Export]
+	public AbilityUi AbilityUi { get; set; }
+	[Export]
+	public LevelManager LevelManager { get; set; }
+	[Export]
+	public Node2D Levels { get; set; }
+	[Export]
+	public BasePlayer Player { get; set; }
+	[Export]
+	public ExperienceManager ExperienceManager { get; set; }
+	[Export]
+	public AbilityManager AbilityManager { get; set; }
 
-    [Signal]
-    public delegate void GameFinishedEventHandler();
+	[Signal]
+	public delegate void GameFinishedEventHandler();
 
-    private List<IAbility> _currentIAbilities = new();
+	private List<IAbility> _currentIAbilities = new();
 
-    private Node2D _currentLevel;
+	private Node2D _currentLevel;
 
-    public override void _Ready()
-    {
-        PackedScene currentScene = ResourceLoader.Load<PackedScene>(LevelManager.CurrentLevel);
-        _currentLevel = (Node2D)currentScene.Instantiate();
-        Levels.AddChild(_currentLevel);
+	public override void _Ready()
+	{
+		PackedScene currentScene = ResourceLoader.Load<PackedScene>(LevelManager.CurrentLevel);
+		_currentLevel = (Node2D)currentScene.Instantiate();
+		Levels.AddChild(_currentLevel);
 
-        Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
+		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 
-        Player.ExperiencePickedup += HandleExperienceChange;
-        Player.OnPlayerDied += HandlePlayerDeath;
-        ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
-        AbilityUi.AbilitySelected += HandleAbilitySelection;
-    }
+		Player.ExperiencePickedup += HandleExperienceChange;
+		Player.OnPlayerDied += HandlePlayerDeath;
+		ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
+		AbilityUi.AbilitySelected += HandleAbilitySelection;
+	}
 
-    private void HandleExperienceChange(float experience)
-    {
-        ExperienceManager.IncreaseExperience(experience);
-        Hud.SetExperience(ExperienceManager.CurrentExperience);
-    }
+	private void HandleExperienceChange(float experience)
+	{
+		ExperienceManager.IncreaseExperience(experience);
+		Hud.SetExperience(ExperienceManager.CurrentExperience);
+	}
 
-    private void HandleExperienceLevelIncrease()
-    {
-        List<IAbility> iAbility = AbilityManager.GetRandomAbilities();
+	private void HandleExperienceLevelIncrease()
+	{
+		List<IAbility> iAbility = AbilityManager.GetRandomAbilities();
 
-        foreach (var ability in iAbility)
-        {
-            AbilityUi.AddAbilityCard(ability);
-        }
+		foreach (var ability in iAbility)
+		{
+			AbilityUi.AddAbilityCard(ability);
+		}
 
-        AbilityUi.ShowAbilities();
-        Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
-        Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
-    }
+		AbilityUi.ShowAbilities();
+		Hud.SetMaxExperience(ExperienceManager.MaxExperienceForLevel);
+		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
+	}
 
-    private void HandleAbilitySelection(IAbility selectedAbility)
-    {
-        if (!AbilityManager.CurrentAbilities.Contains(selectedAbility))
-        {
-            AbilityManager.CurrentAbilities.Add(selectedAbility);
-            selectedAbility.Apply(Player);
-        }
-        selectedAbility.Upgrade();
-        AbilityUi.ClearAbilities();
-    }
+	private void HandleAbilitySelection(IAbility selectedAbility)
+	{
+		if (!AbilityManager.CurrentAbilities.Contains(selectedAbility))
+		{
+			AbilityManager.CurrentAbilities.Add(selectedAbility);
+			selectedAbility.Apply(Player);
+		}
+		selectedAbility.Upgrade();
+		AbilityUi.ClearAbilities();
+	}
 
-    private void HandlePlayerDeath()
-    {
-        EmitSignal(SignalName.GameFinished);
-        QueueFree();
-    }
+	private void HandlePlayerDeath()
+	{
+		EmitSignal(SignalName.GameFinished);
+		QueueFree();
+	}
 }
