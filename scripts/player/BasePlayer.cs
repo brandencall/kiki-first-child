@@ -91,6 +91,11 @@ public partial class BasePlayer : CharacterBody2D
 		GD.Print("Player has died");
 		EmitSignal(SignalName.OnPlayerDied);
 	}
+
+	public override void _ExitTree()
+	{
+		GodotUtilities.UnregisterPlayer(this);
+	}
 	
 	public void OnAnimatedSprite2dAnimationFinished()
 	{

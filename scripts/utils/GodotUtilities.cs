@@ -10,6 +10,11 @@ public static class GodotUtilities
         _cachedPlayer = player;
     }
 
+    public static void UnregisterPlayer(BasePlayer player)
+    {
+        _cachedPlayer = null;
+    }
+
     public static BasePlayer GetPlayer()
     {
         return _cachedPlayer;

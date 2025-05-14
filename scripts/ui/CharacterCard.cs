@@ -6,8 +6,6 @@ public partial class CharacterCard : Control
 {
 	[Export]
 	public TextureButton CharacterButton { get; set; }
-	//[Export]
-	//public Button ButtonTest { get; set; }
 	[Export]
 	public Label CharacterName { get; set; }
 
@@ -17,13 +15,11 @@ public partial class CharacterCard : Control
 
 	public override void _Ready()
 	{
-	//	ButtonTest.Pressed += OnCharacterSelected;
 		CharacterButton.Pressed += OnCharacterSelected;
 	}
 
 	private void OnCharacterSelected()
 	{
-		GD.Print("Char selected");
 		CharacterSelected?.Invoke(_character);
 	}
 
@@ -36,16 +32,11 @@ public partial class CharacterCard : Control
 
 	private void SetupCharacterButton()
 	{
-	//	ButtonTest.Icon = ResourceLoader.Load<Texture2D>(_character.IconPath);
-	//	ButtonTest.Text = _character.Id;
-	//	ButtonTest.Modulate = _character.IsUnlocked ? Colors.White : Colors.Gray;
-	
 		Texture2D spriteTexture = ResourceLoader.Load<Texture2D>(_character.IconPath);
 		CharacterButton.TextureNormal = spriteTexture;
 		CharacterButton.TextureClickMask = CreateClickMask(spriteTexture);
 		CharacterButton.Modulate = _character.IsUnlocked ? Colors.White : Colors.Gray;
 		CharacterButton.Disabled = !_character.IsUnlocked;
-	//	GD.Print("Id: " + _character.Id + " Disabled: " + CharacterButton.Disabled);
 	}
 
 	private Bitmap CreateClickMask(Texture2D spriteTexture)
