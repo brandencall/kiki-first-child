@@ -2,19 +2,19 @@
     {
         "Id" : "Purple Knight",
         "IsUnlocked" : true,
-        "Scene" : "res://scenes/player/purple_knight_player.tscn",
+        "Scene" : "res://scenes/characters/purple_knight_character.tscn",
         "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Purple_Icon.png"
     },
     {
         "Id" : "Blue Knight",
         "IsUnlocked" : true,
-        "Scene" : "res://scenes/player/blue_knight_player.tscn",
+        "Scene" : "res://scenes/characters/blue_knight_character.tscn",
         "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
     },
     {
         "Id" : "Test",
         "IsUnlocked" : false,
-        "Scene" : "res://scenes/player/blue_knight_player.tscn",
+        "Scene" : "res://scenes/characters/blue_knight_character.tscn",
         "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
     }
 ]

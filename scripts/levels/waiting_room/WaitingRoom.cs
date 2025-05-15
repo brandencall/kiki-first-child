@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 /*
  *  Load All Charaters (some will be locked in the future)
@@ -14,7 +13,7 @@ public partial class WaitingRoom : Node2D
 	[Export]
 	public CharacterSelection CharacterSelectUI { get; set; }
 
-	private BasePlayer _currentCharacter;
+	private BaseCharacter _currentCharacter;
 	private bool _showCharacterSelection = true;
 	private SaveManager SaveManager => GetNode<SaveManager>("/root/SaveManager");
 
@@ -22,7 +21,7 @@ public partial class WaitingRoom : Node2D
 	{
 		CharacterData character = SaveManager.CurrentCharacter;
 		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
-		var characterInstance = characterScene.Instantiate<BasePlayer>();
+		var characterInstance = characterScene.Instantiate<BaseCharacter>();
 		_currentCharacter = characterInstance;
 		AddChild(characterInstance);
 
@@ -49,7 +48,7 @@ public partial class WaitingRoom : Node2D
 		Vector2 position = _currentCharacter.GlobalPosition;
 		RemoveChild(_currentCharacter);
 		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
-		_currentCharacter = characterScene.Instantiate<BasePlayer>();
+		_currentCharacter = characterScene.Instantiate<BaseCharacter>();
 		_currentCharacter.GlobalPosition = position;
 		AddChild(_currentCharacter);
 		SaveManager.CurrentCharacter = character;

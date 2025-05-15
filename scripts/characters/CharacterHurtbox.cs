@@ -1,18 +1,14 @@
 using Godot;
 
-public partial class PlayerHurtbox : Area2D
+public partial class CharacterHurtbox : Area2D
 {
 	[Export]
 	private HealthComponent _healthComponent;
 
-	public PlayerHurtbox()
+	public override void _Ready()
 	{
 		CollisionLayer = 0;
 		CollisionMask = 3;
-	}
-
-	public override void _Ready()
-	{
 		Connect("area_entered", new Callable(this, nameof(OnAreaEntered)));
 	}
 

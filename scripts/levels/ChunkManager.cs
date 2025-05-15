@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class ChunkManager : Node2D
 {
-    public BasePlayer Player { get; set; }
+    public BaseCharacter Character { get; set; }
     [Export]
     public WorldTileSet TileMap { get; set; }
     [Export]
@@ -26,11 +26,11 @@ public partial class ChunkManager : Node2D
 
     public override void _Ready()
     {
-        Player = this.GetPlayer();
-        _currentChunk = (Vector2I)CallDeferred(nameof(GetCurrentChunk), Player.GlobalPosition);
-        _currentGridCell = TileMap.LocalToMap(Player.GlobalPosition);
+        Character = this.GetCharacter();
+        _currentChunk = (Vector2I)CallDeferred(nameof(GetCurrentChunk), Character.GlobalPosition);
+        _currentGridCell = TileMap.LocalToMap(Character.GlobalPosition);
         _activeChunks.Add(_currentChunk);
-        FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
+        FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
         TileMap.Generate(_currentChunk, chunkSize);
         ChunkLoadTimer.Timeout += OnChunkLoadTimerTimeOut;
         RenderChunk();
@@ -39,11 +39,11 @@ public partial class ChunkManager : Node2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        _currentGridCell = TileMap.LocalToMap(Player.GlobalPosition);
+        _currentGridCell = TileMap.LocalToMap(Character.GlobalPosition);
 
         if (_currentGridCell != _previousGridCell)
         {
-            FlowField.GenerateHighResField(_currentChunk, Player.GlobalPosition);
+            FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
             // Debugger.SetFlowVectors(FlowField.DetailedFlowFields);
             _previousGridCell = _currentGridCell;
         }
@@ -53,7 +53,7 @@ public partial class ChunkManager : Node2D
 
     private void OnChunkLoadTimerTimeOut()
     {
-        _currentChunk = GetCurrentChunk(Player.GlobalPosition);
+        _currentChunk = GetCurrentChunk(Character.GlobalPosition);
         FlowField.ValidateChunkMapWithCurrent(_currentChunk);
         if (_currentChunk != _previousChunk)
         {

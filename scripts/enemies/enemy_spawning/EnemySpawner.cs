@@ -4,21 +4,21 @@ using System;
 public partial class EnemySpawner : Node
 {
     private Random _random = new Random();
-    private CharacterBody2D _player;
+    private CharacterBody2D _character;
     private PathFollow2D _spawnPath;
     private Marker2D _spawnMarker;
 
     public override void _Ready()
     {
-        CallDeferred(nameof(InitPlayer));
+        CallDeferred(nameof(InitCharacter));
     }
 
-    private void InitPlayer()
+    private void InitCharacter()
     {
-        _player = this.GetPlayer();
-        if (_player != null)
+        _character = this.GetCharacter();
+        if (_character != null)
         {
-            Path2D path = _player.GetNode<Path2D>("EnemySpawnPath");
+            Path2D path = _character.GetNode<Path2D>("EnemySpawnPath");
             _spawnPath = path.GetChild<PathFollow2D>(0);
             _spawnMarker = _spawnPath.GetChild<Marker2D>(0);
         }

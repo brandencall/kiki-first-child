@@ -11,10 +11,10 @@ public class Football : IAbility
     private PackedScene _footballScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/football/football_ability.tscn"); 
     private FootballAbility _football;
 
-    public void Apply(BasePlayer player)
+    public void Apply(BaseCharacter character)
     {
         _football = _footballScene.Instantiate<FootballAbility>();
-        player.GetTree().Root.AddChild(_football);
+        character.GetTree().Root.AddChild(_football);
     }
 
     public void Upgrade()

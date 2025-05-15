@@ -11,10 +11,10 @@ public class SoundPulse : IAbility
     private PackedScene _soundPulseScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/sound_pulse/sound_pulse_ability.tscn"); 
     private SoundPulseAbility _soundPulse;
 
-    public void Apply(BasePlayer player)
+    public void Apply(BaseCharacter character)
     {
         _soundPulse = _soundPulseScene.Instantiate<SoundPulseAbility>();
-        player.AddChild(_soundPulse);
+        character.AddChild(_soundPulse);
     }
 
     public void Upgrade()

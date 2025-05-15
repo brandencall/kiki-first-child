@@ -7,6 +7,6 @@ public interface IAbility
     public Texture2D AbilityIcon { get; set; }
     public int CurrentLevel { get; set; }
     public bool OnLastLevel { get; set; }
-    public void Apply(BasePlayer player);
+    public void Apply(BaseCharacter character);
     public void Upgrade();
 }

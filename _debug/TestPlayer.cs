@@ -17,9 +17,9 @@ public partial class TestPlayer : BaseEnemy
 
     private void UpdatePath()
     {
-        if (_player != null)
+        if (_character != null)
         {
-            _pathfindComponent.SetTargetPosition(_player.GlobalPosition);
+            _pathfindComponent.SetTargetPosition(_character.GlobalPosition);
             _pathfindComponent.FollowPath(GlobalPosition);
         }
     }

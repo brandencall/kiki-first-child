@@ -1,79 +1,79 @@
 [gd_scene load_steps=27 format=3 uid="uid://bc1qhscn8qrx6"]
 
-[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/player/base_player.tscn" id="1_8xfo6"]
-[ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="2_je6y8"]
-[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_qwdwt"]
+[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_6nk6n"]
+[ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="2_g3txe"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_n5qru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_je6y8"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(0, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8e4v0"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(192, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_778t6"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(384, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_omeuh"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(576, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dq58g"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(768, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eitwh"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwdwt"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dujjx"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jfpl"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wj71m"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dfa6m"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vg47u"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8odd"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(0, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4sme2"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(192, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a24ph"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(384, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdqn1"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(576, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ewu8"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(768, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wr3re"]
-atlas = ExtResource("2_je6y8")
+atlas = ExtResource("2_g3txe")
 region = Rect2(960, 192, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8e4v0"]
@@ -154,13 +154,13 @@ radius = 33.0606
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_778t6"]
 size = Vector2(38, 76)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_je6y8"]
-radius = 25.4951
+[sub_resource type="CircleShape2D" id="CircleShape2D_mw6ym"]
+radius = 28.0179
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwdwt"]
 radius = 40.1123
 
-[node name="BasePlayer" instance=ExtResource("1_8xfo6")]
+[node name="BasePlayer" instance=ExtResource("1_6nk6n")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_8e4v0")
@@ -180,17 +180,17 @@ shape = SubResource("RectangleShape2D_778t6")
 MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_je6y8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
+position = Vector2(-1, -4)
+shape = SubResource("CircleShape2D_mw6ym")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_qwdwt")
-
-[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_qwdwt")]
+[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_n5qru")]
 offset_left = -79.0
 offset_top = 43.0
 offset_right = 79.0
 offset_bottom = 52.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_qwdwt")

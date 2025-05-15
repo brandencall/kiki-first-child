@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://2i8euktrm4j8"]
+[gd_scene load_steps=27 format=3 uid="uid://2i8euktrm4j8"]
 
-[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/player/base_player.tscn" id="1_660ek"]
+[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_660ek"]
 [ext_resource type="Texture2D" uid="uid://n3s3fu74kxs6" path="res://assets/PlaceholderAssets/Characters/Warrior_Blue.png" id="2_6xqdu"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_6xqdu"]
 
@@ -154,10 +154,13 @@ radius = 41.0122
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_stneq"]
 size = Vector2(55.5, 103.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_177g4"]
+radius = 36.0139
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6w54"]
 radius = 30.0167
 
-[node name="BasePlayer" instance=ExtResource("1_660ek")]
+[node name="BaseCharacter" instance=ExtResource("1_660ek")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_w08rr")
@@ -179,17 +182,16 @@ disabled = true
 MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_e6w54")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
+shape = SubResource("CircleShape2D_177g4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_e6w54")
-
-[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_6xqdu")]
+[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_6xqdu")]
 offset_left = -79.0
 offset_top = 43.0
 offset_right = 79.0
 offset_bottom = 52.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_e6w54")

@@ -2,27 +2,27 @@ using Godot;
 
 public static class GodotUtilities 
 {
-    private static BasePlayer _cachedPlayer;
+    private static BaseCharacter _cachedCharacter;
     private static FlowFieldManager _flowField;
 
-    public static void RegisterPlayer(BasePlayer player)
+    public static void RegisterCharacter(BaseCharacter character)
     {
-        _cachedPlayer = player;
+        _cachedCharacter = character;
     }
 
-    public static void UnregisterPlayer(BasePlayer player)
+    public static void UnregisterCharacter(BaseCharacter character)
     {
-        _cachedPlayer = null;
+        _cachedCharacter = null;
     }
 
-    public static BasePlayer GetPlayer()
+    public static BaseCharacter GetCharacter()
     {
-        return _cachedPlayer;
+        return _cachedCharacter;
     }
 
-    public static BasePlayer GetPlayer(this Node node)
+    public static BaseCharacter GetCharacter(this Node node)
     {
-        return GetPlayer();
+        return GetCharacter();
     }
 
     public static void RegisterFlowField(FlowFieldManager flowField)

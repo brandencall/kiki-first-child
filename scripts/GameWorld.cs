@@ -12,7 +12,7 @@ public partial class GameWorld : Node2D
 	[Export]
 	public Node2D Levels { get; set; }
 	[Export]
-	public BasePlayer Player { get; set; }
+	public BaseCharacter Character{ get; set; }
 	[Export]
 	public ExperienceManager ExperienceManager { get; set; }
 	[Export]
@@ -33,8 +33,8 @@ public partial class GameWorld : Node2D
 
 		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 
-		Player.ExperiencePickedup += HandleExperienceChange;
-		Player.OnPlayerDied += HandlePlayerDeath;
+		Character.ExperiencePickedup += HandleExperienceChange;
+		Character.OnCharacterDied += HandleCharacterDeath;
 		ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
 		AbilityUi.AbilitySelected += HandleAbilitySelection;
 	}
@@ -64,13 +64,13 @@ public partial class GameWorld : Node2D
 		if (!AbilityManager.CurrentAbilities.Contains(selectedAbility))
 		{
 			AbilityManager.CurrentAbilities.Add(selectedAbility);
-			selectedAbility.Apply(Player);
+			selectedAbility.Apply(Character);
 		}
 		selectedAbility.Upgrade();
 		AbilityUi.ClearAbilities();
 	}
 
-	private void HandlePlayerDeath()
+	private void HandleCharacterDeath()
 	{
 		EmitSignal(SignalName.GameFinished);
 		QueueFree();

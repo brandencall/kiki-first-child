@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class FootballAbility : HitboxComponent
 {
@@ -15,16 +14,16 @@ public partial class FootballAbility : HitboxComponent
     public int MaxNumberOfEnemiesHit { get; set; } = 1;
 
     private Vector2 _direction;
-    private BasePlayer _player;
+    private BaseCharacter _character;
     private int _currentEnemiesHit = 0;
     private float _currentSpeed;
 
     public override void _Ready()
     {
         base._Ready();
-        _player = this.GetPlayer();
-        GlobalPosition = _player.GlobalPosition;
-        _direction = _player.VelocityComponent.Velocity.Normalized();
+        _character = this.GetCharacter();
+        GlobalPosition = _character.GlobalPosition;
+        _direction = _character.VelocityComponent.Velocity.Normalized();
         Sprite.Rotation = _direction.Angle();
         Collision.Rotation = _direction.Angle() - Mathf.Pi / 2f;
         Cooldown.Timeout += ResetFootball;
@@ -62,8 +61,8 @@ public partial class FootballAbility : HitboxComponent
         Sprite.Visible = true;
         _currentSpeed = Speed;
         _currentEnemiesHit = 0;
-        GlobalPosition = _player.GlobalPosition;
-        _direction = _player.VelocityComponent.Velocity.Normalized();
+        GlobalPosition = _character.GlobalPosition;
+        _direction = _character.VelocityComponent.Velocity.Normalized();
         Sprite.Rotation = _direction.Angle();
         Collision.Rotation = _direction.Angle() - Mathf.Pi / 2f;
     }

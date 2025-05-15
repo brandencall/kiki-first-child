@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class BasePlayer : CharacterBody2D
+public partial class BaseCharacter : CharacterBody2D
 {
 	[Export]
 	public AnimatedSprite2D Animations { get; set; }
@@ -24,13 +24,13 @@ public partial class BasePlayer : CharacterBody2D
 	[Signal]
 	public delegate void ExperiencePickedupEventHandler(float experience);
 	[Signal]
-	public delegate void OnPlayerDiedEventHandler();
+	public delegate void OnCharacterDiedEventHandler();
 
 	public override void _Ready()
 	{
 		CollisionLayer = 8;
 		CollisionMask = 0;
-		AddToGroup("player");
+		AddToGroup("character");
 		_healthComponent.Died += Die;
 		GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
@@ -44,7 +44,7 @@ public partial class BasePlayer : CharacterBody2D
 		baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
 		baseAttackTimer.Start();
 
-		GodotUtilities.RegisterPlayer(this);
+		GodotUtilities.RegisterCharacter(this);
 	}
 
 	private void OnBaseAttackTimerTimeout()
@@ -89,12 +89,12 @@ public partial class BasePlayer : CharacterBody2D
 	private void Die()
 	{
 		GD.Print("Player has died");
-		EmitSignal(SignalName.OnPlayerDied);
+		EmitSignal(SignalName.OnCharacterDied);
 	}
 
 	public override void _ExitTree()
 	{
-		GodotUtilities.UnregisterPlayer(this);
+		GodotUtilities.UnregisterCharacter(this);
 	}
 	
 	public void OnAnimatedSprite2dAnimationFinished()
