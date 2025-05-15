@@ -20,7 +20,7 @@ public partial class WaitingRoom : Node2D
 
 	public override void _Ready()
 	{
-		CharacterData character = SaveManager.DefaultCharacter;
+		CharacterData character = SaveManager.CurrentCharacter;
 		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
 		var characterInstance = characterScene.Instantiate<BasePlayer>();
 		_currentCharacter = characterInstance;
@@ -52,6 +52,7 @@ public partial class WaitingRoom : Node2D
 		_currentCharacter = characterScene.Instantiate<BasePlayer>();
 		_currentCharacter.GlobalPosition = position;
 		AddChild(_currentCharacter);
+		SaveManager.CurrentCharacter = character;
 		_showCharacterSelection = false;
 	}
 

@@ -5,5 +5,6 @@ using System.Collections.Generic;
 public class GameState
 {
     public List<CharacterData> Characters { get; set; }
+    public CharacterData LastUsedCharacter { get; set; }
 }
 

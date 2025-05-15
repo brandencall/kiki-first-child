@@ -1,47 +1,22 @@
 using Godot;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Collections.Generic;
 
 public partial class SaveManager : Node
 {
-	public CharacterData DefaultCharacter { get; private set; }
+	public CharacterData CurrentCharacter { get; set; }
 	public const string SavePath = "user://savegame.json";
+	public const string CharacterDataPath = "res://data/characters.json";
 	private GameState _gameState = new();
-	// Make this a config with a list of characters.
-	private readonly List<CharacterData> _defaultCharacterList = new List<CharacterData>
-	{
-		new CharacterData 
-		{ 
-			Id = "Purple Knight",
-			IsUnlocked = true,
-			Scene = "res://scenes/player/purple_knight_player.tscn",
-			IconPath = "res://assets/PlaceholderAssets/Characters/Warrior_Purple_Icon.png" 
-		},
-		new CharacterData 
-		{ 
-			Id = "Blue Knight",
-			IsUnlocked = true,
-			Scene = "res://scenes/player/blue_knight_player.tscn",
-			IconPath = "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
-		},
-		new CharacterData 
-		{ 
-			Id = "Test",
-			IsUnlocked = false,
-			Scene = "res://scenes/player/blue_knight_player.tscn",
-			IconPath = "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
-		}
-	};
+	private List<CharacterData> _characterList;
+	private string _defaultCharacterId = "Purple Knight";
 
 	public override void _Ready()
 	{
-		DefaultCharacter = new CharacterData
-		{
-			Id = "Default",
-			IsUnlocked = true,
-			Scene = "res://scenes/player/blue_knight_player.tscn",
-			IconPath = "res://assets/icon.svg"
-		};
+		var jsonFile = FileAccess.Open(CharacterDataPath, FileAccess.ModeFlags.Read);
+		string jsonText = jsonFile.GetAsText();
+		_characterList = JsonSerializer.Deserialize<List<CharacterData>>(jsonText);
 		LoadGame();
 	}
 
@@ -55,6 +30,7 @@ public partial class SaveManager : Node
 				string jsonString = file.GetAsText();
 				_gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
 				EnsureAllCharactersExist();
+				CurrentCharacter = _gameState.LastUsedCharacter;
 				GD.Print("Game loaded suxxessfully");
 			}
 			else
@@ -88,15 +64,15 @@ public partial class SaveManager : Node
 
 	private void EnsureAllCharactersExist()
 	{
-		foreach (var defaultChar in _defaultCharacterList)
+		foreach (var character in _characterList)
 		{
-			if (!_gameState.Characters.Exists(c => c.Id == defaultChar.Id))
+			if (!_gameState.Characters.Exists(c => c.Id == character.Id))
 			{
 				_gameState.Characters.Add(new CharacterData
 				{
-					Id = defaultChar.Id,
-					IsUnlocked = defaultChar.IsUnlocked,
-					Scene = defaultChar.Scene
+					Id = character.Id,
+					IsUnlocked = character.IsUnlocked,
+					Scene = character.Scene
 				});
 			}
 		}
@@ -104,7 +80,15 @@ public partial class SaveManager : Node
 
 	public void InitializeNewGame()
 	{
-		_gameState.Characters = new List<CharacterData>(_defaultCharacterList);
+		_gameState.Characters = _characterList;
+		CurrentCharacter = GetCharacterById(_defaultCharacterId);
+		Debug.Assert(CurrentCharacter != null, "The current character should not be null here");
+	}
+
+	public CharacterData GetCharacterById(string characterId)
+	{
+		CharacterData character = _gameState.Characters.Find(c => c.Id == characterId);
+		return character;
 	}
 
 	public void UnlockCharacter(string characterId)
