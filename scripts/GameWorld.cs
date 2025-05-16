@@ -8,28 +8,24 @@ public partial class GameWorld : Node2D
 	[Export]
 	public AbilityUi AbilityUi { get; set; }
 	[Export]
-	public LevelManager LevelManager { get; set; }
-	[Export]
-	public Node2D Levels { get; set; }
+	public Node2D Level { get; set; }
 	[Export]
 	public ExperienceManager ExperienceManager { get; set; }
 	[Export]
 	public AbilityManager AbilityManager { get; set; }
 
-	[Signal]
-	public delegate void GameFinishedEventHandler();
-
 	public BaseCharacter Character { get; set; }
 
+	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
 	private List<IAbility> _currentIAbilities = new();
 	private Node2D _currentLevel;
 
 	public override void _Ready()
 	{
-		PackedScene currentScene = ResourceLoader.Load<PackedScene>(LevelManager.CurrentLevel);
+		PackedScene currentScene = ResourceLoader.Load<PackedScene>(SceneManager.CurrentLevel);
 		_currentLevel = (Node2D)currentScene.Instantiate();
 		Character = this.GetCharacter();
-		Levels.AddChild(_currentLevel);
+		AddChild(_currentLevel);
 		AddChild(Character);
 
 		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
@@ -73,7 +69,7 @@ public partial class GameWorld : Node2D
 
 	private void HandleCharacterDeath()
 	{
-		EmitSignal(SignalName.GameFinished);
-		QueueFree();
+		SceneManager.ChangeSceneToWaitingRoom();
+		SceneManager.CurrentLevel = null;
 	}
 }

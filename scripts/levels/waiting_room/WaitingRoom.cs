@@ -68,10 +68,10 @@ public partial class WaitingRoom : Node2D
 	// path to the wave data and any other information related to the level.
 	private void OnLevelAreaEntered()
 	{
-		// For now just sending a signal saying the area was entered. Later would need to send an event with the 
-		// level data. This would be sent in OnLevelSelected(LevelData level).
 		RemoveChild(currentCharacter);
-		SceneManager.ChangeSceneDeffered("res://scenes/game_world.tscn");
+		SceneManager.ChangeScene("res://scenes/game_world.tscn");
+		// Hard coding current level. This will change when we have the player choose a level.
+		SceneManager.CurrentLevel = "res://scenes/levels/open_world_test.tscn";
 		EmitSignal(SignalName.LevelSelected);
 	}
 
