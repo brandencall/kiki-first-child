@@ -21,6 +21,7 @@ public partial class WaitingRoom : Node2D
 
 	private bool _showCharacterSelection = true;
 	private SaveManager SaveManager => GetNode<SaveManager>("/root/SaveManager");
+	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
 
 	public override void _Ready()
 	{
@@ -67,10 +68,10 @@ public partial class WaitingRoom : Node2D
 	// path to the wave data and any other information related to the level.
 	private void OnLevelAreaEntered()
 	{
-		GD.Print("Level area entered");
 		// For now just sending a signal saying the area was entered. Later would need to send an event with the 
 		// level data. This would be sent in OnLevelSelected(LevelData level).
 		RemoveChild(currentCharacter);
+		SceneManager.ChangeSceneDeffered("res://scenes/game_world.tscn");
 		EmitSignal(SignalName.LevelSelected);
 	}
 

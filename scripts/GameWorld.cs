@@ -32,8 +32,6 @@ public partial class GameWorld : Node2D
 		Levels.AddChild(_currentLevel);
 		AddChild(Character);
 
-		GD.Print("Global char in gameworld: " + this.GetCharacter());
-
 		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 
 		Character.ExperiencePickedup += HandleExperienceChange;
