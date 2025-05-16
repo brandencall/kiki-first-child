@@ -5,12 +5,11 @@ public partial class MainMenu : Control
     [Export]
     public Button StartButton { get; set; }
 
-    [Signal]
-    public delegate void StartGameEventHandler();
+	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
 
     public void OnStartButtonPressed()
     {
-        EmitSignal(SignalName.StartGame);
+        SceneManager.ChangeSceneToWaitingRoom();
     }
 
     public void OnOptionPressed()
