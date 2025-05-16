@@ -94,7 +94,8 @@ public partial class BaseCharacter : CharacterBody2D
 
 	public override void _ExitTree()
 	{
-		GodotUtilities.UnregisterCharacter(this);
+		GD.Print("bye bye");
+		//GodotUtilities.UnregisterCharacter(this);
 	}
 	
 	public void OnAnimatedSprite2dAnimationFinished()

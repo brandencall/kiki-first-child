@@ -1,30 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://cw1ljklfsgl0v"]
+[gd_scene load_steps=8 format=3 uid="uid://cw1ljklfsgl0v"]
 
 [ext_resource type="Script" uid="uid://2ukxxho5ojjb" path="res://scripts/levels/waiting_room/WaitingRoom.cs" id="1_5msiv"]
 [ext_resource type="PackedScene" uid="uid://mkr2qp0ti8su" path="res://scenes/ui/character_selection.tscn" id="2_0mffr"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_5xtnt"]
 [ext_resource type="Script" uid="uid://c6gseb34f7nws" path="res://scripts/levels/waiting_room/CharacterSelectArea.cs" id="2_jieco"]
+[ext_resource type="Script" uid="uid://bbbt3b0njhtil" path="res://scripts/levels/waiting_room/LevelSelectArea.cs" id="5_0mffr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dc4o"]
 size = Vector2(125.25, 119)
 
-[node name="WaitingRoom" type="Node2D" node_paths=PackedStringArray("CharacterSelectArea", "CharacterSelectUI")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwlv1"]
+size = Vector2(124, 125)
+
+[node name="WaitingRoom" type="Node2D" node_paths=PackedStringArray("CharacterSelectArea", "CharacterSelectUI", "LevelSelectArea")]
 script = ExtResource("1_5msiv")
 CharacterSelectArea = NodePath("CharacterSelectArea")
 CharacterSelectUI = NodePath("CanvasLayer/CharacterSelection")
+LevelSelectArea = NodePath("LevelSelectArea")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CharacterSelection" parent="CanvasLayer" instance=ExtResource("2_0mffr")]
 
 [node name="CharacterSelectArea" type="Area2D" parent="."]
+position = Vector2(380, 128)
 collision_mask = 8
 script = ExtResource("2_jieco")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterSelectArea"]
-position = Vector2(211, 133)
 texture = ExtResource("2_5xtnt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterSelectArea"]
-position = Vector2(210.375, 131.5)
 shape = SubResource("RectangleShape2D_7dc4o")
+
+[node name="LevelSelectArea" type="Area2D" parent="."]
+position = Vector2(381, 402)
+script = ExtResource("5_0mffr")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelSelectArea"]
+texture = ExtResource("2_5xtnt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelSelectArea"]
+shape = SubResource("RectangleShape2D_nwlv1")

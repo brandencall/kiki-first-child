@@ -12,8 +12,6 @@ public partial class GameWorld : Node2D
 	[Export]
 	public Node2D Levels { get; set; }
 	[Export]
-	public BaseCharacter Character{ get; set; }
-	[Export]
 	public ExperienceManager ExperienceManager { get; set; }
 	[Export]
 	public AbilityManager AbilityManager { get; set; }
@@ -21,15 +19,20 @@ public partial class GameWorld : Node2D
 	[Signal]
 	public delegate void GameFinishedEventHandler();
 
-	private List<IAbility> _currentIAbilities = new();
+	public BaseCharacter Character { get; set; }
 
+	private List<IAbility> _currentIAbilities = new();
 	private Node2D _currentLevel;
 
 	public override void _Ready()
 	{
 		PackedScene currentScene = ResourceLoader.Load<PackedScene>(LevelManager.CurrentLevel);
 		_currentLevel = (Node2D)currentScene.Instantiate();
+		Character = this.GetCharacter();
 		Levels.AddChild(_currentLevel);
+		AddChild(Character);
+
+		GD.Print("Global char in gameworld: " + this.GetCharacter());
 
 		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 

@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ioy1d1qd0grx"]
+[gd_scene load_steps=5 format=3 uid="uid://ioy1d1qd0grx"]
 
 [ext_resource type="Script" uid="uid://cxwhfq0n1c6w7" path="res://Main.cs" id="1_a1fbw"]
 [ext_resource type="PackedScene" uid="uid://ctascef0av2kr" path="res://scenes/ui/main_menu.tscn" id="2_jdul5"]
 [ext_resource type="PackedScene" uid="uid://o4dnquijjfx5" path="res://scenes/game_world.tscn" id="2_ygnli"]
+[ext_resource type="PackedScene" uid="uid://cw1ljklfsgl0v" path="res://scenes/levels/waiting_room/waiting_room.tscn" id="3_1bvp3"]
 
 [node name="main" type="Node" node_paths=PackedStringArray("MainMenu")]
 script = ExtResource("1_a1fbw")
 GameScene = ExtResource("2_ygnli")
 MainMenu = NodePath("MainMenu")
+WaitingRoomScene = ExtResource("3_1bvp3")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_jdul5")]
