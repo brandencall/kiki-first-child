@@ -12,9 +12,9 @@
         "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
     },
     {
-        "Id" : "Test",
+        "Id" : "Tonts",
         "IsUnlocked" : false,
-        "Scene" : "res://scenes/characters/blue_knight_character.tscn",
-        "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
+        "Scene" : "res://scenes/characters/tonts.tscn",
+        "IconPath" : "res://assets/characters/tonts/Tonts_icon.png"
     }
 ]
