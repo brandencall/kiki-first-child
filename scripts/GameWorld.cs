@@ -22,7 +22,7 @@ public partial class GameWorld : Node2D
 
 	public override void _Ready()
 	{
-		PackedScene currentScene = ResourceLoader.Load<PackedScene>(SceneManager.CurrentLevel);
+		PackedScene currentScene = ResourceLoader.Load<PackedScene>(SceneManager.CurrentLevel.Scene);
 		_currentLevel = (Node2D)currentScene.Instantiate();
 		Character = this.GetCharacter();
 		AddChild(_currentLevel);

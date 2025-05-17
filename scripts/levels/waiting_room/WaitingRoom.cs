@@ -71,7 +71,14 @@ public partial class WaitingRoom : Node2D
 		RemoveChild(currentCharacter);
 		SceneManager.ChangeScene("res://scenes/game_world.tscn");
 		// Hard coding current level. This will change when we have the player choose a level.
-		SceneManager.CurrentLevel = "res://scenes/levels/open_world_test.tscn";
+		LevelData levelData = new()
+		{
+			Id = "test",
+			IsUnlocked = true,
+			Scene = "res://scenes/levels/open_world_test.tscn"
+		};
+			
+		SceneManager.CurrentLevel = levelData;
 		EmitSignal(SignalName.LevelSelected);
 	}
 

@@ -4,7 +4,7 @@ using System;
 public partial class SceneManager : Node
 {
 	public string CurrentScene { get; private set; }
-	public string CurrentLevel { get; set; }
+	public LevelData CurrentLevel { get; set; }
 
 	public void ChangeSceneToWaitingRoom()
 	{
