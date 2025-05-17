@@ -5,6 +5,8 @@ public partial class FlowFieldManager : Node2D
 {
     [Export]
     public ChunkManager ChunkManager { get; set; }
+    [Export]
+    public Timer LowResUpdateTimer { get; set; }
     public Dictionary<Vector2I, Vector2> ChunkDirectionMap = new();
     public Dictionary<Vector2I, Vector2> DetailedFlowFields = new();
     public int tileSize = 64;
@@ -15,6 +17,7 @@ public partial class FlowFieldManager : Node2D
     public override void _Ready()
     {
         GodotUtilities.RegisterFlowField(this);
+        LowResUpdateTimer.Timeout += LowResTimeout;
     }
 
     public void GenerateHighResField(Vector2I chunkCoord, Vector2 playerPos)
@@ -45,7 +48,16 @@ public partial class FlowFieldManager : Node2D
                 if (!costField.ContainsKey(neighbor) || costField[neighbor] > currentCost + 1)
                 {
                     costField[neighbor] = currentCost + 1;
-                    DetailedFlowFields[neighbor] = (GridToWorld(current) - GridToWorld(neighbor)).Normalized();
+                    float blendWeight = 0.5f;
+                    Vector2 neighborVector = (GridToWorld(current) - GridToWorld(neighbor)).Normalized();
+                    if (DetailedFlowFields.ContainsKey(current))
+                    {
+                        DetailedFlowFields[neighbor] = DetailedFlowFields[current].Lerp(neighborVector, blendWeight);
+                    }
+                    else
+                    {
+                        DetailedFlowFields[neighbor] = neighborVector;
+                    }
                     openQueue.Enqueue(neighbor);
                 }
             }
@@ -59,6 +71,32 @@ public partial class FlowFieldManager : Node2D
         Vector2 direction = (playerChunkCenter - chunkWorldCenter).Normalized();
 
         ChunkDirectionMap[chunkCoor] = direction;
+    }
+
+    public void GenerateLowResField(Vector2I chunkCoor, Vector2 playerPos, Vector2I currentChunk)
+    {
+        if (chunkCoor != currentChunk)
+        {
+            Vector2 chunkWorldCenter = ChunkManager.GetChunkCenter(chunkCoor);
+            Vector2I goalGrid = ChunkManager.TileMap.LocalToMap(playerPos);
+            Vector2 direction = (goalGrid - chunkWorldCenter).Normalized();
+            ChunkDirectionMap[chunkCoor] = direction;
+        }
+    }
+    
+    private void LowResTimeout()
+    {
+        UpdateLowResField(ChunkManager.Character.GlobalPosition);
+    }
+
+    public void UpdateLowResField(Vector2 playerPos)
+    {
+        Vector2I goalGrid = ChunkManager.TileMap.LocalToMap(playerPos);
+        foreach (var chunkCoor in ChunkDirectionMap.Keys)
+        {
+            Vector2 chunkWorldCenter = ChunkManager.GetChunkCenter(chunkCoor);
+            ChunkDirectionMap[chunkCoor] = (goalGrid - chunkWorldCenter).Normalized();
+        }
     }
 
     public Vector2 GetFlowVector(Vector2 gloabalPos)

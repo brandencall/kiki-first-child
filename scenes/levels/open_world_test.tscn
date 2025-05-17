@@ -81,9 +81,14 @@ renderDistance = 3
 
 [node name="SpawnManager" parent="." instance=ExtResource("5_40bav")]
 
-[node name="FlowFieldManager" type="Node2D" parent="." node_paths=PackedStringArray("ChunkManager")]
+[node name="FlowFieldManager" type="Node2D" parent="." node_paths=PackedStringArray("ChunkManager", "LowResUpdateTimer")]
 script = ExtResource("5_g4pm7")
 ChunkManager = NodePath("../ChunkManager")
+LowResUpdateTimer = NodePath("LowResUpdateTimer")
+
+[node name="LowResUpdateTimer" type="Timer" parent="FlowFieldManager"]
+wait_time = 0.578
+autostart = true
 
 [node name="HighResFlowFieldDebug" type="Node2D" parent="." node_paths=PackedStringArray("ChunkManager", "TileMap")]
 script = ExtResource("7_5liiq")
