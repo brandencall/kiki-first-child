@@ -7,11 +7,11 @@ public partial class ChunkManager : Node2D
     [Export]
     public WorldTileSet TileMap { get; set; }
     [Export]
-    public FlowFieldDebug Debugger { get; set; }
+    public LowResFlowFieldDebug LowResDebugger { get; set; }
+    [Export]
+    public HighResFlowFieldDebug HighResDebugger { get; set; }
     [Export]
     public FlowFieldManager FlowField { get; set; }
-    [Export]
-    public Timer ChunkLoadTimer { get; set; }
     [Export]
     public int chunkSize = 8;
     [Export]
@@ -32,7 +32,6 @@ public partial class ChunkManager : Node2D
         _activeChunks.Add(_currentChunk);
         FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
         TileMap.Generate(_currentChunk, chunkSize);
-        ChunkLoadTimer.Timeout += OnChunkLoadTimerTimeOut;
         RenderChunk();
     }
 
@@ -40,28 +39,26 @@ public partial class ChunkManager : Node2D
     {
         base._PhysicsProcess(delta);
         _currentGridCell = TileMap.LocalToMap(Character.GlobalPosition);
+        _currentChunk = GetCurrentChunk(Character.GlobalPosition);
 
         if (_currentGridCell != _previousGridCell)
         {
             FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
-            // Debugger.SetFlowVectors(FlowField.DetailedFlowFields);
+            //HighResDebugger.SetFlowVectors(FlowField.DetailedFlowFields);
             _previousGridCell = _currentGridCell;
         }
-
-
+        UpdateLowResFlowField();
     }
 
-    private void OnChunkLoadTimerTimeOut()
+    private void UpdateLowResFlowField()
     {
-        _currentChunk = GetCurrentChunk(Character.GlobalPosition);
         FlowField.ValidateChunkMapWithCurrent(_currentChunk);
         if (_currentChunk != _previousChunk)
         {
             RenderChunk();
-            //Debugger.SetFlowVectors(FlowField.ChunkDirectionMap);
+            //LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
+            _previousChunk = _currentChunk;
         }
-
-        _previousChunk = _currentChunk;
     }
 
     public Vector2I GetCurrentChunk(Vector2 position)

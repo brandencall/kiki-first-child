@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class FlowFieldDebug : Node2D
+public partial class LowResFlowFieldDebug : Node2D
 {
     public Dictionary<Vector2I, Vector2> FlowVectors = new();
     [Export]
@@ -12,8 +12,8 @@ public partial class FlowFieldDebug : Node2D
 
     public override void _Draw()
     {
-        //DrawLowResFlowVectors();
-        DrawHighResFlowVectors();
+        DrawLowResFlowVectors();
+        //DrawHighResFlowVectors();
     }
 
     private void DrawLowResFlowVectors()
