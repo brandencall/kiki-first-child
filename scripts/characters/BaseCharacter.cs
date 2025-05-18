@@ -2,19 +2,23 @@ using Godot;
 
 public partial class BaseCharacter : CharacterBody2D
 {
+	public enum Direction 
+	{
+		Right,
+		Left,
+		Up,
+		Down
+	}
+
 	[Export]
 	public AnimatedSprite2D Animations { get; set; }
 	[Export]
 	public VelocityComponent VelocityComponent { get; set; }
+
+	public Direction facingDirection = Direction.Right;
+
 	[Export]
 	private HealthComponent _healthComponent;
-
-	//TODO: May want to create a seperate "AttackComponent". This might help with implementing abiltities
-	//and different weapons.
-	[Export]
-	private AttackComponent _attackComponent;
-	[Export]
-	private Area2D _hitboxComponent;
 	[Export]
 	private float _baseAttackCooldown = 1.5f;
 
@@ -34,9 +38,6 @@ public partial class BaseCharacter : CharacterBody2D
 		_healthComponent.Died += Die;
 		GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
-		_hitboxCollision = _hitboxComponent.GetNode<CollisionShape2D>("CollisionShape2D");
-		_hitboxCollision.Disabled = true;
-
 		Timer baseAttackTimer = new Timer();
 		AddChild(baseAttackTimer);
 		baseAttackTimer.WaitTime += _baseAttackCooldown;
@@ -47,11 +48,10 @@ public partial class BaseCharacter : CharacterBody2D
 		GodotUtilities.RegisterCharacter(this);
 	}
 
-	private void OnBaseAttackTimerTimeout()
+	public virtual void OnBaseAttackTimerTimeout()
 	{
 		_isAttacking = true;
 		Animations.Play("attack");
-		_hitboxCollision.Disabled = false;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -63,12 +63,12 @@ public partial class BaseCharacter : CharacterBody2D
 			if (inputDirection.X < 0)
 			{
 				Animations.FlipH = true;
-				_hitboxComponent.SetScale(new Vector2(-1, 1));
+				facingDirection = Direction.Left;
 			}
 			else
 			{
 				Animations.FlipH = false;
-				_hitboxComponent.SetScale(new Vector2(1, 1));
+				facingDirection = Direction.Right;
 			}
 		}
 
@@ -91,19 +91,12 @@ public partial class BaseCharacter : CharacterBody2D
 		GD.Print("Player has died");
 		EmitSignal(SignalName.OnCharacterDied);
 	}
-
-	public override void _ExitTree()
-	{
-		GD.Print("bye bye");
-		//GodotUtilities.UnregisterCharacter(this);
-	}
 	
 	public void OnAnimatedSprite2dAnimationFinished()
 	{
 		if (Animations.Animation == "attack")
 		{
 			_isAttacking = false;
-			_hitboxCollision.Disabled = true;
 		}
 	}
 

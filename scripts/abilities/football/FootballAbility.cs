@@ -23,7 +23,7 @@ public partial class FootballAbility : HitboxComponent
         base._Ready();
         _character = this.GetCharacter();
         GlobalPosition = _character.GlobalPosition;
-        _direction = _character.VelocityComponent.Velocity.Normalized();
+		_direction = _character.VelocityComponent.LastMoveDirection.Normalized();
         Sprite.Rotation = _direction.Angle();
         Collision.Rotation = _direction.Angle() - Mathf.Pi / 2f;
         Cooldown.Timeout += ResetFootball;

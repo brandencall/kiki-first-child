@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://bc1qhscn8qrx6"]
+[gd_scene load_steps=28 format=3 uid="uid://bc1qhscn8qrx6"]
 
 [ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_6nk6n"]
 [ext_resource type="Texture2D" uid="uid://cbmyddra1pqla" path="res://assets/PlaceholderAssets/Characters/Warrior_Purple.png" id="2_g3txe"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_n5qru"]
+[ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="4_g3txe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_je6y8"]
 atlas = ExtResource("2_g3txe")
@@ -151,14 +152,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dujjx"]
 radius = 33.0606
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_778t6"]
-size = Vector2(38, 76)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_mw6ym"]
 radius = 28.0179
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qwdwt"]
 radius = 40.1123
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_778t6"]
+size = Vector2(38, 76)
 
 [node name="BasePlayer" instance=ExtResource("1_6nk6n")]
 
@@ -171,12 +172,7 @@ autoplay = "idle"
 visible = false
 shape = SubResource("CircleShape2D_dujjx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
-visible = false
-position = Vector2(41, -5)
-shape = SubResource("RectangleShape2D_778t6")
-
-[node name="VelocityComponent" parent="." index="6"]
+[node name="VelocityComponent" parent="." index="5"]
 MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
@@ -184,7 +180,7 @@ _accelerationCoefficient = 10.0
 position = Vector2(-1, -4)
 shape = SubResource("CircleShape2D_mw6ym")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_n5qru")]
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_n5qru")]
 offset_left = -79.0
 offset_top = 43.0
 offset_right = 79.0
@@ -194,3 +190,10 @@ _healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
 visible = false
 shape = SubResource("CircleShape2D_qwdwt")
+
+[node name="HitboxComponent" parent="." index="9" instance=ExtResource("4_g3txe")]
+
+[node name="HitboxComponent#CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+visible = false
+position = Vector2(41, -5)
+shape = SubResource("RectangleShape2D_778t6")

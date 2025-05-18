@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://2i8euktrm4j8"]
+[gd_scene load_steps=28 format=3 uid="uid://2i8euktrm4j8"]
 
 [ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_660ek"]
 [ext_resource type="Texture2D" uid="uid://n3s3fu74kxs6" path="res://assets/PlaceholderAssets/Characters/Warrior_Blue.png" id="2_6xqdu"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_6xqdu"]
+[ext_resource type="PackedScene" uid="uid://bhacfcsq21aci" path="res://scenes/components/hitbox_component.tscn" id="4_icv0i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l1jow"]
 atlas = ExtResource("2_6xqdu")
@@ -151,14 +152,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_5g3hu"]
 radius = 41.0122
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_stneq"]
-size = Vector2(55.5, 103.5)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_177g4"]
 radius = 36.0139
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6w54"]
 radius = 30.0167
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stneq"]
+size = Vector2(55.5, 103.5)
 
 [node name="BaseCharacter" instance=ExtResource("1_660ek")]
 
@@ -172,20 +173,14 @@ visible = false
 position = Vector2(-2, -9)
 shape = SubResource("CircleShape2D_5g3hu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
-visible = false
-position = Vector2(44.25, -13.75)
-shape = SubResource("RectangleShape2D_stneq")
-disabled = true
-
-[node name="VelocityComponent" parent="." index="6"]
+[node name="VelocityComponent" parent="." index="5"]
 MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 shape = SubResource("CircleShape2D_177g4")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_6xqdu")]
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_6xqdu")]
 offset_left = -79.0
 offset_top = 43.0
 offset_right = 79.0
@@ -195,3 +190,11 @@ _healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
 visible = false
 shape = SubResource("CircleShape2D_e6w54")
+
+[node name="HitboxComponent" parent="." index="9" instance=ExtResource("4_icv0i")]
+
+[node name="HitboxComponent#CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+visible = false
+position = Vector2(44.25, -13.75)
+shape = SubResource("RectangleShape2D_stneq")
+disabled = true

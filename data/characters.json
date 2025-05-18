@@ -13,7 +13,7 @@
     },
     {
         "Id" : "Tonts",
-        "IsUnlocked" : false,
+        "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/tonts.tscn",
         "IconPath" : "res://assets/characters/tonts/Tonts_icon.png"
     }
