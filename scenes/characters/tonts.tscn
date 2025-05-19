@@ -55,7 +55,6 @@ Mussel = NodePath("Mussel")
 _baseAttackCooldown = 0.5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_muvte")
 animation = &"walk"
 autoplay = "idle"
@@ -64,6 +63,9 @@ autoplay = "idle"
 visible = false
 position = Vector2(4.5, -1)
 shape = SubResource("RectangleShape2D_lobog")
+
+[node name="Camera2D" parent="." index="2"]
+zoom = Vector2(1, 1)
 
 [node name="VelocityComponent" parent="." index="5"]
 MaxSpeed = 200.0
@@ -79,12 +81,12 @@ visible = false
 position = Vector2(4.5, -1)
 shape = SubResource("RectangleShape2D_lobog")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_cy1pa")]
-offset_left = -70.0
-offset_top = 50.0
-offset_right = 88.0
-offset_bottom = 59.0
-_healthComponent = NodePath("../HealthComponent")
+[node name="Mussel" type="Marker2D" parent="." index="8"]
+position = Vector2(15, 1)
 
-[node name="Mussel" type="Marker2D" parent="." index="9"]
-position = Vector2(50, 1)
+[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_cy1pa")]
+offset_left = -20.0
+offset_top = 16.0
+offset_right = 25.0
+offset_bottom = 20.0
+_healthComponent = NodePath("../HealthComponent")

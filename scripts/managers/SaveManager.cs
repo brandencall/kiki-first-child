@@ -10,7 +10,6 @@ public partial class SaveManager : Node
 	public const string CharacterDataPath = "res://data/characters.json";
 	private GameState _gameState = new();
 	private List<CharacterData> _characterList;
-	private string _defaultCharacterId = "Purple Knight";
 
 	public override void _Ready()
 	{
@@ -81,8 +80,9 @@ public partial class SaveManager : Node
 	public void InitializeNewGame()
 	{
 		_gameState.Characters = _characterList;
-		CurrentCharacter = GetCharacterById(_defaultCharacterId);
+		CurrentCharacter = _characterList[0];
 		Debug.Assert(CurrentCharacter != null, "The current character should not be null here");
+		Debug.Assert(CurrentCharacter.IsUnlocked == true, "The CurrentCharacter should be unlocked");
 	}
 
 	public CharacterData GetCharacterById(string characterId)

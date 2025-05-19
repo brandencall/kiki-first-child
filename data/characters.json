@@ -1,17 +1,5 @@
 [
     {
-        "Id" : "Purple Knight",
-        "IsUnlocked" : true,
-        "Scene" : "res://scenes/characters/purple_knight_character.tscn",
-        "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Purple_Icon.png"
-    },
-    {
-        "Id" : "Blue Knight",
-        "IsUnlocked" : true,
-        "Scene" : "res://scenes/characters/blue_knight_character.tscn",
-        "IconPath" : "res://assets/PlaceholderAssets/Characters/Warrior_Blue_Icon.png"
-    },
-    {
         "Id" : "Tonts",
         "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/tonts.tscn",

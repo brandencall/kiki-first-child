@@ -37,7 +37,7 @@ public partial class CharacterCard : Control
 		CharacterButton.Modulate = _character.IsUnlocked ? Colors.White : Colors.Gray;
 		CharacterButton.Disabled = !_character.IsUnlocked;
 		// Scale the button once we get more of our custom characters in.
-		//CharacterButton.Scale = new Vector2(3.0f, 3.0f);
+		CharacterButton.Scale = new Vector2(3.0f, 3.0f);
 	}
 
 	private Bitmap CreateClickMask(Texture2D spriteTexture)
