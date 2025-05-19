@@ -19,6 +19,16 @@ public partial class SaveManager : Node
 		LoadGame();
 	}
 
+	public override void _Notification(int what)
+	{
+		if (what == NotificationWMCloseRequest)
+		{
+			GD.Print("Game is closing, saving game...");
+			SaveGame();
+			GetTree().Quit(); // Ensure the game quits after saving
+		}
+	}
+
 	public void LoadGame()
 	{
 		try
@@ -29,7 +39,14 @@ public partial class SaveManager : Node
 				string jsonString = file.GetAsText();
 				_gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
 				EnsureAllCharactersExist();
-				CurrentCharacter = _gameState.LastUsedCharacter;
+				if (_gameState.LastUsedCharacter == null)
+				{
+					CurrentCharacter = _characterList[0];
+				}
+				else
+				{
+					CurrentCharacter = _gameState.LastUsedCharacter;
+				}
 				GD.Print("Game loaded suxxessfully");
 			}
 			else
@@ -50,6 +67,7 @@ public partial class SaveManager : Node
 	{
 		try
 		{
+			_gameState.LastUsedCharacter = CurrentCharacter;
 			string jsonString = JsonSerializer.Serialize(_gameState, new JsonSerializerOptions { WriteIndented = true });
 			using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
 			file.StoreString(jsonString);
