@@ -25,7 +25,7 @@ public partial class SaveManager : Node
 		{
 			GD.Print("Game is closing, saving game...");
 			SaveGame();
-			GetTree().Quit(); // Ensure the game quits after saving
+			GetTree().Quit(); 
 		}
 	}
 
@@ -89,7 +89,8 @@ public partial class SaveManager : Node
 				{
 					Id = character.Id,
 					IsUnlocked = character.IsUnlocked,
-					Scene = character.Scene
+					Scene = character.Scene,
+					IconPath = character.IconPath
 				});
 			}
 		}
