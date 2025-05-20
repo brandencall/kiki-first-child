@@ -17,6 +17,7 @@ _healthComponent = NodePath("HealthComponent")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 process_callback = 0
 position_smoothing_enabled = true
 

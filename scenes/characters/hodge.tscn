@@ -48,7 +48,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gm0aa"]
 size = Vector2(15, 20)
 
-[node name="BaseCharacter" node_paths=PackedStringArray("Noodle") instance=ExtResource("1_gm0aa")]
+[node name="Hodge" node_paths=PackedStringArray("Noodle") instance=ExtResource("1_gm0aa")]
 script = ExtResource("2_unbyy")
 Noodle = NodePath("noodle")
 
