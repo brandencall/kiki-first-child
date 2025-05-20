@@ -9,6 +9,8 @@ public partial class Bullet : HitboxComponent
 	public Sprite2D Sprite { get; set; }
 	[Export]
 	public float Speed = 700f;
+	[Export]
+	public float LifeTime = 2.0f;
 
 	private BaseCharacter _character;
 	private Vector2 _direction;
@@ -24,6 +26,12 @@ public partial class Bullet : HitboxComponent
 		Sprite.Rotation = _direction.Angle();
 		Collision.Rotation = _direction.Angle() - Mathf.Pi / 2f;
 		_currentSpeed = Speed;
+
+		Timer lifeTimer = new Timer();
+		AddChild(lifeTimer);
+		lifeTimer.WaitTime = LifeTime;
+		lifeTimer.Timeout += OnLifeTimerTimeout;
+		lifeTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -37,5 +45,10 @@ public partial class Bullet : HitboxComponent
 		{
 			QueueFree();
 		}
+	}
+
+	private void OnLifeTimerTimeout()
+	{
+		QueueFree();
 	}
 }
