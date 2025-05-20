@@ -18,12 +18,12 @@ public partial class Tonts : BaseCharacter
 
 	private void SetMusselPosition()
 	{
-		if (facingDirection == Direction.Right)
+		if (VelocityComponent.LastMoveDirection.X > 0)
 		{
 			Vector2 position = new Vector2(Mathf.Abs(Mussel.Position.X), Mussel.Position.Y);
 			Mussel.Position = position;
 		}
-		else if (facingDirection == Direction.Left)
+		else if (VelocityComponent.LastMoveDirection.X < 0)
 		{
 			Vector2 position = new Vector2(-Mathf.Abs(Mussel.Position.X), Mussel.Position.Y);
 			Mussel.Position = position;

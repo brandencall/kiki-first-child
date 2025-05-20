@@ -64,10 +64,6 @@ visible = false
 position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_cy1pa")
 
-[node name="VelocityComponent" parent="." index="5"]
-MaxSpeed = 200.0
-_accelerationCoefficient = 10.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 visible = false
 position = Vector2(2, -1.5)

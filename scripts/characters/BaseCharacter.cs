@@ -2,20 +2,11 @@ using Godot;
 
 public partial class BaseCharacter : CharacterBody2D
 {
-	public enum Direction 
-	{
-		Right,
-		Left,
-		Up,
-		Down
-	}
 
 	[Export]
 	public AnimatedSprite2D Animations { get; set; }
 	[Export]
 	public VelocityComponent VelocityComponent { get; set; }
-
-	public Direction facingDirection = Direction.Right;
 
 	[Export]
 	private HealthComponent _healthComponent;
@@ -63,12 +54,10 @@ public partial class BaseCharacter : CharacterBody2D
 			if (inputDirection.X < 0)
 			{
 				Animations.FlipH = true;
-				facingDirection = Direction.Left;
 			}
 			else
 			{
 				Animations.FlipH = false;
-				facingDirection = Direction.Right;
 			}
 		}
 
