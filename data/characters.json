@@ -10,5 +10,11 @@
         "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/hodge.tscn",
         "IconPath" : "res://assets/characters/hodge/Hodge_icon.png"
+    },
+    {
+        "Id" : "Chavz",
+        "IsUnlocked" : true,
+        "Scene" : "res://scenes/characters/chavz.tscn",
+        "IconPath" : "res://assets/characters/chavz/Chavz_icon.png"
     }
 ]
