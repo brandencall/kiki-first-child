@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://chqixr4glxpr5"]
+
+[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_gm0aa"]
+[ext_resource type="Texture2D" uid="uid://b18jsyiba3w3d" path="res://assets/characters/hodge/Hodge.png" id="2_xy3db"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_xy3db"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdjcv"]
+atlas = ExtResource("2_xy3db")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unbyy"]
+atlas = ExtResource("2_xy3db")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc54n"]
+atlas = ExtResource("2_xy3db")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xcsn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdjcv")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unbyy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc54n")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm0aa"]
+size = Vector2(15, 20)
+
+[node name="BaseCharacter" instance=ExtResource("1_gm0aa")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_5xcsn")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_gm0aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
+visible = false
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_gm0aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_gm0aa")
+
+[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_xy3db")]
+offset_left = -20.0
+offset_top = 16.0
+offset_right = 25.0
+offset_bottom = 20.0
+_healthComponent = NodePath("../HealthComponent")

@@ -4,5 +4,11 @@
         "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/tonts.tscn",
         "IconPath" : "res://assets/characters/tonts/Tonts_icon.png"
+    },
+    {
+        "Id" : "Hodge",
+        "IsUnlocked" : true,
+        "Scene" : "res://scenes/characters/hodge.tscn",
+        "IconPath" : "res://assets/characters/hodge/Hodge_icon.png"
     }
 ]
