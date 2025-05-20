@@ -45,8 +45,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lobog"]
-size = Vector2(29, 36)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cy1pa"]
+size = Vector2(16, 25)
 
 [node name="Tonts" node_paths=PackedStringArray("Mussel") instance=ExtResource("1_jtmwb")]
 script = ExtResource("2_o75v0")
@@ -61,8 +61,8 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
-position = Vector2(4.5, -1)
-shape = SubResource("RectangleShape2D_lobog")
+position = Vector2(2, -1.5)
+shape = SubResource("RectangleShape2D_cy1pa")
 
 [node name="Camera2D" parent="." index="2"]
 zoom = Vector2(1, 1)
@@ -73,13 +73,13 @@ _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 visible = false
-position = Vector2(4.5, -1)
-shape = SubResource("RectangleShape2D_lobog")
+position = Vector2(2, -1.5)
+shape = SubResource("RectangleShape2D_cy1pa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
 visible = false
-position = Vector2(4.5, -1)
-shape = SubResource("RectangleShape2D_lobog")
+position = Vector2(2, -1.5)
+shape = SubResource("RectangleShape2D_cy1pa")
 
 [node name="Mussel" type="Marker2D" parent="." index="8"]
 position = Vector2(15, 1)

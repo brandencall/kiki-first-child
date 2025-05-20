@@ -17,7 +17,6 @@ _healthComponent = NodePath("HealthComponent")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.6, 0.6)
 process_callback = 0
 position_smoothing_enabled = true
 
@@ -28,6 +27,8 @@ position = Vector2(-26.9987, -17.4179)
 scale = Vector2(1.37468, 1.36475)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_u1830")]
+MaxSpeed = 200.0
+_accelerationCoefficient = 10.0
 
 [node name="CharacterHurtbox" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_3r7lq")]
 _healthComponent = NodePath("../HealthComponent")
