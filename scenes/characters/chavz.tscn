@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7gpmd03l8y8k"]
+[gd_scene load_steps=11 format=3 uid="uid://b7gpmd03l8y8k"]
 
 [ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_iof6u"]
+[ext_resource type="Script" uid="uid://ddft062osarw2" path="res://scripts/characters/Chavz.cs" id="2_422ku"]
 [ext_resource type="Texture2D" uid="uid://b444gd8s86w1p" path="res://assets/characters/chavz/Chavz.png" id="2_ccd0x"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_1mpuj"]
+[ext_resource type="PackedScene" uid="uid://c3xnp1w6ydct4" path="res://scenes/items/steak.tscn" id="4_1mpuj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_422ku"]
 atlas = ExtResource("2_ccd0x")
@@ -46,7 +48,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srery"]
 size = Vector2(17, 20)
 
-[node name="Chavz" instance=ExtResource("1_iof6u")]
+[node name="Chavz" node_paths=PackedStringArray("Steak") instance=ExtResource("1_iof6u")]
+script = ExtResource("2_422ku")
+Steak = NodePath("Steak")
+_baseAttackCooldown = 1.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_qe2sj")
@@ -67,7 +72,9 @@ visible = false
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_srery")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_1mpuj")]
+[node name="Steak" parent="." index="8" instance=ExtResource("4_1mpuj")]
+
+[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_1mpuj")]
 offset_left = -20.0
 offset_top = 16.0
 offset_right = 25.0

@@ -1,0 +1,191 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3xnp1w6ydct4"]
+
+[ext_resource type="Script" uid="uid://ce8d7rmny273d" path="res://scripts/items/Steak.cs" id="1_8132r"]
+[ext_resource type="Texture2D" uid="uid://hualox1lkv55" path="res://assets/items/steak.png" id="2_su3w7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aatei"]
+size = Vector2(21, 23)
+
+[sub_resource type="Animation" id="Animation_qe2sj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, -18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5.5, -24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:flip_v")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_chvw5"]
+resource_name = "steak_forward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, -23), Vector2(18, -18), Vector2(24, -6), Vector2(18, 10), Vector2(6, 21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.5708, -1.5708, -0.591667, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5.5, -24), Vector2(19, -19), Vector2(24, -7), Vector2(17, 11), Vector2(7, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:flip_v")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_8132r"]
+resource_name = "steak_backward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-4, -23), Vector2(-18, -18), Vector2(-24, -6), Vector2(-18, 10), Vector2(-6, 21)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.5708, -1.5708, -2.1677, -2.85187, -3.32485]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5.5, -24), Vector2(-19, -19), Vector2(-24, -7), Vector2(-17, 11), Vector2(-7, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:flip_v")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.06667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_srery"]
+_data = {
+&"RESET": SubResource("Animation_qe2sj"),
+&"steak_backward": SubResource("Animation_8132r"),
+&"steak_forward": SubResource("Animation_chvw5")
+}
+
+[node name="Steak" type="Area2D" node_paths=PackedStringArray("Animation", "Sprite", "Collision")]
+script = ExtResource("1_8132r")
+Animation = NodePath("AnimationPlayer")
+Sprite = NodePath("Sprite2D")
+Collision = NodePath("CollisionShape2D")
+Damage = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, -18)
+rotation = -1.5708
+scale = Vector2(0.96875, 0.96875)
+texture = ExtResource("2_su3w7")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, -24)
+shape = SubResource("RectangleShape2D_aatei")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_srery")
+}
+speed_scale = 3.0
