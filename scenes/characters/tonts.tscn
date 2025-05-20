@@ -64,9 +64,6 @@ visible = false
 position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_cy1pa")
 
-[node name="Camera2D" parent="." index="2"]
-zoom = Vector2(1, 1)
-
 [node name="VelocityComponent" parent="." index="5"]
 MaxSpeed = 200.0
 _accelerationCoefficient = 10.0
