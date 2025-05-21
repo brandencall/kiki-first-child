@@ -48,11 +48,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cy1pa"]
 size = Vector2(16, 25)
 
-[node name="Tonts" node_paths=PackedStringArray("Mussel") instance=ExtResource("1_jtmwb")]
+[node name="Tonts" node_paths=PackedStringArray("Mussel", "HealthComponent") instance=ExtResource("1_jtmwb")]
 scale = Vector2(2, 2)
 script = ExtResource("2_o75v0")
 BulletScene = ExtResource("4_o75v0")
 Mussel = NodePath("Mussel")
+HealthComponent = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_muvte")

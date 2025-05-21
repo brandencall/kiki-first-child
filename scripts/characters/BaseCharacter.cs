@@ -7,9 +7,9 @@ public partial class BaseCharacter : CharacterBody2D
 	public AnimatedSprite2D Animations { get; set; }
 	[Export]
 	public VelocityComponent VelocityComponent { get; set; }
-
 	[Export]
-	private HealthComponent _healthComponent;
+	public HealthComponent HealthComponent { get; set; }
+
 	[Export]
 	private float _baseAttackCooldown = 1.5f;
 
@@ -26,7 +26,7 @@ public partial class BaseCharacter : CharacterBody2D
 		CollisionLayer = 8;
 		CollisionMask = 0;
 		AddToGroup("character");
-		_healthComponent.Died += Die;
+		HealthComponent.Died += Die;
 		GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
 		Timer baseAttackTimer = new Timer();

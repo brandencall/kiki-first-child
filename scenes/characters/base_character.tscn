@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://b2hqa4riqa7kt" path="res://scenes/characters/pickup_area.tscn" id="5_gcpci"]
 [ext_resource type="PackedScene" uid="uid://cnp2mnnr2e2vw" path="res://scenes/enemies/enemy_spawning/enemy_spawn_path.tscn" id="6_l4eab"]
 
-[node name="BaseCharacter" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "VelocityComponent", "_healthComponent") groups=["character"]]
+[node name="BaseCharacter" type="CharacterBody2D" node_paths=PackedStringArray("Animations", "VelocityComponent", "HealthComponent") groups=["character"]]
 collision_layer = 8
 script = ExtResource("1_rtfjh")
 Animations = NodePath("AnimatedSprite2D")
 VelocityComponent = NodePath("VelocityComponent")
-_healthComponent = NodePath("HealthComponent")
+HealthComponent = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 

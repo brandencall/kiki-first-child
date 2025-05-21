@@ -1,0 +1,47 @@
+[
+    {
+        "CharacterId" : "Tonts",
+        "Skills":[
+            {
+                "Id": "Test",
+                "Name": "Test",
+                "Description": "Test",
+                "IconPath": "Test",
+                "ScenePath": "res://scenes/characters/skills/test_skill.tscn",
+                "Cost": 1,
+                "Prerequisites": [],
+                "IsUnlocked": true
+            } 
+        ]
+    },
+    {
+        "Id" : "Hodge",
+        "Skills":[
+            {
+                "Id": "Test",
+                "Name": "Test",
+                "Description": "Test",
+                "IconPath": "Test",
+                "ScenePath": "",
+                "Cost": 1,
+                "Prerequisites": [],
+                "IsUnlocked": true
+            } 
+        ]
+    },
+    {
+        "Id" : "Chavz",
+        "Skills":[
+            {
+                "Id": "Test",
+                "Name": "Test",
+                "Description": "Test",
+                "IconPath": "Test",
+                "ScenePath": "",
+                "Cost": 1,
+                "Prerequisites": [],
+                "IsUnlocked": true
+            } 
+        ]
+    }
+]

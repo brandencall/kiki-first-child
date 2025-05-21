@@ -8,14 +8,19 @@ public partial class SaveManager : Node
 	public CharacterData CurrentCharacter { get; set; }
 	public const string SavePath = "user://savegame.json";
 	public const string CharacterDataPath = "res://data/characters.json";
+	public const string SkillTreeDataPath = "res://data/skillTrees.json";
 	private GameState _gameState = new();
 	private List<CharacterData> _characterList;
+	private List<SkillTreeData> _skillTreeData;
 
 	public override void _Ready()
 	{
-		var jsonFile = FileAccess.Open(CharacterDataPath, FileAccess.ModeFlags.Read);
-		string jsonText = jsonFile.GetAsText();
-		_characterList = JsonSerializer.Deserialize<List<CharacterData>>(jsonText);
+		var jsonCharacterData = FileAccess.Open(CharacterDataPath, FileAccess.ModeFlags.Read);
+		var jsonSkillTreeData = FileAccess.Open(SkillTreeDataPath, FileAccess.ModeFlags.Read);
+		string jsonCharacterText = jsonCharacterData.GetAsText();
+		string jsonSkillTreeText = jsonSkillTreeData.GetAsText();
+		_characterList = JsonSerializer.Deserialize<List<CharacterData>>(jsonCharacterText);
+		_skillTreeData = JsonSerializer.Deserialize<List<SkillTreeData>>(jsonSkillTreeText);
 		LoadGame();
 	}
 
@@ -99,9 +104,18 @@ public partial class SaveManager : Node
 	public void InitializeNewGame()
 	{
 		_gameState.Characters = _characterList;
+		_gameState.SkillTrees = _skillTreeData;
 		CurrentCharacter = _characterList[0];
 		Debug.Assert(CurrentCharacter != null, "The current character should not be null here");
 		Debug.Assert(CurrentCharacter.IsUnlocked == true, "The CurrentCharacter should be unlocked");
+	}
+
+	public void ApplySkillTrees(BaseCharacter character)
+	{
+		SkillTreeData skillTree = _skillTreeData[0];
+		PackedScene skillScene = GD.Load<PackedScene>(skillTree.Skills[0].ScenePath);
+		ISkill skill = skillScene.Instantiate<TestSkill>();
+		skill.Apply(character);
 	}
 
 	public CharacterData GetCharacterById(string characterId)
