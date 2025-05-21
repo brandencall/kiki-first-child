@@ -114,6 +114,7 @@ public partial class SaveManager : Node
 	{
 		SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == characterData.Id);
 		if (skillTree == null) return;
+		if (skillTree.Skills == null) return;
 
 		foreach (var skill in skillTree.Skills)
 		{
