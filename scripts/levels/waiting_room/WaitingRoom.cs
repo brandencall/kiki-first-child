@@ -30,7 +30,7 @@ public partial class WaitingRoom : Node2D
 		var characterInstance = characterScene.Instantiate<BaseCharacter>();
 		currentCharacter = characterInstance;
 		AddChild(characterInstance);
-		SaveManager.ApplySkillTrees(currentCharacter);
+		SaveManager.ApplySkillTrees(currentCharacter, character);
 
 		CharacterSelectArea.CharacterAreaEntered += OnCharacterSelectAreaEntered;
 		CharacterSelectArea.CharacterAreaExited += OnCharacterSelectAreaExited;
@@ -61,7 +61,7 @@ public partial class WaitingRoom : Node2D
 		currentCharacter.GlobalPosition = position;
 		AddChild(currentCharacter);
 		SaveManager.CurrentCharacter = character;
-		SaveManager.ApplySkillTrees(currentCharacter);
+		SaveManager.ApplySkillTrees(currentCharacter, character);
 		_showCharacterSelection = false;
 	}
 

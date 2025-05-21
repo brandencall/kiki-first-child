@@ -16,32 +16,10 @@
     },
     {
         "Id" : "Hodge",
-        "Skills":[
-            {
-                "Id": "Test",
-                "Name": "Test",
-                "Description": "Test",
-                "IconPath": "Test",
-                "ScenePath": "",
-                "Cost": 1,
-                "Prerequisites": [],
-                "IsUnlocked": true
-            } 
-        ]
+        "Skills": null
     },
     {
         "Id" : "Chavz",
-        "Skills":[
-            {
-                "Id": "Test",
-                "Name": "Test",
-                "Description": "Test",
-                "IconPath": "Test",
-                "ScenePath": "",
-                "Cost": 1,
-                "Prerequisites": [],
-                "IsUnlocked": true
-            } 
-        ]
+        "Skills": null
     }
 ]

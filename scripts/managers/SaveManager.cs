@@ -30,7 +30,7 @@ public partial class SaveManager : Node
 		{
 			GD.Print("Game is closing, saving game...");
 			SaveGame();
-			GetTree().Quit(); 
+			GetTree().Quit();
 		}
 	}
 
@@ -110,12 +110,17 @@ public partial class SaveManager : Node
 		Debug.Assert(CurrentCharacter.IsUnlocked == true, "The CurrentCharacter should be unlocked");
 	}
 
-	public void ApplySkillTrees(BaseCharacter character)
+	public void ApplySkillTrees(BaseCharacter character, CharacterData characterData)
 	{
-		SkillTreeData skillTree = _skillTreeData[0];
-		PackedScene skillScene = GD.Load<PackedScene>(skillTree.Skills[0].ScenePath);
-		ISkill skill = skillScene.Instantiate<TestSkill>();
-		skill.Apply(character);
+		SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == characterData.Id);
+		if (skillTree == null) return;
+
+		foreach (var skill in skillTree.Skills)
+		{
+			PackedScene skillScene = GD.Load<PackedScene>(skill.ScenePath);
+			ISkill skillNode = skillScene.Instantiate<TestSkill>();
+			skillNode.Apply(character);
+		}
 	}
 
 	public CharacterData GetCharacterById(string characterId)
