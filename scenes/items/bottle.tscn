@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://c04lpdstpxqss"]
 
-[ext_resource type="Script" uid="uid://dkh2w8t0dluit" path="res://scripts/items/Bullet.cs" id="1_fghtl"]
-[ext_resource type="Texture2D" uid="uid://bm51ce00hjyko" path="res://assets/items/bottle_tonts.png" id="2_tryqy"]
+[ext_resource type="Script" uid="uid://dkh2w8t0dluit" path="res://scripts/items/Bottle.cs" id="1_7q0a5"]
+[ext_resource type="Texture2D" uid="uid://bm51ce00hjyko" path="res://assets/items/bottle_tonts.png" id="2_voy3e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tryqy"]
 size = Vector2(30, 15)
 
-[node name="Bullet" type="Area2D" node_paths=PackedStringArray("Collision", "Sprite")]
-script = ExtResource("1_fghtl")
+[node name="Bottle" type="Area2D" node_paths=PackedStringArray("Collision", "Sprite")]
+script = ExtResource("1_7q0a5")
 Collision = NodePath("CollisionShape2D")
 Sprite = NodePath("Sprite2D")
 Speed = 500.0
 Damage = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_tryqy")
+texture = ExtResource("2_voy3e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2.5)

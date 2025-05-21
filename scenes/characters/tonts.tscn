@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_jtmwb"]
 [ext_resource type="Script" uid="uid://6qjfv4y66d5u" path="res://scripts/characters/Tonts.cs" id="2_o75v0"]
 [ext_resource type="Texture2D" uid="uid://1ix70iyonpwa" path="res://assets/characters/tonts/Tonts.png" id="3_h5mfi"]
-[ext_resource type="PackedScene" uid="uid://c04lpdstpxqss" path="res://scenes/items/bullet.tscn" id="4_o75v0"]
+[ext_resource type="PackedScene" uid="uid://c04lpdstpxqss" path="res://scenes/items/bottle.tscn" id="4_o75v0"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="5_cy1pa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5mfi"]
@@ -48,12 +48,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cy1pa"]
 size = Vector2(16, 25)
 
-[node name="Tonts" node_paths=PackedStringArray("Mussel", "HealthComponent") instance=ExtResource("1_jtmwb")]
+[node name="Tonts" node_paths=PackedStringArray("Mussel") instance=ExtResource("1_jtmwb")]
 scale = Vector2(2, 2)
 script = ExtResource("2_o75v0")
 BulletScene = ExtResource("4_o75v0")
 Mussel = NodePath("Mussel")
-HealthComponent = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_muvte")

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Bullet : HitboxComponent
+public partial class Bottle : HitboxComponent
 {
 	[Export]
 	public CollisionShape2D Collision { get; set; }
