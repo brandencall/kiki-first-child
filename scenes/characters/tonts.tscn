@@ -52,7 +52,6 @@ size = Vector2(16, 25)
 script = ExtResource("2_o75v0")
 BulletScene = ExtResource("4_o75v0")
 Mussel = NodePath("Mussel")
-_baseAttackCooldown = 0.5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_muvte")
