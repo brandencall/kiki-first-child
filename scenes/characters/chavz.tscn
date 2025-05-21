@@ -49,6 +49,7 @@ animations = [{
 size = Vector2(17, 20)
 
 [node name="Chavz" node_paths=PackedStringArray("Steak") instance=ExtResource("1_iof6u")]
+scale = Vector2(2, 2)
 script = ExtResource("2_422ku")
 Steak = NodePath("Steak")
 _baseAttackCooldown = 1.0

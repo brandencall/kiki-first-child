@@ -49,6 +49,7 @@ animations = [{
 size = Vector2(15, 20)
 
 [node name="Hodge" node_paths=PackedStringArray("Noodle") instance=ExtResource("1_gm0aa")]
+scale = Vector2(2, 2)
 script = ExtResource("2_unbyy")
 Noodle = NodePath("noodle")
 
