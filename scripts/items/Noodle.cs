@@ -28,4 +28,19 @@ public partial class Noodle : HitboxComponent
 		}
 		Animation.Play("whip");
 	}
+
+	public void AttackBackwards()
+	{
+		Rotation = _character.VelocityComponent.LastMoveDirection.Angle() + Mathf.Pi;
+		if (_character.VelocityComponent.LastMoveDirection.X < 0)
+		{
+			Sprite.FlipV = true;
+		}
+		else
+		{
+			Sprite.FlipV = false;
+		}
+		Animation.Play("whip");
+
+	}
 }

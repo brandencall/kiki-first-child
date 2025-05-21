@@ -20,6 +20,8 @@ public partial class BaseCharacter : CharacterBody2D
 	public delegate void ExperiencePickedupEventHandler(float experience);
 	[Signal]
 	public delegate void OnCharacterDiedEventHandler();
+	[Signal]
+	public delegate void AttackEventHandler();
 
 	public override void _Ready()
 	{
@@ -41,6 +43,7 @@ public partial class BaseCharacter : CharacterBody2D
 
 	public virtual void OnBaseAttackTimerTimeout()
 	{
+		EmitSignal(SignalName.Attack);
 		_isAttacking = true;
 		Animations.Play("attack");
 	}
