@@ -18,6 +18,7 @@ public partial class HealthBar : ProgressBar
 		_damageBar.MaxValue = _health;
 		_damageBar.Value = _health;
 		_healthComponent.HealthChanged += HealthChanged;
+		_healthComponent.MaxHealthChanged += MaxHealthChanged;
 	}
 
 	private void HealthChanged(float newHealth)
@@ -34,6 +35,12 @@ public partial class HealthBar : ProgressBar
 		{
 			_damageBar.Value = _health;
 		}
+	}
+
+	private void MaxHealthChanged(float maxHealth)
+	{
+		MaxValue = maxHealth;
+		_damageBar.MaxValue = maxHealth;
 	}
 
 	private void OnTimerTimeout()

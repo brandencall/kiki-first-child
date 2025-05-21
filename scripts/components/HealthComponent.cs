@@ -6,6 +6,8 @@ public partial class HealthComponent : Node2D
     public delegate void HealthChangedEventHandler(float healthUpdate);
     [Signal]
     public delegate void DiedEventHandler();
+    [Signal]
+    public delegate void MaxHealthChangedEventHandler(float maxHealth);
 
     public bool HasHealthRemaining => !Mathf.IsEqualApprox(CurrentHealth, 0f);
 
@@ -57,6 +59,7 @@ public partial class HealthComponent : Node2D
     public void SetMaxHealth(float health)
     {
        MaxHealth = health; 
+       EmitSignal(SignalName.MaxHealthChanged, health);
     }
 
     public void Damage(float damage)
