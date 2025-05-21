@@ -117,9 +117,12 @@ public partial class SaveManager : Node
 
 		foreach (var skill in skillTree.Skills)
 		{
-			PackedScene skillScene = GD.Load<PackedScene>(skill.ScenePath);
-			ISkill skillNode = skillScene.Instantiate<TestSkill>();
-			skillNode.Apply(character);
+			if (skill.IsUnlocked == true)
+			{
+				PackedScene skillScene = GD.Load<PackedScene>(skill.ScenePath);
+				ISkill skillNode = skillScene.Instantiate<ISkill>();
+				skillNode.Apply(character);
+			}
 		}
 	}
 
