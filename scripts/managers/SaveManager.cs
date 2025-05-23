@@ -113,18 +113,7 @@ public partial class SaveManager : Node
 	public void ApplySkillTrees(BaseCharacter character, CharacterData characterData)
 	{
 		SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == characterData.Id);
-		if (skillTree == null) return;
-		if (skillTree.Skills == null) return;
-
-		foreach (var skill in skillTree.Skills)
-		{
-			if (skill.IsUnlocked == true)
-			{
-				PackedScene skillScene = GD.Load<PackedScene>(skill.ScenePath);
-				ISkill skillNode = skillScene.Instantiate<ISkill>();
-				skillNode.Apply(character);
-			}
-		}
+		character.CreateAndApplySkillTree(skillTree);   
 	}
 
 	public CharacterData GetCharacterById(string characterId)

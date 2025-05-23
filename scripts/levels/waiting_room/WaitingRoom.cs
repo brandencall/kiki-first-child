@@ -2,7 +2,6 @@ using Godot;
 
 /*
  *  Load All Charaters (some will be locked in the future)
- *  Load all weapons for that charater (some will be locked in the future)
  *  Load Skill tree for the charater
  *  Load all Levels (some will be locked in the future)
  */
