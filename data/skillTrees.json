@@ -22,7 +22,7 @@
                 "Name": "Backwards Noodle Attack",
                 "Description": "Whip the enemies in front and behind you",
                 "IconPath": "Test",
-                "ScenePath": "res://scenes/characters/skills/backwards_noodle_skills.tscn",
+                "ScenePath": "res://scenes/characters/skills/backwards_noodle_skill.tscn",
                 "Cost": 1,
                 "Prerequisites": [],
                 "IsUnlocked": true
