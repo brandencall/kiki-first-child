@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 SaveManager="*res://scenes/managers/save_manager.tscn"
 SceneManager="*res://scenes/managers/scene_manager.tscn"
+GameManager="*res://scenes/managers/game_manager.tscn"
 
 [display]
 
