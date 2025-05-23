@@ -1,17 +1,17 @@
 using Godot;
-using System.Diagnostics;
 using System.Text.Json;
 using System.Collections.Generic;
 
 public partial class SaveManager : Node
 {
-	public CharacterData CurrentCharacter { get; set; }
 	public const string SavePath = "user://savegame.json";
 	public const string CharacterDataPath = "res://data/characters.json";
 	public const string SkillTreeDataPath = "res://data/skillTrees.json";
 	private GameState _gameState = new();
 	private List<CharacterData> _characterList;
 	private List<SkillTreeData> _skillTreeData;
+
+	private GameManager GameManager => GetNode<GameManager>("/root/GameManager");
 
 	public override void _Ready()
 	{
@@ -22,6 +22,7 @@ public partial class SaveManager : Node
 		_characterList = JsonSerializer.Deserialize<List<CharacterData>>(jsonCharacterText);
 		_skillTreeData = JsonSerializer.Deserialize<List<SkillTreeData>>(jsonSkillTreeText);
 		LoadGame();
+		GameManager.Initialize();
 	}
 
 	public override void _Notification(int what)
@@ -44,14 +45,8 @@ public partial class SaveManager : Node
 				string jsonString = file.GetAsText();
 				_gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
 				EnsureAllCharactersExist();
-				if (_gameState.LastUsedCharacter == null)
-				{
-					CurrentCharacter = _characterList[0];
-				}
-				else
-				{
-					CurrentCharacter = _gameState.LastUsedCharacter;
-				}
+				AssignSkillTrees();
+				PopulateGameManager();
 				GD.Print("Game loaded suxxessfully");
 			}
 			else
@@ -65,22 +60,6 @@ public partial class SaveManager : Node
 		{
 			InitializeNewGame();
 			GD.Print("Failed to load game: " + e.Message);
-		}
-	}
-
-	public void SaveGame()
-	{
-		try
-		{
-			_gameState.LastUsedCharacter = CurrentCharacter;
-			string jsonString = JsonSerializer.Serialize(_gameState, new JsonSerializerOptions { WriteIndented = true });
-			using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
-			file.StoreString(jsonString);
-			GD.Print("Game saved successfully.");
-		}
-		catch (System.Exception e)
-		{
-			GD.PrintErr($"Failed to save game: {e.Message}");
 		}
 	}
 
@@ -101,19 +80,42 @@ public partial class SaveManager : Node
 		}
 	}
 
+	private void AssignSkillTrees()
+	{
+		foreach (CharacterData character in _characterList)
+		{
+			SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == character.Id);
+		}
+	}
+
+	private void PopulateGameManager()
+	{
+		GameManager.CharacterDataList = _characterList;
+		GameManager.GameStateData = _gameState;
+	}
+
+	public void SaveGame()
+	{
+		try
+		{
+			_gameState.LastUsedCharacter = GameManager.CurrentCharacter.CharacterData;
+			string jsonString = JsonSerializer.Serialize(_gameState, new JsonSerializerOptions { WriteIndented = true });
+			using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
+			file.StoreString(jsonString);
+			GD.Print("Game saved successfully.");
+		}
+		catch (System.Exception e)
+		{
+			GD.PrintErr($"Failed to save game: {e.Message}");
+		}
+	}
+
 	public void InitializeNewGame()
 	{
 		_gameState.Characters = _characterList;
 		_gameState.SkillTrees = _skillTreeData;
-		CurrentCharacter = _characterList[0];
-		Debug.Assert(CurrentCharacter != null, "The current character should not be null here");
-		Debug.Assert(CurrentCharacter.IsUnlocked == true, "The CurrentCharacter should be unlocked");
-	}
-
-	public void ApplySkillTrees(BaseCharacter character, CharacterData characterData)
-	{
-		SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == characterData.Id);
-		character.CreateAndApplySkillTree(skillTree);   
+		AssignSkillTrees();
+		PopulateGameManager();
 	}
 
 	public CharacterData GetCharacterById(string characterId)

@@ -19,17 +19,13 @@ public partial class WaitingRoom : Node2D
 	public BaseCharacter currentCharacter;
 
 	private bool _showCharacterSelection = true;
-	private SaveManager SaveManager => GetNode<SaveManager>("/root/SaveManager");
 	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
+	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
 
 	public override void _Ready()
 	{
-		CharacterData character = SaveManager.CurrentCharacter;
-		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
-		var characterInstance = characterScene.Instantiate<BaseCharacter>();
-		currentCharacter = characterInstance;
-		AddChild(characterInstance);
-		SaveManager.ApplySkillTrees(currentCharacter, character);
+		currentCharacter = GameManager.CurrentCharacter;
+		AddChild(currentCharacter);
 
 		CharacterSelectArea.CharacterAreaEntered += OnCharacterSelectAreaEntered;
 		CharacterSelectArea.CharacterAreaExited += OnCharacterSelectAreaExited;
@@ -58,9 +54,9 @@ public partial class WaitingRoom : Node2D
 		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
 		currentCharacter = characterScene.Instantiate<BaseCharacter>();
 		currentCharacter.GlobalPosition = position;
+		currentCharacter.Initialize(character);
 		AddChild(currentCharacter);
-		SaveManager.CurrentCharacter = character;
-		SaveManager.ApplySkillTrees(currentCharacter, character);
+		GameManager.CurrentCharacter = currentCharacter;
 		_showCharacterSelection = false;
 	}
 

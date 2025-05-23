@@ -11,6 +11,7 @@ public partial class BaseCharacter : CharacterBody2D
 	public HealthComponent HealthComponent { get; set; }
 
 	public SkillTree SkillTree { get; set; }
+	public CharacterData CharacterData { get; private set; }
 
 	[Export]
 	private float _baseAttackCooldown = 1.5f;
@@ -43,9 +44,15 @@ public partial class BaseCharacter : CharacterBody2D
 		GodotUtilities.RegisterCharacter(this);
 	}
 
-	public void CreateAndApplySkillTree(SkillTreeData skillTreeData)
+	public void Initialize(CharacterData characterData)
 	{
-		SkillTree = new SkillTree(skillTreeData, this);
+		CharacterData = characterData;
+		CreateAndApplySkillTree();
+	}
+
+	public void CreateAndApplySkillTree()
+	{
+		SkillTree = new SkillTree(CharacterData.SkillTree, this);
 	}
 
 	public virtual void OnBaseAttackTimerTimeout()

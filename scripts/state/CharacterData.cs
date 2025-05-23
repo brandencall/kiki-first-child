@@ -7,4 +7,6 @@ public class CharacterData
     public bool IsUnlocked { get; set; }
     public string Scene { get; set; }
     public string IconPath { get; set; }
+    [NonSerialized]
+    public SkillTreeData SkillTree;
 }
