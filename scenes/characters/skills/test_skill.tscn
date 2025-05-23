@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://clmeg2ybeotmw"]
+[gd_scene load_steps=2 format=3 uid="uid://cwxg6tevrsy8h"]
 
-[ext_resource type="Script" uid="uid://c1ncrhg6yj7u5" path="res://scripts/characters/skills/TestSkill.cs" id="1_84esm"]
+[sub_resource type="CSharpScript" id="CSharpScript_vx2lv"]
+script/source = "using Godot;
+using System;
+
+public partial class TestSkill : Node, ISkill
+{
+	public void Apply(BaseCharacter character)
+	{
+		GD.Print(\"Health: \" + character.HealthComponent.MaxHealth);
+		character.HealthComponent.SetMaxHealth(200);
+		GD.Print(\"Health after skill applied: \" + character.HealthComponent.MaxHealth);
+	}
+}
+"
 
 [node name="TestSkill" type="Node"]
-script = ExtResource("1_84esm")
+script = SubResource("CSharpScript_vx2lv")
