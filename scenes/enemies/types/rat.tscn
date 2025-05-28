@@ -1,0 +1,87 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbx0m63uspnc4"]
+
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_exbx4"]
+[ext_resource type="Texture2D" uid="uid://bv0vb3c5xy1ly" path="res://assets/enemies/rat.png" id="2_2tddw"]
+[ext_resource type="Script" uid="uid://d1qruxhemux1x" path="res://scripts/enemies/types/Rat.cs" id="2_unsun"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_unsun"]
+[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_vll8n"]
+[ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_h2e3b"]
+[ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_jqcia"]
+[ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_tfqfa"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_g4jj5"]
+[ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="9_sw88c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5esbu"]
+atlas = ExtResource("2_2tddw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ulvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5esbu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsgw"]
+size = Vector2(51, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
+radius = 38.0132
+
+[node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_exbx4")]
+script = ExtResource("2_unsun")
+_velocityComponent = NodePath("VelocityComponent")
+_pathfindComponent = NodePath("PathfindComponent")
+_healthComponent = NodePath("HealthComponent")
+_itemDropper = NodePath("ItemDropper")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_3ulvb")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_qmsgw")
+
+[node name="HealthComponent" parent="." index="3" instance=ExtResource("3_unsun")]
+MaxHealth = 10.0
+
+[node name="HurtboxComponent" parent="." index="4" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_qmsgw")
+
+[node name="VelocityComponent" parent="." index="5" instance=ExtResource("5_h2e3b")]
+MaxSpeed = 150.0
+_accelerationCoefficient = 10.0
+
+[node name="PathfindComponent" parent="." index="6" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_jqcia")]
+_velocityComponent = NodePath("../VelocityComponent")
+_avoidance = NodePath("../CollisionAvoidance")
+
+[node name="EnemyHitbox" parent="." index="7" instance=ExtResource("7_tfqfa")]
+Damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_qmsgw")
+
+[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_g4jj5")]
+offset_left = -30.0
+offset_top = 12.0
+offset_right = 29.0
+offset_bottom = 16.0
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionAvoidance" parent="." index="9" instance=ExtResource("9_sw88c")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_k4655")
