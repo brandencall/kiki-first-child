@@ -29,4 +29,9 @@ public partial class GameManager : Node
 			CurrentCharacter.Initialize(currentCharacterData);
 		}
 	}
+
+	public void CharacterDied(BaseCharacter character)
+	{
+		character.Reset();
+	}
 }

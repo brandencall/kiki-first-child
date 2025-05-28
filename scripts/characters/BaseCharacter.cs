@@ -115,4 +115,9 @@ public partial class BaseCharacter : CharacterBody2D
 			item.QueueFree();
 		}
 	}
+
+	public void Reset()
+	{
+		HealthComponent.ResetHealth();
+	}
 }

@@ -17,6 +17,7 @@ public partial class GameWorld : Node2D
 	public BaseCharacter Character { get; set; }
 
 	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
+	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
 	private List<IAbility> _currentIAbilities = new();
 	private Node2D _currentLevel;
 
@@ -24,7 +25,7 @@ public partial class GameWorld : Node2D
 	{
 		PackedScene currentScene = ResourceLoader.Load<PackedScene>(SceneManager.CurrentLevel.Scene);
 		_currentLevel = (Node2D)currentScene.Instantiate();
-		Character = this.GetCharacter();
+		Character = GameManager.CurrentCharacter;
 		AddChild(_currentLevel);
 		AddChild(Character);
 
@@ -69,6 +70,8 @@ public partial class GameWorld : Node2D
 
 	private void HandleCharacterDeath()
 	{
+		CallDeferred("remove_child", Character);
+		GameManager.CharacterDied(Character);
 		SceneManager.ChangeSceneToWaitingRoom();
 		SceneManager.CurrentLevel = null;
 	}

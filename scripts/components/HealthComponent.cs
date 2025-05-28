@@ -66,4 +66,9 @@ public partial class HealthComponent : Node2D
     {
         CurrentHealth -= damage;
     }
+
+    public void ResetHealth()
+    {
+        CurrentHealth = MaxHealth;
+    }
 }
