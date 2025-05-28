@@ -32,6 +32,9 @@ public partial class GameManager : Node
 
 	public void CharacterDied(BaseCharacter character)
 	{
-		character.Reset();
+		CharacterData currentCharacterData = GameStateData.LastUsedCharacter;
+		PackedScene characterScene = GD.Load<PackedScene>(currentCharacterData.Scene);
+		CurrentCharacter = characterScene.Instantiate<BaseCharacter>();
+		CurrentCharacter.Initialize(currentCharacterData);
 	}
 }
