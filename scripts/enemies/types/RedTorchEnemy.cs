@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class RedTorchEnemy : BaseEnemy 
+public partial class RedTorchEnemy : BaseEnemy
 {
     [Export]
     private VelocityComponent _velocityComponent;
