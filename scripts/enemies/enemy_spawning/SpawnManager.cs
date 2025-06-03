@@ -14,6 +14,8 @@ public partial class SpawnManager : Node
 	private Random _random = new Random();
 	private float _timeBetweenWaves = 2.0f;
 
+	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
+
 	public override void _Ready()
 	{
 		var jsonFile = FileAccess.Open(_enemyConfigString, FileAccess.ModeFlags.Read);
@@ -30,6 +32,8 @@ public partial class SpawnManager : Node
 		{
 			await StartWave(wave);
 			await ToSignal(GetTree().CreateTimer(_timeBetweenWaves, true), "timeout");
+			GameManager.GameStateData.Schmeckels += wave.CurrencyEarned;
+			GD.Print(GameManager.GameStateData.Schmeckels);
 		}
 	}
 

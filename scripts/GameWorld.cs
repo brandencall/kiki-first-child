@@ -75,4 +75,5 @@ public partial class GameWorld : Node2D
 		SceneManager.ChangeSceneToWaitingRoom();
 		SceneManager.CurrentLevel = null;
 	}
+
 }

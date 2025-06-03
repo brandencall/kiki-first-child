@@ -8,7 +8,8 @@
 		"scene": "res://scenes/enemies/types/rat.tscn",
 		"probability": 1.0
 	  }
-	]
+	],
+    "currency_earned": 10,
   },
   {
 	"wave": 2,
@@ -27,6 +28,7 @@
 		"scene": "res://scenes/enemies/types/purple_torch_enemy.tscn",
 		"probability": 0.2
 	  }
-	]
+	],
+    "currency_earned": 20,
   }
 ]
