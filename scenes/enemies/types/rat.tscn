@@ -81,6 +81,8 @@ offset_bottom = 16.0
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionAvoidance" parent="." index="9" instance=ExtResource("9_sw88c")]
+RepulsionWeight = 0.2
+FlowFieldWeight = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance" index="0"]
 visible = false

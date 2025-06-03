@@ -5,7 +5,7 @@
 	"total_enemies": 20,
 	"enemies": [
 	  {
-		"scene": "res://scenes/enemies/types/rat.tscn",
+		"scene": "res://scenes/enemies/types/tk.tscn",
 		"probability": 1.0
 	  }
 	],
