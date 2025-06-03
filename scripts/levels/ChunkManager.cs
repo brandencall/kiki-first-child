@@ -31,7 +31,7 @@ public partial class ChunkManager : Node2D
         _currentGridCell = TileMap.LocalToMap(Character.GlobalPosition);
         _activeChunks.Add(_currentChunk);
         FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
-        LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
+        //LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
         TileMap.Generate(_currentChunk, chunkSize);
         RenderChunk();
     }
@@ -45,7 +45,7 @@ public partial class ChunkManager : Node2D
         if (_currentGridCell != _previousGridCell)
         {
             FlowField.GenerateHighResField(_currentChunk, Character.GlobalPosition);
-            HighResDebugger.SetFlowVectors(FlowField.DetailedFlowFields);
+            //HighResDebugger.SetFlowVectors(FlowField.DetailedFlowFields);
             _previousGridCell = _currentGridCell;
         }
         UpdateLowResFlowField();
@@ -64,7 +64,7 @@ public partial class ChunkManager : Node2D
         //            FlowField.UpdateLowResField(Character.GlobalPosition);
         //            //LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
         //        }
-        LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
+        //LowResDebugger.SetFlowVectors(FlowField.ChunkDirectionMap);
     }
 
     public Vector2I GetCurrentChunk(Vector2 position)
