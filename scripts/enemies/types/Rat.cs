@@ -17,6 +17,7 @@ public partial class Rat : BaseEnemy
 
 	public override void _PhysicsProcess(double delta)
 	{
+		base._PhysicsProcess(delta);
 		_pathfindComponent.FollowPath(GlobalPosition);
 		_velocityComponent.Move(this);
 	}

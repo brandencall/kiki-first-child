@@ -11,15 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_g4jj5"]
 [ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="9_sw88c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5esbu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tddw"]
 atlas = ExtResource("2_2tddw")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3ulvb"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_unsun"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5esbu")
+"texture": SubResource("AtlasTexture_2tddw")
 }],
 "loop": true,
 "name": &"default",
@@ -32,55 +32,54 @@ size = Vector2(51, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
 radius = 38.0132
 
-[node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_exbx4")]
+[node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_exbx4")]
 script = ExtResource("2_unsun")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
-_itemDropper = NodePath("ItemDropper")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+[node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_3ulvb")
+sprite_frames = SubResource("SpriteFrames_unsun")
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthComponent" parent="." index="3" instance=ExtResource("3_unsun")]
+[node name="HealthComponent" parent="." index="2" instance=ExtResource("3_unsun")]
 MaxHealth = 10.0
 
-[node name="HurtboxComponent" parent="." index="4" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="VelocityComponent" parent="." index="5" instance=ExtResource("5_h2e3b")]
+[node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_h2e3b")]
 MaxSpeed = 150.0
 _accelerationCoefficient = 10.0
 
-[node name="PathfindComponent" parent="." index="6" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_jqcia")]
+[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_jqcia")]
 _velocityComponent = NodePath("../VelocityComponent")
 _avoidance = NodePath("../CollisionAvoidance")
 
-[node name="EnemyHitbox" parent="." index="7" instance=ExtResource("7_tfqfa")]
+[node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_tfqfa")]
 Damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_g4jj5")]
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_g4jj5")]
 offset_left = -30.0
 offset_top = 12.0
 offset_right = 29.0
 offset_bottom = 16.0
 _healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionAvoidance" parent="." index="9" instance=ExtResource("9_sw88c")]
+[node name="CollisionAvoidance" parent="." index="8" instance=ExtResource("9_sw88c")]
 RepulsionWeight = 0.2
 FlowFieldWeight = 0.8
 

@@ -5,7 +5,7 @@
 	"total_enemies": 20,
 	"enemies": [
 	  {
-		"scene": "res://scenes/enemies/types/tk.tscn",
+		"scene": "res://scenes/enemies/types/rat.tscn",
 		"probability": 1.0
 	  }
 	],
@@ -17,16 +17,12 @@
 	"total_enemies": 20,
 	"enemies": [
 	  {
-		"scene": "res://scenes/enemies/types/tnt_enemy.tscn",
-		"probability": 0.5
+		"scene": "res://scenes/enemies/types/rat.tscn",
+		"probability": 0.7
 	  },
 	  {
-		"scene": "res://scenes/enemies/types/red_torch_enemy.tscn",
+		"scene": "res://scenes/enemies/types/tk.tscn",
 		"probability": 0.3
-	  },
-	  {
-		"scene": "res://scenes/enemies/types/purple_torch_enemy.tscn",
-		"probability": 0.2
 	  }
 	],
     "currency_earned": 20,

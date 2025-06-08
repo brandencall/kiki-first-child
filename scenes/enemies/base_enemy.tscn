@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://c6ffktfl81gy8" path="res://scripts/enemies/BaseEnemy.cs" id="1_r5xb8"]
 [ext_resource type="PackedScene" uid="uid://cn17c3n307c3f" path="res://scenes/components/item_dropper.tscn" id="2_qf3h2"]
 
-[node name="BaseEnemy" type="CharacterBody2D"]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations")]
 script = ExtResource("1_r5xb8")
+_itemDropper = NodePath("ItemDropper")
+Animations = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="ItemDropper" parent="." instance=ExtResource("2_qf3h2")]

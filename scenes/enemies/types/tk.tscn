@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://m6dgyomjj6bu"]
+[gd_scene load_steps=15 format=3 uid="uid://m6dgyomjj6bu"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_axxgj"]
 [ext_resource type="Texture2D" uid="uid://v30ged8cbtf0" path="res://assets/enemies/TK-Sheet.png" id="2_qmaus"]
@@ -11,15 +11,27 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_iw1ws"]
 [ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="9_lc218"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vf7vn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmaus"]
+atlas = ExtResource("2_qmaus")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq7ay"]
 atlas = ExtResource("2_qmaus")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_n1mmg"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbbhd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vf7vn")
+"texture": SubResource("AtlasTexture_qmaus")
+}],
+"loop": true,
+"name": &"agro",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq7ay")
 }],
 "loop": true,
 "name": &"default",
@@ -29,26 +41,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnmfw"]
 size = Vector2(15.5, 24.25)
 
-[node name="TK" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_itemDropper") instance=ExtResource("1_axxgj")]
+[node name="TK" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_animations") instance=ExtResource("1_axxgj")]
 scale = Vector2(2, 2)
 script = ExtResource("2_uq7ay")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
-_itemDropper = NodePath("ItemDropper")
+_animations = NodePath("AnimatedSprite2D")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_n1mmg")
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_cbbhd")
+autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_gnmfw")
 
-[node name="HealthComponent" parent="." index="3" instance=ExtResource("3_uq7ay")]
+[node name="HealthComponent" parent="." index="2" instance=ExtResource("3_uq7ay")]
 MaxHealth = 15.0
 
-[node name="HurtboxComponent" parent="." index="4" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_cbbhd")]
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_cbbhd")]
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
@@ -56,14 +69,14 @@ visible = false
 position = Vector2(-0.25, -1)
 shape = SubResource("RectangleShape2D_gnmfw")
 
-[node name="VelocityComponent" parent="." index="5" instance=ExtResource("5_dyiwa")]
+[node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_dyiwa")]
 _accelerationCoefficient = 10.0
 
-[node name="PathfindComponent" parent="." index="6" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_pfmaa")]
+[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_pfmaa")]
 _velocityComponent = NodePath("../VelocityComponent")
 _avoidance = NodePath("../CollisionAvoidance")
 
-[node name="EnemyHitbox" parent="." index="7" instance=ExtResource("7_tvtqx")]
+[node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_tvtqx")]
 Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
@@ -71,14 +84,14 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_gnmfw")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_iw1ws")]
+[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_iw1ws")]
 offset_left = -18.0
 offset_top = 15.0
 offset_right = 20.0
 offset_bottom = 18.0
 _healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionAvoidance" parent="." index="9" instance=ExtResource("9_lc218")]
+[node name="CollisionAvoidance" parent="." index="8" instance=ExtResource("9_lc218")]
 RepulsionWeight = 0.2
 FlowFieldWeight = 0.8
 
