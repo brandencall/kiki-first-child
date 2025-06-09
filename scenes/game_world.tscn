@@ -6,10 +6,11 @@
 [ext_resource type="Script" uid="uid://ced4ybvxth8h6" path="res://scripts/managers/ExperienceManager.cs" id="5_wbbl4"]
 [ext_resource type="Script" uid="uid://cafredyqsie72" path="res://scripts/managers/AbilityManager.cs" id="7_bhwwd"]
 
-[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "AbilityUi", "ExperienceManager", "AbilityManager")]
+[node name="GameWorld" type="Node2D" node_paths=PackedStringArray("Hud", "AbilityUi", "Level", "ExperienceManager", "AbilityManager")]
 script = ExtResource("1_j6q4g")
 Hud = NodePath("CanvasLayer/HUD")
 AbilityUi = NodePath("CanvasLayer/AbilityUI")
+Level = NodePath(".")
 ExperienceManager = NodePath("ExperienceManager")
 AbilityManager = NodePath("AbilityManager")
 

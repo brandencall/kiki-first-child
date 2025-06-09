@@ -5,7 +5,6 @@
 
 [node name="SpawnManager" type="Node" node_paths=PackedStringArray("_enemySpawner")]
 script = ExtResource("1_oo7ng")
-_enemyConfigString = "res://data/waves.json"
 _enemySpawner = NodePath("enemySpawner")
 
 [node name="enemySpawner" parent="." instance=ExtResource("2_h4oht")]

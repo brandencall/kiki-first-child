@@ -7,22 +7,20 @@ using System.Threading.Tasks;
 public partial class SpawnManager : Node
 {
 	[Export]
-	private string _enemyConfigString;
-	[Export]
 	private EnemySpawner _enemySpawner;
+	public event Action<WaveInfo> WaveFinished;
 
 	private Random _random = new Random();
 	private float _timeBetweenWaves = 2.0f;
 
-	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
-
-	public override void _Ready()
+	public void Initialize(string waveConfig)
 	{
-		var jsonFile = FileAccess.Open(_enemyConfigString, FileAccess.ModeFlags.Read);
+		var jsonFile = FileAccess.Open(waveConfig, FileAccess.ModeFlags.Read);
 		string jsonText = jsonFile.GetAsText();
 		List<WaveInfo> waves = JsonConvert.DeserializeObject<List<WaveInfo>>(jsonText);
 
 		Start(waves);
+
 	}
 
 	private async void Start(List<WaveInfo> waves)
@@ -32,8 +30,7 @@ public partial class SpawnManager : Node
 		{
 			await StartWave(wave);
 			await ToSignal(GetTree().CreateTimer(_timeBetweenWaves, true), "timeout");
-			GameManager.GameStateData.Schmeckels += wave.CurrencyEarned;
-			GD.Print(GameManager.GameStateData.Schmeckels);
+			WaveFinished?.Invoke(wave);
 		}
 	}
 
