@@ -16,7 +16,6 @@ public partial class WaitingRoom : Node2D
 	
 	[Signal]
 	public delegate void LevelSelectedEventHandler();
-	public BaseCharacter currentCharacter;
 
 	private bool _showCharacterSelection = true;
 	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
@@ -24,8 +23,7 @@ public partial class WaitingRoom : Node2D
 
 	public override void _Ready()
 	{
-		currentCharacter = GameManager.CurrentCharacter;
-		AddChild(currentCharacter);
+		AddChild(GameManager.CurrentCharacter);
 
 		CharacterSelectArea.CharacterAreaEntered += OnCharacterSelectAreaEntered;
 		CharacterSelectArea.CharacterAreaExited += OnCharacterSelectAreaExited;
@@ -49,14 +47,13 @@ public partial class WaitingRoom : Node2D
 
 	private void OnCharacterSelected(CharacterData character)
 	{
-		Vector2 position = currentCharacter.GlobalPosition;
-		RemoveChild(currentCharacter);
+		Vector2 position = GameManager.CurrentCharacter.GlobalPosition;
+		RemoveChild(GameManager.CurrentCharacter);
 		PackedScene characterScene = GD.Load<PackedScene>(character.Scene);
-		currentCharacter = characterScene.Instantiate<BaseCharacter>();
-		currentCharacter.GlobalPosition = position;
-		currentCharacter.Initialize(character);
-		AddChild(currentCharacter);
-		GameManager.CurrentCharacter = currentCharacter;
+		GameManager.CurrentCharacter = characterScene.Instantiate<BaseCharacter>();
+		GameManager.CurrentCharacter.GlobalPosition = position;
+		GameManager.CurrentCharacter.Initialize(character);
+		AddChild(GameManager.CurrentCharacter);
 		_showCharacterSelection = false;
 	}
 
@@ -65,7 +62,7 @@ public partial class WaitingRoom : Node2D
 	// path to the wave data and any other information related to the level.
 	private void OnLevelAreaEntered()
 	{
-		RemoveChild(currentCharacter);
+		RemoveChild(GameManager.CurrentCharacter);
 		SceneManager.ChangeScene("res://scenes/game_world.tscn");
 		// Hard coding current level. This will change when we have the player choose a level.
 		LevelData levelData = new()
