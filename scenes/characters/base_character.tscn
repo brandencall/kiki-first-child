@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuyvun3yd2fmw"]
+[gd_scene load_steps=8 format=3 uid="uid://cuyvun3yd2fmw"]
 
 [ext_resource type="Script" uid="uid://dknsnugxkekln" path="res://scripts/characters/BaseCharacter.cs" id="1_rtfjh"]
+[ext_resource type="PackedScene" uid="uid://dcnl2nlvve3kp" path="res://scenes/ui/currency.tscn" id="2_kwcgt"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="2_rtfjh"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="3_u1830"]
 [ext_resource type="PackedScene" uid="uid://boypsm2a2wu72" path="res://scenes/characters/character_hurtbox.tscn" id="4_3r7lq"]
@@ -13,6 +14,10 @@ script = ExtResource("1_rtfjh")
 Animations = NodePath("AnimatedSprite2D")
 VelocityComponent = NodePath("VelocityComponent")
 HealthComponent = NodePath("HealthComponent")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Currency" parent="CanvasLayer" instance=ExtResource("2_kwcgt")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 

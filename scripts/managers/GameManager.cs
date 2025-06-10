@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -8,6 +9,8 @@ public partial class GameManager : Node
 	public List<CharacterData> CharacterDataList { get; set; }
 	public string CurrentScene { get; set; }
 	public GameState GameStateData { get; set; }
+
+	public event Action<int> CurrencyChanged;
 
 	public void Initialize()
 	{
@@ -36,5 +39,11 @@ public partial class GameManager : Node
 		PackedScene characterScene = GD.Load<PackedScene>(currentCharacterData.Scene);
 		CurrentCharacter = characterScene.Instantiate<BaseCharacter>();
 		CurrentCharacter.Initialize(currentCharacterData);
+	}
+
+	public void DepositCurrenct(int currencyToDeposit)
+	{
+		GameStateData.Schmeckels += currencyToDeposit;
+		CurrencyChanged?.Invoke(GameStateData.Schmeckels);
 	}
 }

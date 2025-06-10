@@ -18,8 +18,7 @@ public partial class OpenWorldTest : Node2D
 
 	private void OnWaveFinished(WaveInfo wave)
 	{
-		GameManager.GameStateData.Schmeckels += wave.CurrencyEarned;
-		GD.Print(GameManager.GameStateData.Schmeckels);
+		GameManager.DepositCurrenct(wave.CurrencyEarned);
 	}
 
 }

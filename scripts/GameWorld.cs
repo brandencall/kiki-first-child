@@ -8,8 +8,6 @@ public partial class GameWorld : Node2D
 	[Export]
 	public AbilityUi AbilityUi { get; set; }
 	[Export]
-	public Node2D Level { get; set; }
-	[Export]
 	public ExperienceManager ExperienceManager { get; set; }
 	[Export]
 	public AbilityManager AbilityManager { get; set; }
