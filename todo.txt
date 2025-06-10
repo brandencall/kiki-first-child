@@ -1,0 +1,10 @@
+TODO:
+ - Create currency system.
+    - Display current currency on player camera
+ - Fix player loading when player dies
+ - Display stats of round after player dies
+ - Lock and unlock system for new characters
+ - Skill tree system
+    - Display for skill trees
+    - unlock system for still trees
+
