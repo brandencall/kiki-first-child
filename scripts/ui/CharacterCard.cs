@@ -7,14 +7,23 @@ public partial class CharacterCard : Control
 	public TextureButton CharacterButton { get; set; }
 	[Export]
 	public Label CharacterName { get; set; }
+	[Export]
+	public Button BuyButton { get; set; }
 
 	public event Action<CharacterData> CharacterSelected;
 
 	private CharacterData _character;
+	private GameManager GameManager => GetNode<GameManager>("/root/GameManager");
 
 	public override void _Ready()
 	{
 		CharacterButton.Pressed += OnCharacterSelected;
+		BuyButton.Pressed += OnBuyButtonPressed;
+	}
+
+	public void UpdateCardInfo(CharacterData characterData)
+	{
+		SetCharacter(characterData);
 	}
 
 	private void OnCharacterSelected()
@@ -22,10 +31,27 @@ public partial class CharacterCard : Control
 		CharacterSelected?.Invoke(_character);
 	}
 
+	private void OnBuyButtonPressed()
+	{
+		if (_character.Cost < GameManager.CurrencyBalance())
+		{
+			GameManager.WithdrawCurrency(_character.Cost);
+			_character.IsUnlocked = true;
+			OnCharacterSelected();
+		}
+	}
+
 	public void SetCharacter(CharacterData character)
 	{
 		_character = character;
 		CharacterName.Text = character.Id;
+		if (character.IsUnlocked == false)
+		{
+			BuyButton.Text = "Buy $" + character.Cost;
+		} else 
+		{
+			BuyButton.Visible = false;
+		}
 		SetupCharacterButton();
 	}
 
@@ -36,8 +62,6 @@ public partial class CharacterCard : Control
 		CharacterButton.TextureClickMask = CreateClickMask(spriteTexture);
 		CharacterButton.Modulate = _character.IsUnlocked ? Colors.White : Colors.Gray;
 		CharacterButton.Disabled = !_character.IsUnlocked;
-		// Scale the button once we get more of our custom characters in.
-		CharacterButton.Scale = new Vector2(3.0f, 3.0f);
 	}
 
 	private Bitmap CreateClickMask(Texture2D spriteTexture)

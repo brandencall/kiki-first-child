@@ -3,18 +3,21 @@
         "Id" : "Tonts",
         "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/tonts.tscn",
-        "IconPath" : "res://assets/characters/tonts/Tonts_icon.png"
+        "IconPath" : "res://assets/characters/tonts/Tonts_icon.png",
+        "Cost" : 0
     },
     {
         "Id" : "Hodge",
-        "IsUnlocked" : true,
+        "IsUnlocked" : false,
         "Scene" : "res://scenes/characters/hodge.tscn",
-        "IconPath" : "res://assets/characters/hodge/Hodge_icon.png"
+        "IconPath" : "res://assets/characters/hodge/Hodge_icon.png",
+        "Cost" : 10
     },
     {
         "Id" : "Chavz",
-        "IsUnlocked" : true,
+        "IsUnlocked" : false,
         "Scene" : "res://scenes/characters/chavz.tscn",
-        "IconPath" : "res://assets/characters/chavz/Chavz_icon.png"
+        "IconPath" : "res://assets/characters/chavz/Chavz_icon.png",
+        "Cost" : 20
     }
 ]

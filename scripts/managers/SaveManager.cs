@@ -74,7 +74,8 @@ public partial class SaveManager : Node
 					Id = character.Id,
 					IsUnlocked = character.IsUnlocked,
 					Scene = character.Scene,
-					IconPath = character.IconPath
+					IconPath = character.IconPath,
+					Cost = character.Cost
 				});
 			}
 		}

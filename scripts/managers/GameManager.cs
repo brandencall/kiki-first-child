@@ -46,4 +46,15 @@ public partial class GameManager : Node
 		GameStateData.Schmeckels += currencyToDeposit;
 		CurrencyChanged?.Invoke(GameStateData.Schmeckels);
 	}
+
+	public int CurrencyBalance()
+	{
+		return GameStateData.Schmeckels;
+	}
+
+	public void WithdrawCurrency(int currencyToWithdraw)
+	{
+		GameStateData.Schmeckels -= currencyToWithdraw;
+		CurrencyChanged?.Invoke(GameStateData.Schmeckels);
+	}
 }
