@@ -18,6 +18,12 @@ HealthComponent = NodePath("HealthComponent")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Currency" parent="CanvasLayer" instance=ExtResource("2_kwcgt")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+mouse_filter = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
