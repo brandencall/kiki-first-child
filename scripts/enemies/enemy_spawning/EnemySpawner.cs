@@ -24,13 +24,14 @@ public partial class EnemySpawner : Node
 		}
 	}   
 
-	public void SpawnEnemy(PackedScene enemyScene)
+	public BaseEnemy SpawnEnemy(PackedScene enemyScene)
 	{
-		if (enemyScene == null) return;
+		if (enemyScene == null) return null;
 
-		CharacterBody2D enemy = enemyScene.Instantiate<CharacterBody2D>();
+		BaseEnemy enemy = enemyScene.Instantiate<BaseEnemy>();
 		enemy.Position = SpawnLocation();
 		GetParent().AddChild(enemy);
+		return enemy;
 	}
 
 	private Vector2 SpawnLocation()

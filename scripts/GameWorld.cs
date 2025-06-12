@@ -17,22 +17,23 @@ public partial class GameWorld : Node2D
 	private SceneManager SceneManager => GetNode<SceneManager>("/root/SceneManager"); 
 	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
 	private List<IAbility> _currentIAbilities = new();
-	private Node2D _currentLevel;
+	//Need to change this to a BaseLevel class to handle multiple levels
+	private OpenWorldTest _level;
 
 	public override void _Ready()
 	{
 		PackedScene currentScene = ResourceLoader.Load<PackedScene>(SceneManager.CurrentLevel.Scene);
-		_currentLevel = (Node2D)currentScene.Instantiate();
+		_level = (OpenWorldTest)currentScene.Instantiate();
 		Character = GameManager.CurrentCharacter;
-		AddChild(_currentLevel);
+		AddChild(_level);
 		AddChild(Character);
 
 		Hud.SetCurrentExperienceLevel(ExperienceManager.CurrentExperienceLevel);
 
 		Character.ExperiencePickedup += HandleExperienceChange;
-		Character.OnCharacterDied += HandleCharacterDeath;
 		ExperienceManager.LevelIncrease += HandleExperienceLevelIncrease;
 		AbilityUi.AbilitySelected += HandleAbilitySelection;
+		_level.OnLevelFinished += HandleLevelFinished;
 	}
 
 	private void HandleExperienceChange(float experience)
@@ -66,7 +67,7 @@ public partial class GameWorld : Node2D
 		AbilityUi.ClearAbilities();
 	}
 
-	private void HandleCharacterDeath()
+	private void HandleLevelFinished()
 	{
 		CallDeferred("remove_child", Character);
 		GameManager.CharacterDied(Character);

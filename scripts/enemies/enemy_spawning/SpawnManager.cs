@@ -10,6 +10,8 @@ public partial class SpawnManager : Node
 	private EnemySpawner _enemySpawner;
 	public event Action<WaveInfo> WaveFinished;
 
+	public event Action<BaseEnemy> EnemySpawned;
+
 	private Random _random = new Random();
 	private float _timeBetweenWaves = 2.0f;
 
@@ -44,7 +46,8 @@ public partial class SpawnManager : Node
 			await WaitUntilUnpaused();
 			EnemyConfig enemy = GetRandomEnemy(wave.Enemies);
 			PackedScene enemyScene = GD.Load<PackedScene>(enemy.Scene);
-			_enemySpawner.SpawnEnemy(enemyScene);
+			BaseEnemy spawnedEnemy = _enemySpawner.SpawnEnemy(enemyScene);
+			EnemySpawned?.Invoke(spawnedEnemy);
 			await ToSignal(GetTree().CreateTimer(wave.SpawnInterval, true), "timeout");
 		}
 	}

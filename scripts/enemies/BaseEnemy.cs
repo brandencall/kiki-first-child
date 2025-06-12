@@ -7,6 +7,8 @@ public partial class BaseEnemy : CharacterBody2D
     protected ItemDropper _itemDropper;
     [Export]
     public AnimatedSprite2D Animations { get; set; }
+	[Signal]
+	public delegate void OnEnemyDiedEventHandler();
     protected CharacterBody2D _character;
 
     public override void _Ready()
@@ -40,6 +42,7 @@ public partial class BaseEnemy : CharacterBody2D
     public virtual void Die()
     {
         _itemDropper.DropItem();
+		EmitSignal(SignalName.OnEnemyDied);
         QueueFree();
     }
 
