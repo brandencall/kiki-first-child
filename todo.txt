@@ -7,3 +7,7 @@ TODO:
     - Display for skill trees
     - unlock system for still trees
 
+
+BUG's:
+ - Save state isn't working for some reason. All characters stay locked after closing game.
+
