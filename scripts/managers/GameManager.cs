@@ -1,35 +1,46 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 public partial class GameManager : Node
 {
 	public BaseCharacter CurrentCharacter { get; set; }
-	public List<CharacterData> CharacterDataList { get; set; }
 	public string CurrentScene { get; set; }
-	public GameState GameStateData { get; set; }
+
+	private GameState _gameStateData;
+	public GameState GameStateData 
+	{ 
+		get => _gameStateData; 
+		set => _gameStateData = value; 
+	}
 
 	public event Action<int> CurrencyChanged;
 
-	public void Initialize()
+	public void Initialize(GameState gameStateData)
 	{
-		Debug.Assert(GameStateData != null, "The GamestateData must be initialized in GameManager");
-		Debug.Assert(CharacterDataList != null, "The CharacterDataList must be initialized in GameManager");
+		_gameStateData = gameStateData;
 
-		if (GameStateData.LastUsedCharacter != null)
+		if (_gameStateData.LastUsedCharacter != null)
 		{
-			CharacterData currentCharacterData = GameStateData.LastUsedCharacter;
+			CharacterData currentCharacterData = _gameStateData.LastUsedCharacter;
 			PackedScene characterScene = GD.Load<PackedScene>(currentCharacterData.Scene);
 			CurrentCharacter = characterScene.Instantiate<BaseCharacter>();
 			CurrentCharacter.Initialize(currentCharacterData);
 		}
 		else
 		{
-			CharacterData currentCharacterData = CharacterDataList[0];
+			CharacterData currentCharacterData = _gameStateData.Characters[0];
 			PackedScene characterScene = GD.Load<PackedScene>(currentCharacterData.Scene);
 			CurrentCharacter = characterScene.Instantiate<BaseCharacter>();
 			CurrentCharacter.Initialize(currentCharacterData);
+		}
+	}
+
+	public void UnlockCharacter(string characterId)
+	{
+		CharacterData character = GameStateData.Characters.Find(c => c.Id == characterId);
+		if (character != null && !character.IsUnlocked)
+		{
+			character.IsUnlocked = true;
 		}
 	}
 
@@ -43,18 +54,19 @@ public partial class GameManager : Node
 
 	public void DepositCurrenct(int currencyToDeposit)
 	{
-		GameStateData.Schmeckels += currencyToDeposit;
+		_gameStateData.Schmeckels += currencyToDeposit;
 		CurrencyChanged?.Invoke(GameStateData.Schmeckels);
 	}
 
 	public int CurrencyBalance()
 	{
-		return GameStateData.Schmeckels;
+		return _gameStateData.Schmeckels;
 	}
 
 	public void WithdrawCurrency(int currencyToWithdraw)
 	{
-		GameStateData.Schmeckels -= currencyToWithdraw;
-		CurrencyChanged?.Invoke(GameStateData.Schmeckels);
+		_gameStateData.Schmeckels -= currencyToWithdraw;
+		CurrencyChanged?.Invoke(_gameStateData.Schmeckels);
 	}
+
 }

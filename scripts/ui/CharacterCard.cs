@@ -36,7 +36,8 @@ public partial class CharacterCard : Control
 		if (_character.Cost < GameManager.CurrencyBalance())
 		{
 			GameManager.WithdrawCurrency(_character.Cost);
-			_character.IsUnlocked = true;
+			GameManager.UnlockCharacter(_character.Id);
+			//_character.IsUnlocked = true;
 			OnCharacterSelected();
 		}
 	}
@@ -44,11 +45,12 @@ public partial class CharacterCard : Control
 	public void SetCharacter(CharacterData character)
 	{
 		_character = character;
-		CharacterName.Text = character.Id;
+		CharacterName.Text = _character.Id;
 		if (character.IsUnlocked == false)
 		{
 			BuyButton.Text = "Buy $" + character.Cost;
-		} else 
+		}
+		else
 		{
 			BuyButton.Visible = false;
 		}

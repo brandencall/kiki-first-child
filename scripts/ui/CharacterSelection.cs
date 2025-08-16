@@ -22,7 +22,7 @@ public partial class CharacterSelection : Control
 
 	private void CreateCharacterCards()
 	{
-		List<CharacterData> characters = GameManager.CharacterDataList;
+		List<CharacterData> characters = GameManager.GameStateData.Characters;
 		foreach (var character in characters)
 		{
 			AddCharacterCard(character);
@@ -47,7 +47,7 @@ public partial class CharacterSelection : Control
 
 	private void ReloadCharacterData()
 	{
-		List<CharacterData> characters = GameManager.CharacterDataList;
+		List<CharacterData> characters = GameManager.GameStateData.Characters;
 		foreach (var character in characterCardMap)
 		{
 			UpdateCardInfo(character.Key, character.Value);

@@ -7,9 +7,8 @@ public partial class SaveManager : Node
 	public const string SavePath = "user://savegame.json";
 	public const string CharacterDataPath = "res://data/characters.json";
 	public const string SkillTreeDataPath = "res://data/skillTrees.json";
-	private GameState _gameState = new();
-	private List<CharacterData> _characterList;
-	private List<SkillTreeData> _skillTreeData;
+	private List<CharacterData> _configuredCharacters;
+	private List<SkillTreeData> _configuredSkillTrees;
 
 	private GameManager GameManager => GetNode<GameManager>("/root/GameManager");
 
@@ -19,10 +18,9 @@ public partial class SaveManager : Node
 		var jsonSkillTreeData = FileAccess.Open(SkillTreeDataPath, FileAccess.ModeFlags.Read);
 		string jsonCharacterText = jsonCharacterData.GetAsText();
 		string jsonSkillTreeText = jsonSkillTreeData.GetAsText();
-		_characterList = JsonSerializer.Deserialize<List<CharacterData>>(jsonCharacterText);
-		_skillTreeData = JsonSerializer.Deserialize<List<SkillTreeData>>(jsonSkillTreeText);
+		_configuredCharacters = JsonSerializer.Deserialize<List<CharacterData>>(jsonCharacterText);
+		_configuredSkillTrees = JsonSerializer.Deserialize<List<SkillTreeData>>(jsonSkillTreeText);
 		LoadGame();
-		GameManager.Initialize();
 	}
 
 	public override void _Notification(int what)
@@ -43,10 +41,9 @@ public partial class SaveManager : Node
 			{
 				using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Read);
 				string jsonString = file.GetAsText();
-				_gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
+				GameState gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
+				GameManager.Initialize(gameState);
 				EnsureAllCharactersExist();
-				AssignSkillTrees();
-				PopulateGameManager();
 				GD.Print("Game loaded suxxessfully");
 			}
 			else
@@ -65,11 +62,11 @@ public partial class SaveManager : Node
 
 	private void EnsureAllCharactersExist()
 	{
-		foreach (var character in _characterList)
+		foreach (var character in _configuredCharacters)
 		{
-			if (!_gameState.Characters.Exists(c => c.Id == character.Id))
+			if (!GameManager.GameStateData.Characters.Exists(c => c.Id == character.Id))
 			{
-				_gameState.Characters.Add(new CharacterData
+				GameManager.GameStateData.Characters.Add(new CharacterData
 				{
 					Id = character.Id,
 					IsUnlocked = character.IsUnlocked,
@@ -81,26 +78,21 @@ public partial class SaveManager : Node
 		}
 	}
 
-	private void AssignSkillTrees()
+	public void InitializeNewGame()
 	{
-		foreach (CharacterData character in _characterList)
-		{
-			SkillTreeData skillTree = _skillTreeData.Find(s => s.CharacterId == character.Id);
-		}
-	}
-
-	private void PopulateGameManager()
-	{
-		GameManager.CharacterDataList = _characterList;
-		GameManager.GameStateData = _gameState;
+		GameState newGameState = new();
+		newGameState.Characters = _configuredCharacters;
+		newGameState.SkillTrees = _configuredSkillTrees;
+		newGameState.Schmeckels = 0;
+		GameManager.Initialize(newGameState);
 	}
 
 	public void SaveGame()
 	{
 		try
 		{
-			_gameState.LastUsedCharacter = GameManager.CurrentCharacter.CharacterData;
-			string jsonString = JsonSerializer.Serialize(_gameState, new JsonSerializerOptions { WriteIndented = true });
+			GameManager.GameStateData.LastUsedCharacter = GameManager.CurrentCharacter.CharacterData;
+			string jsonString = JsonSerializer.Serialize(GameManager.GameStateData, new JsonSerializerOptions { WriteIndented = true });
 			using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
 			file.StoreString(jsonString);
 			GD.Print("Game saved successfully.");
@@ -110,41 +102,4 @@ public partial class SaveManager : Node
 			GD.PrintErr($"Failed to save game: {e.Message}");
 		}
 	}
-
-	public void InitializeNewGame()
-	{
-		_gameState.Characters = _characterList;
-		_gameState.SkillTrees = _skillTreeData;
-		AssignSkillTrees();
-		PopulateGameManager();
-	}
-
-	public CharacterData GetCharacterById(string characterId)
-	{
-		CharacterData character = _gameState.Characters.Find(c => c.Id == characterId);
-		return character;
-	}
-
-	public void UnlockCharacter(string characterId)
-	{
-		CharacterData character = _gameState.Characters.Find(c => c.Id == characterId);
-		if (character != null && !character.IsUnlocked)
-		{
-			character.IsUnlocked = true;
-			SaveGame();
-			GD.Print("Unloced character: " + characterId);
-		}
-	}
-
-	public bool IsCharacterLocked(string characterId)
-	{
-		CharacterData character = _gameState.Characters.Find(c => c.Id == characterId);
-		return character?.IsUnlocked ?? false;
-	}
-
-	public List<CharacterData> GetAllCharacters()
-	{
-		return _gameState.Characters;
-	}
-
 }
