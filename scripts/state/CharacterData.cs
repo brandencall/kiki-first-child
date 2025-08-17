@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class CharacterData
@@ -8,6 +9,5 @@ public class CharacterData
     public string Scene { get; set; }
     public string IconPath { get; set; }
     public int Cost { get; set; }
-    [NonSerialized]
-    public SkillTreeData SkillTree;
+    public List<SkillData> Skills { get; set; }
 }

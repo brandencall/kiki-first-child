@@ -6,20 +6,15 @@ public partial class SaveManager : Node
 {
 	public const string SavePath = "user://savegame.json";
 	public const string CharacterDataPath = "res://data/characters.json";
-	public const string SkillTreeDataPath = "res://data/skillTrees.json";
 	private List<CharacterData> _configuredCharacters;
-	private List<SkillTreeData> _configuredSkillTrees;
 
 	private GameManager GameManager => GetNode<GameManager>("/root/GameManager");
 
 	public override void _Ready()
 	{
 		var jsonCharacterData = FileAccess.Open(CharacterDataPath, FileAccess.ModeFlags.Read);
-		var jsonSkillTreeData = FileAccess.Open(SkillTreeDataPath, FileAccess.ModeFlags.Read);
 		string jsonCharacterText = jsonCharacterData.GetAsText();
-		string jsonSkillTreeText = jsonSkillTreeData.GetAsText();
 		_configuredCharacters = JsonSerializer.Deserialize<List<CharacterData>>(jsonCharacterText);
-		_configuredSkillTrees = JsonSerializer.Deserialize<List<SkillTreeData>>(jsonSkillTreeText);
 		LoadGame();
 	}
 
@@ -63,7 +58,7 @@ public partial class SaveManager : Node
 		{
 			if (!GameManager.GameStateData.Characters.Exists(c => c.Id == character.Id))
 			{
-                GameManager.GameStateData.Characters.Add(character);
+				GameManager.GameStateData.Characters.Add(character);
 			}
 		}
 	}
@@ -72,7 +67,6 @@ public partial class SaveManager : Node
 	{
 		GameState newGameState = new();
 		newGameState.Characters = _configuredCharacters;
-		newGameState.SkillTrees = _configuredSkillTrees;
 		newGameState.Schmeckels = 0;
 		GameManager.Initialize(newGameState);
 	}

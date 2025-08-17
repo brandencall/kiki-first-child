@@ -4,20 +4,34 @@
         "IsUnlocked" : true,
         "Scene" : "res://scenes/characters/tonts.tscn",
         "IconPath" : "res://assets/characters/tonts/Tonts_icon.png",
-        "Cost" : 0
+        "Cost" : 0,
+        "Skills": null
     },
     {
         "Id" : "Hodge",
         "IsUnlocked" : false,
         "Scene" : "res://scenes/characters/hodge.tscn",
         "IconPath" : "res://assets/characters/hodge/Hodge_icon.png",
-        "Cost" : 10
+        "Cost" : 10,
+        "Skills": [
+            {
+                "Id": "backwards_noodle",
+                "Name": "Backwards Noodle Attack",
+                "Description": "Whip the enemies in front and behind you",
+                "IconPath": "Test",
+                "ScenePath": "res://scenes/characters/skills/backwards_noodle_skill.tscn",
+                "Cost": 1,
+                "Prerequisites": [],
+                "IsUnlocked": false 
+            } 
+        ]    
     },
     {
         "Id" : "Chavz",
         "IsUnlocked" : false,
         "Scene" : "res://scenes/characters/chavz.tscn",
         "IconPath" : "res://assets/characters/chavz/Chavz_icon.png",
-        "Cost" : 20
+        "Cost" : 20,
+        "Skills": null
     }
 ]

@@ -1,23 +1,23 @@
 using Godot;
+using System.Collections.Generic;
 
 public class SkillTree
 {
-    private SkillTreeData _skillTreeData;
     private BaseCharacter _character;
+    private List<SkillData> _skill;
 
-    public SkillTree(SkillTreeData skillTreeData, BaseCharacter character)
+    public SkillTree(List<SkillData> skills, BaseCharacter character)
     {
-        _skillTreeData = skillTreeData;
+        _skill = skills;
         _character = character;
         ParseAndApplySkills();
     }
 
     private void ParseAndApplySkills()
     {
-        if (_skillTreeData == null) return;
-        if (_skillTreeData.Skills == null) return;
+        if (_skill == null) return;
 
-        foreach (var skill in _skillTreeData.Skills)
+        foreach (var skill in _skill)
         {
             if (skill.IsUnlocked == true)
             {

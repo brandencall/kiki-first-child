@@ -52,7 +52,7 @@ public partial class BaseCharacter : CharacterBody2D
 
 	public void CreateAndApplySkillTree()
 	{
-		SkillTree = new SkillTree(CharacterData.SkillTree, this);
+		SkillTree = new SkillTree(CharacterData.Skills, this);
 	}
 
 	public virtual void OnBaseAttackTimerTimeout()
