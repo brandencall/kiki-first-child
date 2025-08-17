@@ -27,7 +27,6 @@ public partial class SaveManager : Node
 	{
 		if (what == NotificationWMCloseRequest)
 		{
-			GD.Print("Game is closing, saving game...");
 			SaveGame();
 			GetTree().Quit();
 		}
@@ -44,12 +43,10 @@ public partial class SaveManager : Node
 				GameState gameState = JsonSerializer.Deserialize<GameState>(jsonString) ?? new GameState();
 				GameManager.Initialize(gameState);
 				EnsureAllCharactersExist();
-				GD.Print("Game loaded suxxessfully");
 			}
 			else
 			{
 				InitializeNewGame();
-				GD.Print("No save file. Starting new game");
 			}
 
 		}
@@ -66,14 +63,7 @@ public partial class SaveManager : Node
 		{
 			if (!GameManager.GameStateData.Characters.Exists(c => c.Id == character.Id))
 			{
-				GameManager.GameStateData.Characters.Add(new CharacterData
-				{
-					Id = character.Id,
-					IsUnlocked = character.IsUnlocked,
-					Scene = character.Scene,
-					IconPath = character.IconPath,
-					Cost = character.Cost
-				});
+                GameManager.GameStateData.Characters.Add(character);
 			}
 		}
 	}
@@ -95,7 +85,6 @@ public partial class SaveManager : Node
 			string jsonString = JsonSerializer.Serialize(GameManager.GameStateData, new JsonSerializerOptions { WriteIndented = true });
 			using FileAccess file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
 			file.StoreString(jsonString);
-			GD.Print("Game saved successfully.");
 		}
 		catch (System.Exception e)
 		{
