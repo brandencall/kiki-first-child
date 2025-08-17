@@ -6,7 +6,6 @@ public partial class CharacterSelection : Control
 {
 	[Export]
 	public HBoxContainer CharacterContainer { get; set; }
-	private SaveManager SaveManager => GetNode<SaveManager>("/root/SaveManager");
 	private GameManager GameManager => GetNode<GameManager>("/root/GameManager"); 
 
 	public event Action<CharacterData> CharacterSelected;
