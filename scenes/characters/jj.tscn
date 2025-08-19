@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0xa6eqgm7qbf"]
+[gd_scene load_steps=14 format=3 uid="uid://b0xa6eqgm7qbf"]
 
 [ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_pwwrh"]
 [ext_resource type="Texture2D" uid="uid://2hhpcvcerpn1" path="res://assets/characters/jj/Big_J.png" id="2_b3dab"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_66sp1"]
+[ext_resource type="Texture2D" uid="uid://cuxswncv4erwb" path="res://assets/characters/jj/Lil_J.png" id="3_b3dab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2k26b"]
 size = Vector2(16, 24)
@@ -46,6 +47,45 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_66sp1"]
+atlas = ExtResource("3_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k26b"]
+atlas = ExtResource("3_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofmbl"]
+atlas = ExtResource("3_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sdbws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66sp1")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2k26b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofmbl")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
 [node name="jj" instance=ExtResource("1_pwwrh")]
 scale = Vector2(2, 2)
 
@@ -58,11 +98,17 @@ sprite_frames = SubResource("SpriteFrames_ofmbl")
 animation = &"attack"
 autoplay = "idle"
 
+[node name="LiljAnimatedSprite" type="AnimatedSprite2D" parent="." index="3"]
+position = Vector2(-15, 0.5)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_sdbws")
+autoplay = "default"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_2k26b")
 
-[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_66sp1")]
+[node name="HealthBar" parent="." index="9" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_66sp1")]
 offset_left = -20.0
 offset_top = 16.0
 offset_right = 25.0
