@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0xa6eqgm7qbf"]
+
+[ext_resource type="PackedScene" uid="uid://cuyvun3yd2fmw" path="res://scenes/characters/base_character.tscn" id="1_pwwrh"]
+[ext_resource type="Texture2D" uid="uid://2hhpcvcerpn1" path="res://assets/characters/jj/Big_J.png" id="2_b3dab"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_66sp1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2k26b"]
+size = Vector2(16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiti2"]
+atlas = ExtResource("2_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prb3k"]
+atlas = ExtResource("2_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61jn5"]
+atlas = ExtResource("2_b3dab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofmbl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiti2")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prb3k")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61jn5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="jj" instance=ExtResource("1_pwwrh")]
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2k26b")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ofmbl")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2k26b")
+
+[node name="HealthBar" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_66sp1")]
+offset_left = -20.0
+offset_top = 16.0
+offset_right = 25.0
+offset_bottom = 20.0
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2k26b")
