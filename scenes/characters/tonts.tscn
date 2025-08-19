@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c04lpdstpxqss" path="res://scenes/items/bottle.tscn" id="4_o75v0"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="5_cy1pa"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cy1pa"]
+size = Vector2(16, 25)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5mfi"]
 atlas = ExtResource("3_h5mfi")
 region = Rect2(0, 0, 32, 32)
@@ -45,29 +48,22 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cy1pa"]
-size = Vector2(16, 25)
-
 [node name="Tonts" node_paths=PackedStringArray("Mussel") instance=ExtResource("1_jtmwb")]
 scale = Vector2(2, 2)
 script = ExtResource("2_o75v0")
 BulletScene = ExtResource("4_o75v0")
 Mussel = NodePath("Mussel")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_muvte")
-animation = &"walk"
-autoplay = "idle"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_cy1pa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
-position = Vector2(2, -1.5)
-shape = SubResource("RectangleShape2D_cy1pa")
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_muvte")
+animation = &"idle"
+autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_cy1pa")
 
@@ -80,3 +76,7 @@ offset_top = 16.0
 offset_right = 25.0
 offset_bottom = 20.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+position = Vector2(2, -1.5)
+shape = SubResource("RectangleShape2D_cy1pa")

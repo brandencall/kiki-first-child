@@ -33,5 +33,13 @@
         "IconPath" : "res://assets/characters/chavz/Chavz_icon.png",
         "Cost" : 20,
         "Skills": null
+    },
+    {
+        "Id" : "JJ",
+        "IsUnlocked" : false,
+        "Scene" : "res://scenes/characters/jj.tscn",
+        "IconPath" : "res://assets/characters/jj/JJ_icon.png",
+        "Cost" : 30,
+        "Skills": null
     }
 ]

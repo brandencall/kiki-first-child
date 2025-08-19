@@ -99,7 +99,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="LiljAnimatedSprite" type="AnimatedSprite2D" parent="." index="3"]
-position = Vector2(-15, 0.5)
+position = Vector2(-17.5, 0)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_sdbws")
 autoplay = "default"
