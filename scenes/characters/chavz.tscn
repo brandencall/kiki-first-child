@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_1mpuj"]
 [ext_resource type="PackedScene" uid="uid://c3xnp1w6ydct4" path="res://scenes/items/steak.tscn" id="4_1mpuj"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srery"]
+size = Vector2(17, 20)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_422ku"]
 atlas = ExtResource("2_ccd0x")
 region = Rect2(0, 0, 32, 32)
@@ -45,30 +48,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srery"]
-size = Vector2(17, 20)
-
 [node name="Chavz" node_paths=PackedStringArray("Steak") instance=ExtResource("1_iof6u")]
 scale = Vector2(2, 2)
 script = ExtResource("2_422ku")
 Steak = NodePath("Steak")
 _baseAttackCooldown = 1.0
 
-[node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_qe2sj")
-animation = &"walk"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_srery")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
-visible = false
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_srery")
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_qe2sj")
+animation = &"walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 visible = false
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_srery")
@@ -82,3 +77,8 @@ offset_top = 16.0
 offset_right = 25.0
 offset_bottom = 20.0
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_srery")

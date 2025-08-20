@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="3_xy3db"]
 [ext_resource type="PackedScene" uid="uid://bkgxj4o7tshbg" path="res://scenes/items/noodle.tscn" id="5_fc54n"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm0aa"]
+size = Vector2(15, 20)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pdjcv"]
 atlas = ExtResource("2_xy3db")
 region = Rect2(0, 0, 32, 32)
@@ -45,30 +48,22 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm0aa"]
-size = Vector2(15, 20)
-
 [node name="Hodge" node_paths=PackedStringArray("Noodle") instance=ExtResource("1_gm0aa")]
 scale = Vector2(2, 2)
 script = ExtResource("2_unbyy")
 Noodle = NodePath("noodle")
-
-[node name="AnimatedSprite2D" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_5xcsn")
-animation = &"idle"
-autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
 position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_gm0aa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
-visible = false
-position = Vector2(0.5, 1)
-shape = SubResource("RectangleShape2D_gm0aa")
+[node name="AnimatedSprite2D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_5xcsn")
+animation = &"idle"
+autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 visible = false
 position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_gm0aa")
@@ -82,3 +77,8 @@ _healthComponent = NodePath("../HealthComponent")
 
 [node name="noodle" parent="." index="9" instance=ExtResource("5_fc54n")]
 position = Vector2(2, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" index="0"]
+visible = false
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_gm0aa")
