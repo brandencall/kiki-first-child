@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cfq2sgfomuytu" path="res://scripts/ui/CharacterCard.cs" id="1_hb02x"]
 
-[node name="CharacterCard" type="Control" node_paths=PackedStringArray("CharacterButton", "CharacterName", "BuyButton")]
-custom_minimum_size = Vector2(100, 100)
+[node name="CharacterCard" type="Control" node_paths=PackedStringArray("CharacterButton", "CharacterSprite", "CharacterName", "BuyButton")]
+custom_minimum_size = Vector2(100, 150)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,40 +13,64 @@ offset_bottom = -548.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hb02x")
-CharacterButton = NodePath("VBoxContainer/TextureButton")
-CharacterName = NodePath("VBoxContainer/CharacterName")
-BuyButton = NodePath("VBoxContainer/BuyButton")
+CharacterButton = NodePath("VBoxContainer/Control2/CharacterDisplayButton")
+CharacterSprite = NodePath("VBoxContainer/Control2/CharacterDisplayButton/VBoxContainer/CharacterSprite")
+CharacterName = NodePath("VBoxContainer/Control2/CharacterDisplayButton/VBoxContainer/CharacterName")
+BuyButton = NodePath("VBoxContainer/Control/BuyButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -81.0
-offset_right = 50.0
-offset_bottom = 81.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CharacterName" type="Label" parent="VBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="CharacterDisplayButton" type="Button" parent="VBoxContainer/Control2"]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control2/CharacterDisplayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterName" type="Label" parent="VBoxContainer/Control2/CharacterDisplayButton/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/outline_size = 5
 text = "Name"
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+[node name="CharacterSprite" type="TextureRect" parent="VBoxContainer/Control2/CharacterDisplayButton/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-stretch_mode = 5
+size_flags_vertical = 3
 
-[node name="BuyButton" type="Button" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_right = 19.0
+offset_bottom = 31.0
+grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Buy"
