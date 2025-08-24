@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://i72v47gh4p6p" path="res://scripts/ui/AbilityCard.cs" id="1_unr5y"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_aghsq"]
-[ext_resource type="Shader" uid="uid://duuqjhqeruaul" path="res://scenes/ui/ability_card_icon.gdshader" id="2_jvgna"]
+[ext_resource type="Shader" uid="uid://duuqjhqeruaul" path="res://scenes/ui/shine.gdshader" id="2_jvgna"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvgna"]
 bg_color = Color(0.54099, 0.540991, 0.54099, 1)

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://wh3t3r6y8gh" path="res://scripts/ui/CharacterSelection.cs" id="1_wk3ts"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wk3ts"]
-bg_color = Color(0.6, 0.6, 0.6, 0.784314)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -31,6 +30,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wk3ts")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Character Selection"
 
 [node name="CharacterContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
