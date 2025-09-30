@@ -7,17 +7,21 @@ public partial class TestSlow : Node2D
 	[Export]
 	public Area2D Upgrade { get; set; }
 
-	public IAbility Ability { get; set; }
+	public IAbility Slow { get; set; }
+	public IAbility Poison { get; set; }
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Upgrade.AreaEntered += OnUpgradeAreaEntered;
-		Ability = new SlowEffect();
+		Slow = new SlowEffect();
+		Poison = new PoisonEffect();
+
 	}
 
 	public void OnUpgradeAreaEntered(Area2D area)
 	{
-		Ability.Upgrade(Character);
+		Poison.Upgrade(Character);
+		Slow.Upgrade(Character);
 	}
 }

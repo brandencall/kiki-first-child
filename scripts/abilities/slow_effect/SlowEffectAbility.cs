@@ -17,6 +17,6 @@ public partial class SlowEffectAbility : Node, IEffect
 		GD.Print("Velocity while slow: " + target.VelocityComponent.MaxSpeed);
 		await ToSignal(GetTree().CreateTimer(Duration), "timeout");
 		target.VelocityComponent.MaxSpeed = baseSpeed;
-		GD.Print("Velocity affert slow: " + target.VelocityComponent.MaxSpeed);
+		GD.Print("Velocity after slow: " + target.VelocityComponent.MaxSpeed);
 	}
 }
