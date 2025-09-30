@@ -25,7 +25,7 @@ public class PoisonEffect : IAbility
             case 1:
                 _poisonEffect = _poisonEffectScene.Instantiate<PoisonEffectAbility>();
                 character.AddChild(_poisonEffect);
-                character.CallDeferred(nameof(character.AddPoisonEffect), _poisonEffect);
+                character.Effects.Add(_poisonEffect);
                 break;
             case 2:
                 _poisonEffect.Damage += 1;

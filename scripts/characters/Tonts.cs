@@ -7,14 +7,12 @@ public partial class Tonts : BaseCharacter
     [Export]
     public Marker2D Mussel;
 
+    // TODO: Make an object pool of bottles and just apply the effects to the bottles once
     public override void OnBaseAttackTimerTimeout()
     {
         base.OnBaseAttackTimerTimeout();
         HitboxComponent bullet = BulletScene.Instantiate<HitboxComponent>();
-        if (PoisonEffectAbility != null)
-        {
-            bullet.PoisonEffectAbility = PoisonEffectAbility;
-        }
+        bullet.Effects = Effects;
         GetTree().Root.AddChild(bullet);
         SetMusselPosition();
         bullet.GlobalPosition = Mussel.GlobalPosition;

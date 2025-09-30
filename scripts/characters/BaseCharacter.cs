@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class BaseCharacter : CharacterBody2D
 {
@@ -13,9 +14,7 @@ public partial class BaseCharacter : CharacterBody2D
     public SkillTree SkillTree { get; set; }
     public CharacterData CharacterData { get; private set; }
 
-    // Poison Testing ===============================
-    public PoisonEffectAbility PoisonEffectAbility;
-    // ==============================================
+    public List<IEffect> Effects { get; set; } = new();
 
     [Export]
     private float _baseAttackCooldown = 1.5f;
@@ -57,11 +56,6 @@ public partial class BaseCharacter : CharacterBody2D
     public void CreateAndApplySkillTree()
     {
         SkillTree = new SkillTree(CharacterData.Skills, this);
-    }
-
-    public void AddPoisonEffect(PoisonEffectAbility poisonEffectAbility)
-    {
-        PoisonEffectAbility = poisonEffectAbility;
     }
 
     public virtual void OnBaseAttackTimerTimeout()
