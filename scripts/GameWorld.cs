@@ -58,11 +58,6 @@ public partial class GameWorld : Node2D
 
 	private void HandleAbilitySelection(IAbility selectedAbility)
 	{
-		//if (!AbilityManager.CurrentAbilities.Contains(selectedAbility))
-		//{
-		//	AbilityManager.CurrentAbilities.Add(selectedAbility);
-		//	selectedAbility.Apply(Character);
-		//}
 		selectedAbility.Upgrade(Character);
 		AbilityUi.ClearAbilities();
 	}
