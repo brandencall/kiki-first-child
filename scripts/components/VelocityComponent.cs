@@ -7,7 +7,7 @@ public partial class VelocityComponent : Node
     [Export]
     private float _accelerationCoefficient = 2f;
 
-	public Vector2 LastMoveDirection { get; private set; } = Vector2.Right; 
+    public Vector2 LastMoveDirection { get; private set; } = Vector2.Right;
     public float AccelerationCoefficientMultiplier { get; set; } = 1f;
     public float AccelerationCoefficient => _accelerationCoefficient;
     public Vector2 Velocity { get; set; }
@@ -20,7 +20,7 @@ public partial class VelocityComponent : Node
 
     public void AccelerateInDirection(Vector2 direction)
     {
-        AccelerateToVelocity(direction * MaxSpeed);
+        AccelerateToVelocity(direction.Normalized() * MaxSpeed);
     }
 
     public void Declerate()
@@ -32,10 +32,10 @@ public partial class VelocityComponent : Node
     {
         characterBody.Velocity = Velocity;
         characterBody.MoveAndSlide();
-		if (!Velocity.IsZeroApprox())
-		{
-			LastMoveDirection = Velocity;
-		}
+        if (!Velocity.IsZeroApprox())
+        {
+            LastMoveDirection = Velocity;
+        }
     }
 
     public float GetMaxSpeed()

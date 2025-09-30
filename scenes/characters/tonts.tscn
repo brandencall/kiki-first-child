@@ -63,6 +63,10 @@ sprite_frames = SubResource("SpriteFrames_muvte")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="VelocityComponent" parent="." index="6"]
+MaxSpeed = 300.0
+_accelerationCoefficient = 15.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_cy1pa")
