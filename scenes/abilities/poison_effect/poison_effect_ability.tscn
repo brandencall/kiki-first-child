@@ -4,5 +4,3 @@
 
 [node name="poison_effect_ability" type="Node"]
 script = ExtResource("1_ku6l8")
-
-[node name="poison_timer" type="Timer" parent="."]
