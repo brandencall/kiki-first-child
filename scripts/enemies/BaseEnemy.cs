@@ -11,8 +11,8 @@ public partial class BaseEnemy : CharacterBody2D
     public HealthComponent HealthComponent { get; set; }
     [Export]
     public VelocityComponent VelocityComponent { get; set; }
-	[Signal]
-	public delegate void OnEnemyDiedEventHandler();
+    [Signal]
+    public delegate void OnEnemyDiedEventHandler();
     protected CharacterBody2D _character;
 
     public override void _Ready()
@@ -43,10 +43,22 @@ public partial class BaseEnemy : CharacterBody2D
         _character = this.GetCharacter();
     }
 
+    public void ApplyPoisonTint(float duration = 0.2f)
+    {
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(this, "modulate", new Color("9db92c"), duration);
+    }
+
+    public void ClearPoisonTint(float duration = 0.2f)
+    {
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(this, "modulate", Colors.White, duration);
+    }
+
     public virtual void Die()
     {
         _itemDropper.DropItem();
-		EmitSignal(SignalName.OnEnemyDied);
+        EmitSignal(SignalName.OnEnemyDied);
         QueueFree();
     }
 
