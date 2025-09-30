@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="4_n763p"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_ylyo2"]
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "VelocityComponent")]
 script = ExtResource("1_r5xb8")
 _itemDropper = NodePath("ItemDropper")
 Animations = NodePath("AnimatedSprite2D")
 HealthComponent = NodePath("HealthComponent")
+VelocityComponent = NodePath("VelocityComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 

@@ -9,6 +9,8 @@ public partial class BaseEnemy : CharacterBody2D
     public AnimatedSprite2D Animations { get; set; }
     [Export]
     public HealthComponent HealthComponent { get; set; }
+    [Export]
+    public VelocityComponent VelocityComponent { get; set; }
 	[Signal]
 	public delegate void OnEnemyDiedEventHandler();
     protected CharacterBody2D _character;

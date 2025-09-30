@@ -57,3 +57,4 @@ offset_top = 83.3333
 offset_right = 123.333
 offset_bottom = 110.333
 _healthComponent = NodePath("../HealthComponent")
+metadata/_edit_use_anchors_ = true

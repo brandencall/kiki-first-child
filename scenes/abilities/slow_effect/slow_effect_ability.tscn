@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8u5xte7ok36w"]
+
+[ext_resource type="Script" uid="uid://djida0whwqdo4" path="res://scripts/abilities/slow_effect/SlowEffectAbility.cs" id="1_p848g"]
+
+[node name="slow_effect_ability" type="Node"]
+script = ExtResource("1_p848g")
