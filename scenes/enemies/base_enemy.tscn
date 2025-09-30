@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddml7p7u4bv13"]
+[gd_scene load_steps=4 format=3 uid="uid://ddml7p7u4bv13"]
 
 [ext_resource type="Script" uid="uid://c6ffktfl81gy8" path="res://scripts/enemies/BaseEnemy.cs" id="1_r5xb8"]
 [ext_resource type="PackedScene" uid="uid://cn17c3n307c3f" path="res://scenes/components/item_dropper.tscn" id="2_qf3h2"]
+[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_ylyo2"]
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent")]
 script = ExtResource("1_r5xb8")
 _itemDropper = NodePath("ItemDropper")
 Animations = NodePath("AnimatedSprite2D")
+HealthComponent = NodePath("HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="ItemDropper" parent="." instance=ExtResource("2_qf3h2")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_ylyo2")]

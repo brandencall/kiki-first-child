@@ -7,6 +7,8 @@ public partial class BaseEnemy : CharacterBody2D
     protected ItemDropper _itemDropper;
     [Export]
     public AnimatedSprite2D Animations { get; set; }
+    [Export]
+    public HealthComponent HealthComponent { get; set; }
 	[Signal]
 	public delegate void OnEnemyDiedEventHandler();
     protected CharacterBody2D _character;

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://df04hv7hw4s3g"]
+
+[ext_resource type="Script" uid="uid://bm4s8ur85elfr" path="res://_debug/test_abilities/test_poison/TestPoison.cs" id="1_pkru2"]
+[ext_resource type="PackedScene" uid="uid://c555vv32vvmb8" path="res://scenes/characters/tonts.tscn" id="2_oi3kd"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="3_a40md"]
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="4_bvvag"]
+[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="5_r2r5i"]
+[ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="7_335gn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl1ib"]
+size = Vector2(24.8, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i6u1"]
+size = Vector2(114, 115)
+
+[node name="TestPoison" type="Node2D" node_paths=PackedStringArray("Character", "Upgrade")]
+script = ExtResource("1_pkru2")
+Character = NodePath("Tonts")
+Upgrade = NodePath("Area2D")
+
+[node name="Tonts" parent="." instance=ExtResource("2_oi3kd")]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(249, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("3_a40md")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.500002)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_yl1ib")
+
+[node name="BaseEnemy" parent="." instance=ExtResource("4_bvvag")]
+position = Vector2(219, 195)
+scale = Vector2(0.3, 0.3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]
+texture = ExtResource("3_a40md")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7i6u1")
+
+[node name="HurtboxComponent" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_r2r5i")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy/HurtboxComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7i6u1")
+
+[node name="HealthBar" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_335gn")]
+offset_left = -116.667
+offset_top = 83.3333
+offset_right = 123.333
+offset_bottom = 110.333
+_healthComponent = NodePath("../HealthComponent")

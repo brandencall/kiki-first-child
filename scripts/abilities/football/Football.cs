@@ -8,32 +8,30 @@ public class Football : IAbility
     public int CurrentLevel { get; set; } = 1;
     public bool OnLastLevel { get; set; } = false;
 
-    private PackedScene _footballScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/football/football_ability.tscn"); 
+    private PackedScene _footballScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/football/football_ability.tscn");
     private FootballAbility _football;
 
-    public void Apply(BaseCharacter character)
+    public void Upgrade(BaseCharacter character)
     {
-        _football = _footballScene.Instantiate<FootballAbility>();
-        character.GetTree().Root.AddChild(_football);
-    }
-
-    public void Upgrade()
-    {
-        UpgradeBasedOnLevel();
+        UpgradeBasedOnLevel(character);
         CurrentLevel++;
         SetupNextLevelAbilityResource();
     }
 
-    private void UpgradeBasedOnLevel()
+    private void UpgradeBasedOnLevel(BaseCharacter character)
     {
         switch (CurrentLevel)
         {
+            case 1:
+                _football = _footballScene.Instantiate<FootballAbility>();
+                character.GetTree().Root.AddChild(_football);
+                break;
             case 2:
                 _football.MaxNumberOfEnemiesHit = 2;
                 break;
             case 3:
                 _football.Damage += 10;
-                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .2; 
+                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .2;
                 break;
             case 4:
                 _football.MaxNumberOfEnemiesHit = 4;
@@ -44,7 +42,7 @@ public class Football : IAbility
                 break;
             case 6:
                 _football.MaxNumberOfEnemiesHit = 6;
-                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .2; 
+                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .2;
                 break;
             case 7:
                 _football.Damage += 20;
@@ -52,7 +50,7 @@ public class Football : IAbility
             case 8:
                 _football.MaxNumberOfEnemiesHit = 10;
                 _football.Damage += 25;
-                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .25; 
+                _football.Cooldown.WaitTime -= _football.Cooldown.WaitTime * .25;
                 break;
         }
     }

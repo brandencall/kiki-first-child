@@ -8,26 +8,24 @@ public class SoundPulse : IAbility
     public int CurrentLevel { get; set; } = 1;
     public bool OnLastLevel { get; set; } = false;
 
-    private PackedScene _soundPulseScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/sound_pulse/sound_pulse_ability.tscn"); 
+    private PackedScene _soundPulseScene = ResourceLoader.Load<PackedScene>("res://scenes/abilities/sound_pulse/sound_pulse_ability.tscn");
     private SoundPulseAbility _soundPulse;
 
-    public void Apply(BaseCharacter character)
+    public void Upgrade(BaseCharacter character)
     {
-        _soundPulse = _soundPulseScene.Instantiate<SoundPulseAbility>();
-        character.AddChild(_soundPulse);
-    }
-
-    public void Upgrade()
-    {
-        UpgradeBasedOnLevel();
+        UpgradeBasedOnLevel(character);
         CurrentLevel++;
         SetupNextLevelAbilityResource();
     }
 
-    private void UpgradeBasedOnLevel()
+    private void UpgradeBasedOnLevel(BaseCharacter character)
     {
         switch (CurrentLevel)
         {
+            case 1:
+                _soundPulse = _soundPulseScene.Instantiate<SoundPulseAbility>();
+                character.AddChild(_soundPulse);
+                break;
             case 2:
                 _soundPulse.Damage += 5;
                 break;

@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbx0m63uspnc4"]
+[gd_scene load_steps=14 format=3 uid="uid://cbx0m63uspnc4"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_exbx4"]
 [ext_resource type="Texture2D" uid="uid://bv0vb3c5xy1ly" path="res://assets/enemies/rat.png" id="2_2tddw"]
 [ext_resource type="Script" uid="uid://d1qruxhemux1x" path="res://scripts/enemies/types/Rat.cs" id="2_unsun"]
-[ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="3_unsun"]
 [ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_vll8n"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="5_h2e3b"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_jqcia"]
@@ -47,42 +46,42 @@ autoplay = "default"
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthComponent" parent="." index="2" instance=ExtResource("3_unsun")]
-MaxHealth = 10.0
-
-[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
-_healthComponent = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(-1.5, -3)
-shape = SubResource("RectangleShape2D_qmsgw")
-
-[node name="VelocityComponent" parent="." index="4" instance=ExtResource("5_h2e3b")]
+[node name="VelocityComponent" parent="." index="2" instance=ExtResource("5_h2e3b")]
 MaxSpeed = 150.0
 _accelerationCoefficient = 10.0
 
-[node name="PathfindComponent" parent="." index="5" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_jqcia")]
+[node name="PathfindComponent" parent="." index="3" node_paths=PackedStringArray("_velocityComponent", "_avoidance") instance=ExtResource("6_jqcia")]
 _velocityComponent = NodePath("../VelocityComponent")
 _avoidance = NodePath("../CollisionAvoidance")
 
-[node name="EnemyHitbox" parent="." index="6" instance=ExtResource("7_tfqfa")]
+[node name="EnemyHitbox" parent="." index="4" instance=ExtResource("7_tfqfa")]
 Damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthBar" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_g4jj5")]
+[node name="HealthBar" parent="." index="5" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("8_g4jj5")]
 offset_left = -30.0
 offset_top = 12.0
 offset_right = 29.0
 offset_bottom = 16.0
 _healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionAvoidance" parent="." index="8" instance=ExtResource("9_sw88c")]
+[node name="CollisionAvoidance" parent="." index="6" instance=ExtResource("9_sw88c")]
 RepulsionWeight = 0.2
 FlowFieldWeight = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance" index="0"]
 visible = false
 shape = SubResource("CircleShape2D_k4655")
+
+[node name="HurtboxComponent" parent="." index="8" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_qmsgw")
+
+[node name="HealthComponent" parent="." index="9"]
+MaxHealth = 10.0

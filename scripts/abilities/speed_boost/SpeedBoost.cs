@@ -8,45 +8,40 @@ public class SpeedBoost : IAbility
     public int CurrentLevel { get; set; } = 1;
     public bool OnLastLevel { get; set; } = false;
 
-    private BaseCharacter _character;
-
-    public void Apply(BaseCharacter character)
+    public void Upgrade(BaseCharacter character)
     {
-        _character = character;
-        character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
-    }
-
-    public void Upgrade()
-    {
-        UpgradeBasedOnLevel();
+        UpgradeBasedOnLevel(character);
         CurrentLevel++;
         SetupNextLevelAbilityResource();
     }
 
-    private void UpgradeBasedOnLevel()
+    private void UpgradeBasedOnLevel(BaseCharacter character)
     {
         switch (CurrentLevel)
         {
+            case 1:
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                break;
             case 2:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 3:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 4:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 5:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 6:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 7:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
             case 8:
-                _character.VelocityComponent.MaxSpeed += _character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
                 break;
         }
     }

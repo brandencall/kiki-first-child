@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://csnxk87ewgt3u"]
+
+[ext_resource type="Script" uid="uid://1tymypf5ygyh" path="res://_debug/test_abilities/TestAbilities.cs" id="1_14878"]
+[ext_resource type="PackedScene" uid="uid://c555vv32vvmb8" path="res://scenes/characters/tonts.tscn" id="2_dwp6x"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="3_dwp6x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjwu6"]
+size = Vector2(24.8, 25)
+
+[node name="TestAbilities" type="Node2D" node_paths=PackedStringArray("Character", "Upgrade")]
+script = ExtResource("1_14878")
+Character = NodePath("Tonts")
+Upgrade = NodePath("Area2D")
+
+[node name="Tonts" parent="." instance=ExtResource("2_dwp6x")]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(249, 3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("3_dwp6x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.500002)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_cjwu6")

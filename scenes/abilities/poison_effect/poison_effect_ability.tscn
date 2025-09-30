@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bprod775u30e"]
+
+[ext_resource type="Script" uid="uid://cvx0i85yixgco" path="res://scripts/abilities/poison_effect/PoisonEffectAbility.cs" id="1_ku6l8"]
+
+[node name="poison_effect_ability" type="Node"]
+script = ExtResource("1_ku6l8")
+
+[node name="poison_timer" type="Timer" parent="."]

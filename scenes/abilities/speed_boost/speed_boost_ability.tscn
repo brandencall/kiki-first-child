@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://v25vub0rgprp"]
-
-[ext_resource type="Script" uid="uid://b455fxxn65lse" path="res://scripts/abilities/speed_boost/SpeedBoostAbility.cs" id="1_aitb0"]
-
-[node name="SpeedBoostAbility" type="Node"]
-script = ExtResource("1_aitb0")
