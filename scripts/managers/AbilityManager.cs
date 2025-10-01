@@ -21,6 +21,7 @@ public partial class AbilityManager : Node
         _allAbilities.Add(new Football());
         _allAbilities.Add(new PoisonEffect());
         _allAbilities.Add(new SlowEffect());
+        _allAbilities.Add(new FireEffect());
     }
 
     public List<IAbility> GetRandomAbilities()
