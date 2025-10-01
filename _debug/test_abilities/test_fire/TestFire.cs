@@ -1,6 +1,7 @@
 using Godot;
+using System;
 
-public partial class TestAbilities : Node2D
+public partial class TestFire : Node2D
 {
 	[Export]
 	public BaseCharacter Character { get; set; }
@@ -13,15 +14,11 @@ public partial class TestAbilities : Node2D
 	{
 		base._Ready();
 		Upgrade.AreaEntered += OnUpgradeAreaEntered;
-		Ability = new SpeedBoost();
-
-		GD.Print("Character speed on load: " + Character.VelocityComponent.GetBaseSpeed());
+		Ability = new FireEffect();
 	}
 
 	public void OnUpgradeAreaEntered(Area2D area)
 	{
 		Ability.Upgrade(Character);
-		GD.Print("Character speed: " + Character.VelocityComponent.GetBaseSpeed());
 	}
-
 }

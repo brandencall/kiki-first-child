@@ -64,7 +64,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="VelocityComponent" parent="." index="6"]
-MaxSpeed = 300.0
+BaseSpeed = 300.0
 _accelerationCoefficient = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]

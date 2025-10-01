@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://k1hapbtu3msh"]
+
+[ext_resource type="Script" uid="uid://c6jqmvjtge886" path="res://scripts/abilities/fire_effect/FireEffectAbility.cs" id="1_o6n4k"]
+
+[node name="fire_effect_ability" type="Node"]
+script = ExtResource("1_o6n4k")

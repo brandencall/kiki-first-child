@@ -20,28 +20,28 @@ public class SpeedBoost : IAbility
         switch (CurrentLevel)
         {
             case 1:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 2:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 3:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 4:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 5:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 6:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 7:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
             case 8:
-                character.VelocityComponent.MaxSpeed += character.VelocityComponent.MaxSpeed * 0.2f;
+                character.VelocityComponent.BaseSpeed += character.VelocityComponent.BaseSpeed * 0.2f;
                 break;
         }
     }

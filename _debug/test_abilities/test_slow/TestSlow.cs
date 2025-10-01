@@ -9,6 +9,7 @@ public partial class TestSlow : Node2D
 
 	public IAbility Slow { get; set; }
 	public IAbility Poison { get; set; }
+	public IAbility Fire { get; set; }
 
 	public override void _Ready()
 	{
@@ -16,11 +17,13 @@ public partial class TestSlow : Node2D
 		Upgrade.AreaEntered += OnUpgradeAreaEntered;
 		Slow = new SlowEffect();
 		Poison = new PoisonEffect();
+		Fire = new FireEffect();
 	}
 
 	public void OnUpgradeAreaEntered(Area2D area)
 	{
 		Slow.Upgrade(Character);
 		Poison.Upgrade(Character);
+		Fire.Upgrade(Character);
 	}
 }

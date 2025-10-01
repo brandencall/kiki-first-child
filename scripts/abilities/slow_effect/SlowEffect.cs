@@ -28,25 +28,25 @@ public partial class SlowEffect : IAbility
                 character.Effects.Add(_slowEffect);
                 break;
             case 2:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 3:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 4:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 5:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 6:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 7:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
             case 8:
-                _slowEffect.SlowPercentage += 0.05f;
+                _slowEffect.SlowDownMultiplier -= 0.05f;
                 break;
         }
     }

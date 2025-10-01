@@ -1,11 +1,14 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class VelocityComponent : Node
 {
     [Export]
-    public float MaxSpeed { get; set; } = 100f;
+    public float BaseSpeed { get; set; } = 100f;
     [Export]
     private float _accelerationCoefficient = 2f;
+
+    private List<float> _speedMultipliers = new();
 
     public Vector2 LastMoveDirection { get; private set; } = Vector2.Right;
     public float AccelerationCoefficientMultiplier { get; set; } = 1f;
@@ -20,7 +23,28 @@ public partial class VelocityComponent : Node
 
     public void AccelerateInDirection(Vector2 direction)
     {
-        AccelerateToVelocity(direction.Normalized() * MaxSpeed);
+        AccelerateToVelocity(direction.Normalized() * GetCurrentSpeed());
+    }
+
+    public float GetCurrentSpeed()
+    {
+        float finalSpeed = BaseSpeed;
+        float totalMultiplier = 1f;
+        foreach (var m in _speedMultipliers)
+        {
+            totalMultiplier *= m;
+        }
+        return finalSpeed * totalMultiplier;
+    }
+
+    public void AddSpeedMultiplier(float value)
+    {
+        _speedMultipliers.Add(value);
+    }
+
+    public void RemoveSpeedMultiplier(float value)
+    {
+        _speedMultipliers.Remove(value);
     }
 
     public void Declerate()
@@ -38,8 +62,8 @@ public partial class VelocityComponent : Node
         }
     }
 
-    public float GetMaxSpeed()
+    public float GetBaseSpeed()
     {
-        return MaxSpeed;
+        return BaseSpeed;
     }
 }
