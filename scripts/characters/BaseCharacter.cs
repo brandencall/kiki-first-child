@@ -72,6 +72,11 @@ public partial class BaseCharacter : CharacterBody2D
         }
     }
 
+    public virtual void UpdateBaseAttackDamage(float newDamage)
+    {
+        BaseAttackDamage = newDamage;
+    }
+
     public virtual void OnBaseAttackTimerTimeout()
     {
         EmitSignal(SignalName.Attack);

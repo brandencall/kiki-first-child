@@ -38,8 +38,8 @@ position = Vector2(-26.9987, -17.4179)
 scale = Vector2(1, 0.993)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_u1830")]
-MaxSpeed = 200.0
-_accelerationCoefficient = 10.0
+BaseSpeed = 300.0
+_accelerationCoefficient = 15.0
 
 [node name="CharacterHurtbox" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_3r7lq")]
 _healthComponent = NodePath("../HealthComponent")

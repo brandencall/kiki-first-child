@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dknmj2u6yov61"]
 
 [ext_resource type="Script" uid="uid://eajuuipo2wya" path="res://_debug/test_abilities/test_base_weapon_upgrade/TestBaseWeaponUpgrade.cs" id="1_v60d3"]
-[ext_resource type="PackedScene" uid="uid://c555vv32vvmb8" path="res://scenes/characters/tonts.tscn" id="2_kh3yl"]
+[ext_resource type="PackedScene" uid="uid://b7gpmd03l8y8k" path="res://scenes/characters/chavz.tscn" id="2_v60d3"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="3_0urt0"]
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="4_a2lme"]
 [ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="5_of8vg"]
@@ -15,10 +15,8 @@ size = Vector2(114, 115)
 
 [node name="TestBaseWeaponUpgrade" type="Node2D" node_paths=PackedStringArray("Character", "Upgrade")]
 script = ExtResource("1_v60d3")
-Character = NodePath("Tonts")
+Character = NodePath("Chavz")
 Upgrade = NodePath("Area2D")
-
-[node name="Tonts" parent="." instance=ExtResource("2_kh3yl")]
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(249, 3)
@@ -58,3 +56,5 @@ offset_right = 123.333
 offset_bottom = 110.333
 _healthComponent = NodePath("../HealthComponent")
 metadata/_edit_use_anchors_ = true
+
+[node name="Chavz" parent="." instance=ExtResource("2_v60d3")]

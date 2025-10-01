@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Noodle : HitboxComponent
 {
@@ -10,9 +9,10 @@ public partial class Noodle : HitboxComponent
 
 	private BaseCharacter _character;
 
-	public void Initialize(BaseCharacter character)
+	public void Initialize(BaseCharacter character, float damage)
 	{
 		_character = character;
+        Damage = damage;
 	}
 
 	public void Attack()

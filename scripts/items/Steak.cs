@@ -20,10 +20,12 @@ public partial class Steak : HitboxComponent
 		Animation.AnimationFinished += OnAnimationFinished;
 	}
 
-	public void Initialize(BaseCharacter character)
+	public void Initialize(BaseCharacter character, float damage)
 	{
 		_character = character;
+		Damage = damage;
 	}
+
 
 	public void Attack()
 	{

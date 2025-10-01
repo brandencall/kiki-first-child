@@ -7,6 +7,12 @@ public partial class Tonts : BaseCharacter
     [Export]
     public Marker2D Mussel;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        BaseAttackDamage = 10f;
+    }
+
     // TODO: Make an object pool of bottles and just apply the effects to the bottles once
     public override void OnBaseAttackTimerTimeout()
     {

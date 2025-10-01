@@ -8,7 +8,7 @@ public partial class BackwardsNoodleSkill : Node2D, ISkill
 	public void Apply(BaseCharacter character)
 	{
 		character.AddChild(this);
-		Noodle.Initialize(character);
+		Noodle.Initialize(character, character.BaseAttackDamage);
 		character.Attack += Attack;
 	}
 
