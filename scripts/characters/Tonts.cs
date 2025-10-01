@@ -13,6 +13,7 @@ public partial class Tonts : BaseCharacter
         base.OnBaseAttackTimerTimeout();
         HitboxComponent bullet = BulletScene.Instantiate<HitboxComponent>();
         bullet.Effects = Effects;
+        bullet.Damage = BaseAttackDamage;
         GetTree().Root.AddChild(bullet);
         SetMusselPosition();
         bullet.GlobalPosition = Mussel.GlobalPosition;

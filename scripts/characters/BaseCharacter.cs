@@ -10,17 +10,19 @@ public partial class BaseCharacter : CharacterBody2D
     public VelocityComponent VelocityComponent { get; set; }
     [Export]
     public HealthComponent HealthComponent { get; set; }
+    [Export]
+    public float BaseAttackCooldown = 1.5f;
+    [Export]
+    public float BaseAttackDamage = 10f;
 
     public SkillTree SkillTree { get; set; }
     public CharacterData CharacterData { get; private set; }
 
     public List<IEffect> Effects { get; set; } = new();
 
-    [Export]
-    private float _baseAttackCooldown = 1.5f;
-
     private CollisionShape2D _hitboxCollision;
     private bool _isAttacking = false;
+    private Timer _baseAttackTimer;
 
     [Signal]
     public delegate void ExperiencePickedupEventHandler(float experience);
@@ -37,13 +39,14 @@ public partial class BaseCharacter : CharacterBody2D
         HealthComponent.Died += Die;
         GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
-        Timer baseAttackTimer = new Timer();
-        AddChild(baseAttackTimer);
-        baseAttackTimer.WaitTime += _baseAttackCooldown;
-        baseAttackTimer.OneShot = false;
-        baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
-        baseAttackTimer.Start();
+        _baseAttackTimer = new Timer();
+        AddChild(_baseAttackTimer);
+        _baseAttackTimer.WaitTime = BaseAttackCooldown;
+        _baseAttackTimer.OneShot = false;
+        _baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
+        _baseAttackTimer.Start();
 
+        //await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
         GodotUtilities.RegisterCharacter(this);
     }
 
@@ -56,6 +59,17 @@ public partial class BaseCharacter : CharacterBody2D
     public void CreateAndApplySkillTree()
     {
         SkillTree = new SkillTree(CharacterData.Skills, this);
+    }
+
+    public void UpdateAttackCooldown(float newCooldown)
+    {
+        BaseAttackCooldown = newCooldown;
+        _baseAttackTimer.WaitTime = BaseAttackCooldown;
+
+        if (_baseAttackTimer.TimeLeft > newCooldown)
+        {
+            _baseAttackTimer.Start();
+        }
     }
 
     public virtual void OnBaseAttackTimerTimeout()
