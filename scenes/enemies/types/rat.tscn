@@ -66,11 +66,6 @@ FlowFieldWeight = 0.8
 visible = false
 shape = SubResource("CircleShape2D_k4655")
 
-[node name="AnimatedSprite2D" parent="." index="6"]
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_unsun")
-autoplay = "default"
-
 [node name="HurtboxComponent" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
 _healthComponent = NodePath("../HealthComponent")
 
@@ -78,9 +73,14 @@ _healthComponent = NodePath("../HealthComponent")
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthComponent" parent="." index="9"]
+[node name="AnimatedSprite2D" parent="." index="8"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_unsun")
+autoplay = "default"
+
+[node name="HealthComponent" parent="." index="10"]
 MaxHealth = 10.0
 
-[node name="VelocityComponent" parent="." index="10"]
+[node name="VelocityComponent" parent="." index="11"]
 MaxSpeed = 150.0
 _accelerationCoefficient = 10.0

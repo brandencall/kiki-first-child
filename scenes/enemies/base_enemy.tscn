@@ -1,12 +1,38 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddml7p7u4bv13"]
+[gd_scene load_steps=15 format=3 uid="uid://ddml7p7u4bv13"]
 
 [ext_resource type="Script" uid="uid://c6ffktfl81gy8" path="res://scripts/enemies/BaseEnemy.cs" id="1_r5xb8"]
 [ext_resource type="PackedScene" uid="uid://cn17c3n307c3f" path="res://scenes/components/item_dropper.tscn" id="2_qf3h2"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="4_n763p"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_ylyo2"]
 
+[sub_resource type="Gradient" id="Gradient_ylyo2"]
+colors = PackedColorArray(0.435294, 0.764706, 0.858824, 1, 0.768627, 0.917647, 0.960784, 0.890196)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2t7ph"]
+gradient = SubResource("Gradient_ylyo2")
+
+[sub_resource type="Curve" id="Curve_ylyo2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.460674), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2t7ph"]
+curve = SubResource("Curve_ylyo2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2ebm"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -5, 0)
+emission_shape = 3
+emission_box_extents = Vector3(50, 5, 1)
+gravity = Vector3(0, -70, 0)
+scale_min = 10.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_2t7ph")
+color = Color(0.435666, 0.762781, 0.857443, 1)
+color_ramp = SubResource("GradientTexture1D_2t7ph")
+
 [sub_resource type="Gradient" id="Gradient_n763p"]
-colors = PackedColorArray(0.72549, 0.768627, 0.152941, 1, 1, 0.94902, 0, 1)
+colors = PackedColorArray(0.505882, 0.596078, 0.141176, 1, 0.796078, 0.929412, 0.317647, 0.886275)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_n763p"]
 gradient = SubResource("Gradient_n763p")
@@ -23,25 +49,31 @@ lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
-emission_box_extents = Vector3(35, 5, 1)
+emission_box_extents = Vector3(35, 10, 1)
 gravity = Vector3(0, -70, 0)
-scale_min = 5.0
-scale_max = 10.0
+scale_min = 10.0
+scale_max = 15.0
 scale_curve = SubResource("CurveTexture_ylyo2")
-color = Color(0.72549, 0.768627, 0.152941, 1)
+color = Color(0.504994, 0.596086, 0.141458, 1)
 color_ramp = SubResource("GradientTexture1D_n763p")
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "VelocityComponent", "PoisonParticles")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "VelocityComponent", "PoisonParticles", "SlowParticles")]
 script = ExtResource("1_r5xb8")
 _itemDropper = NodePath("ItemDropper")
 Animations = NodePath("AnimatedSprite2D")
 HealthComponent = NodePath("HealthComponent")
 VelocityComponent = NodePath("VelocityComponent")
 PoisonParticles = NodePath("PoisonParticles")
+SlowParticles = NodePath("SlowParticles")
+
+[node name="SlowParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_n2ebm")
 
 [node name="PoisonParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 10
+amount = 5
 process_material = SubResource("ParticleProcessMaterial_n763p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

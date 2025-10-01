@@ -16,12 +16,11 @@ public partial class TestSlow : Node2D
 		Upgrade.AreaEntered += OnUpgradeAreaEntered;
 		Slow = new SlowEffect();
 		Poison = new PoisonEffect();
-
 	}
 
 	public void OnUpgradeAreaEntered(Area2D area)
 	{
-		Poison.Upgrade(Character);
 		Slow.Upgrade(Character);
+		Poison.Upgrade(Character);
 	}
 }

@@ -14,9 +14,11 @@ public partial class SlowEffectAbility : Node, IEffect
 		float baseSpeed = target.VelocityComponent.MaxSpeed;
 		float newSpeed = baseSpeed - (baseSpeed * SlowPercentage);
 		target.VelocityComponent.MaxSpeed = newSpeed;
+		target.ApplySlow();
 		GD.Print("Velocity while slow: " + target.VelocityComponent.MaxSpeed);
 		await ToSignal(GetTree().CreateTimer(Duration), "timeout");
 		target.VelocityComponent.MaxSpeed = baseSpeed;
+		target.ClearSlow();
 		GD.Print("Velocity after slow: " + target.VelocityComponent.MaxSpeed);
 	}
 }

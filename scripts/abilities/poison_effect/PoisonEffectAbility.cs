@@ -13,7 +13,7 @@ public partial class PoisonEffectAbility : Node, IEffect
 	public async Task Apply(BaseEnemy target)
 	{
 		float elapsed = 0f;
-		target.ApplyPoisonTint();
+		target.ApplyPoison();
 
 		while (elapsed <= Duration)
 		{
@@ -21,6 +21,6 @@ public partial class PoisonEffectAbility : Node, IEffect
 			target.HealthComponent.Damage(Damage);
 			elapsed += TickInterval;
 		}
-		target.ClearPoisonTint();
+		target.ClearPoison();
 	}
 }
