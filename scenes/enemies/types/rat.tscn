@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_g4jj5"]
 [ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="9_sw88c"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsgw"]
+size = Vector2(51, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
+radius = 38.0132
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_2tddw"]
 atlas = ExtResource("2_2tddw")
 region = Rect2(0, 0, 32, 32)
@@ -24,22 +30,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmsgw"]
-size = Vector2(51, 20)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
-radius = 38.0132
-
 [node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_exbx4")]
 script = ExtResource("2_unsun")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
-
-[node name="AnimatedSprite2D" parent="." index="0"]
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_unsun")
-autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(-1.5, -3)
@@ -71,6 +66,11 @@ FlowFieldWeight = 0.8
 visible = false
 shape = SubResource("CircleShape2D_k4655")
 
+[node name="AnimatedSprite2D" parent="." index="6"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_unsun")
+autoplay = "default"
+
 [node name="HurtboxComponent" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
 _healthComponent = NodePath("../HealthComponent")
 
@@ -78,9 +78,9 @@ _healthComponent = NodePath("../HealthComponent")
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
-[node name="HealthComponent" parent="." index="8"]
+[node name="HealthComponent" parent="." index="9"]
 MaxHealth = 10.0
 
-[node name="VelocityComponent" parent="." index="9"]
+[node name="VelocityComponent" parent="." index="10"]
 MaxSpeed = 150.0
 _accelerationCoefficient = 10.0
