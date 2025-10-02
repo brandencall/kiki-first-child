@@ -3,6 +3,7 @@ using Godot;
 
 public partial class PoisonEffectAbility : Node, IEffect
 {
+	public bool IsStateModifier { get; } = false;
 	[Export]
 	public int Damage { get; set; } = 1;
 	[Export]

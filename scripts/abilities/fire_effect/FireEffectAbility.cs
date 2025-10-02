@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 public partial class FireEffectAbility : Node, IEffect
 {
+	// Modifies the entity movement state
+	public bool IsStateModifier { get; } = true;
 	[Export]
 	public int Damage { get; set; } = 1;
 	[Export]

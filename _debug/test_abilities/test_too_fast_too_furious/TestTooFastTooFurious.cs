@@ -14,13 +14,13 @@ public partial class TestTooFastTooFurious : Node2D
 	{
 		base._Ready();
 		Upgrade.AreaEntered += OnUpgradeAreaEntered;
-		FireEffect = new FireEffect();
 		TooFast = new TooFastTooFurious();
+		FireEffect = new FireEffect();
 	}
 
 	public void OnUpgradeAreaEntered(Area2D area)
 	{
-		FireEffect.Upgrade(Character);
 		TooFast.Upgrade(Character);
+		FireEffect.Upgrade(Character);
 	}
 }

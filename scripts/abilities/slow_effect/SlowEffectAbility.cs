@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 public partial class SlowEffectAbility : Node, IEffect
 {
+	// Modifies the entity movement state
+	public bool IsStateModifier { get; } = true;
 	[Export]
 	public float Duration { get; set; } = 1.5f;
 	[Export]

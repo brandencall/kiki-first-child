@@ -26,8 +26,20 @@ public partial class HurtboxComponent : Area2D
 			{
 				foreach (var effect in effects)
 				{
-					//Fire and forget so that all effects are applied at the same time
-					_ = effect.Apply(enemy);
+					if (effect.IsStateModifier)
+					{
+						//Fire and forget so that all effects are applied at the same time
+						_ = effect.Apply(enemy);
+					}
+				}
+
+				foreach (var effect in effects)
+				{
+					if (!effect.IsStateModifier)
+					{
+						//Fire and forget so that all effects are applied at the same time
+						_ = effect.Apply(enemy);
+					}
 				}
 			}
 		}
