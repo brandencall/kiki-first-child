@@ -26,7 +26,6 @@ public partial class Steak : HitboxComponent
 		Damage = damage;
 	}
 
-
 	public void Attack()
 	{
 		if (_character.VelocityComponent.LastMoveDirection.X < 0)

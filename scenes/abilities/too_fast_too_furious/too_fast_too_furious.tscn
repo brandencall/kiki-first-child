@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cte1muyeo6ryj"]
+
+[ext_resource type="Script" uid="uid://ci5xmarnw5e0b" path="res://scripts/abilities/too_fast_too_furious/TooFastTooFuriousAbility.cs" id="1_n846l"]
+
+[node name="too_fast_too_furious" type="Node"]
+script = ExtResource("1_n846l")
