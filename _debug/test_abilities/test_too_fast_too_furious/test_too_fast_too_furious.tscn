@@ -58,3 +58,30 @@ offset_right = 123.333
 offset_bottom = 110.333
 _healthComponent = NodePath("../HealthComponent")
 metadata/_edit_use_anchors_ = true
+
+[node name="BaseEnemy2" parent="." instance=ExtResource("4_s0m1x")]
+position = Vector2(220, 261)
+scale = Vector2(0.3, 0.3)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BaseEnemy2"]
+texture = ExtResource("3_4g638")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy2"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_2gb8m")
+
+[node name="HurtboxComponent" parent="BaseEnemy2" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_43pyn")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy2/HurtboxComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_2gb8m")
+
+[node name="HealthBar" parent="BaseEnemy2" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("6_ookqf")]
+offset_left = -116.667
+offset_top = 83.3333
+offset_right = 123.333
+offset_bottom = 110.333
+_healthComponent = NodePath("../HealthComponent")
+metadata/_edit_use_anchors_ = true

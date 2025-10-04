@@ -11,8 +11,6 @@ public partial class TooFastTooFuriousAbility : Node, IEffect
 	public async Task Apply(BaseEnemy target)
 	{
 		float extraDamage = target.VelocityComponent.GetCurrentSpeed() * DamageMultiplier;
-		GD.Print("Current Speed: " + target.VelocityComponent.GetCurrentSpeed());
-		GD.Print("Extra Damage: " + extraDamage);
 		target.HealthComponent.Damage(extraDamage);
 	}
 }

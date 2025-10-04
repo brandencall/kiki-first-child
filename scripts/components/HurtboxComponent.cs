@@ -48,6 +48,5 @@ public partial class HurtboxComponent : Area2D
 	private void DealDamage(float damage)
 	{
 		_healthComponent.Damage(damage);
-		GD.Print("Damage: " + damage);
 	}
 }
