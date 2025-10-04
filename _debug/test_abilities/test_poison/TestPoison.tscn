@@ -32,9 +32,10 @@ position = Vector2(0, -0.500002)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_yl1ib")
 
-[node name="BaseEnemy" parent="." instance=ExtResource("4_bvvag")]
+[node name="BaseEnemy" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("4_bvvag")]
 position = Vector2(219, 195)
 scale = Vector2(0.3, 0.3)
+HurtboxComponent = NodePath("HurtboxComponent2")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]
@@ -44,10 +45,10 @@ texture = ExtResource("3_a40md")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_7i6u1")
 
-[node name="HurtboxComponent" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_r2r5i")]
+[node name="HurtboxComponent2" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_r2r5i")]
 _healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy/HurtboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy/HurtboxComponent2"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_7i6u1")
 

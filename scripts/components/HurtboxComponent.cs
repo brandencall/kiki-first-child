@@ -2,48 +2,55 @@ using Godot;
 
 public partial class HurtboxComponent : Area2D
 {
-    [Export]
-    private HealthComponent _healthComponent;
+	[Export]
+	private HealthComponent _healthComponent;
 
-    public override void _Ready()
-    {
-        CollisionLayer = 32;
-        CollisionMask = 2;
-        Connect("area_entered", new Callable(this, nameof(OnAreaEntered)));
-    }
+	public Node OwnerEntity { get; set; }
 
-    private void OnAreaEntered(HitboxComponent hitbox)
-    {
-        DealDamage(hitbox.Damage);
+	public override void _Ready()
+	{
+		CollisionLayer = 32;
+		CollisionMask = 2;
+		Connect("area_entered", new Callable(this, nameof(OnAreaEntered)));
+	}
 
-        var effects = hitbox.Effects;
-        // TODO: Should change this to some sort of IEntity so even the Characters can be effected
-        BaseEnemy enemy = GetParent<BaseEnemy>();
+	private void OnAreaEntered(Area2D otherArea)
+	{
+		if (otherArea is HitboxComponent hitbox)
+		{
+			DealDamage(hitbox.Damage);
+			GD.Print("HurtboxComponent Owner: " + OwnerEntity);
+			GD.Print("HitboxComponent Owner: " + hitbox.OwnerEntity);
 
-        if (enemy != null)
-        {
-            foreach (var effect in effects)
-            {
-                if (effect.IsStateModifier)
-                {
-                    //Fire and forget so that all effects are applied at the same time
-                    _ = effect.Apply(enemy);
-                }
-            }
+			var effects = hitbox.Effects;
+			// TODO: Should change this to some sort of IEntity so even the Characters can be effected
+			BaseEnemy enemy = GetParent<BaseEnemy>();
 
-            foreach (var effect in effects)
-            {
-                if (!effect.IsStateModifier)
-                {
-                    //Fire and forget so that all effects are applied at the same time
-                    _ = effect.Apply(enemy);
-                }
-            }
-        }
-    }
+			if (enemy != null)
+			{
+				foreach (var effect in effects)
+				{
+					if (effect.IsStateModifier)
+					{
+						//Fire and forget so that all effects are applied at the same time
+						_ = effect.Apply(enemy);
+					}
+				}
 
-    private void DealDamage(float damage)
-    {
-        _healthComponent.Damage(damage);
-    }
+				foreach (var effect in effects)
+				{
+					if (!effect.IsStateModifier)
+					{
+						//Fire and forget so that all effects are applied at the same time
+						_ = effect.Apply(enemy);
+					}
+				}
+			}
+		}
+	}
+
+	private void DealDamage(float damage)
+	{
+		_healthComponent.Damage(damage);
+	}
 }

@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbx0m63uspnc4"]
+[gd_scene load_steps=12 format=3 uid="uid://cbx0m63uspnc4"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_exbx4"]
 [ext_resource type="Texture2D" uid="uid://bv0vb3c5xy1ly" path="res://assets/enemies/rat.png" id="2_2tddw"]
 [ext_resource type="Script" uid="uid://d1qruxhemux1x" path="res://scripts/enemies/types/Rat.cs" id="2_unsun"]
-[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="4_vll8n"]
 [ext_resource type="PackedScene" uid="uid://3seqv6e5bdw0" path="res://scenes/components/pathfind_component.tscn" id="6_jqcia"]
 [ext_resource type="PackedScene" uid="uid://tk3k1hq6bh4c" path="res://scenes/enemies/enemy_hitbox.tscn" id="7_tfqfa"]
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_g4jj5"]
@@ -66,13 +65,6 @@ FlowFieldWeight = 0.8
 visible = false
 shape = SubResource("CircleShape2D_k4655")
 
-[node name="HurtboxComponent" parent="." index="7" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_vll8n")]
-_healthComponent = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(-1.5, -3)
-shape = SubResource("RectangleShape2D_qmsgw")
-
 [node name="AnimatedSprite2D" parent="." index="8"]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_unsun")
@@ -82,5 +74,8 @@ autoplay = "default"
 MaxHealth = 10.0
 
 [node name="VelocityComponent" parent="." index="11"]
-MaxSpeed = 150.0
 _accelerationCoefficient = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(-1.5, -3)
+shape = SubResource("RectangleShape2D_qmsgw")

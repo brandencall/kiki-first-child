@@ -10,6 +10,7 @@ public partial class Hodge : BaseCharacter
         base._Ready();
         BaseAttackDamage = 10f;
         Noodle.Initialize(this, BaseAttackDamage);
+        Noodle.OwnerEntity = this;
     }
 
     public override void UpdateBaseAttackDamage(float newDamage)

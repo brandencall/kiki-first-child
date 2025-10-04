@@ -18,6 +18,7 @@ public partial class Tonts : BaseCharacter
     {
         base.OnBaseAttackTimerTimeout();
         HitboxComponent bullet = BulletScene.Instantiate<HitboxComponent>();
+        bullet.OwnerEntity = this;
         bullet.Effects = Effects;
         bullet.Damage = BaseAttackDamage;
         GetTree().Root.AddChild(bullet);

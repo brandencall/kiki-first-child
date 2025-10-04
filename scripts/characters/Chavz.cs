@@ -10,6 +10,7 @@ public partial class Chavz : BaseCharacter
         base._Ready();
         BaseAttackDamage = 20;
         Steak.Initialize(this, BaseAttackDamage);
+        Steak.OwnerEntity = this;
     }
 
     public override void UpdateBaseAttackDamage(float newDamage)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://ddml7p7u4bv13"]
+[gd_scene load_steps=21 format=3 uid="uid://ddml7p7u4bv13"]
 
 [ext_resource type="Script" uid="uid://c6ffktfl81gy8" path="res://scripts/enemies/BaseEnemy.cs" id="1_r5xb8"]
 [ext_resource type="PackedScene" uid="uid://cn17c3n307c3f" path="res://scenes/components/item_dropper.tscn" id="2_qf3h2"]
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="4_n763p"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_ylyo2"]
+[ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="5_ylyo2"]
 
 [sub_resource type="Gradient" id="Gradient_ylyo2"]
 colors = PackedColorArray(0.435294, 0.764706, 0.858824, 1, 0.768627, 0.917647, 0.960784, 0.890196)
@@ -83,11 +84,12 @@ scale_curve = SubResource("CurveTexture_hwcqj")
 color = Color(0.839216, 0, 0, 1)
 color_ramp = SubResource("GradientTexture1D_n2ebm")
 
-[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "VelocityComponent", "PoisonParticles", "SlowParticles", "FireParticles")]
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "HurtboxComponent", "VelocityComponent", "PoisonParticles", "SlowParticles", "FireParticles")]
 script = ExtResource("1_r5xb8")
 _itemDropper = NodePath("ItemDropper")
 Animations = NodePath("AnimatedSprite2D")
 HealthComponent = NodePath("HealthComponent")
+HurtboxComponent = NodePath("HurtboxComponent")
 VelocityComponent = NodePath("VelocityComponent")
 PoisonParticles = NodePath("PoisonParticles")
 SlowParticles = NodePath("SlowParticles")
@@ -115,3 +117,6 @@ process_material = SubResource("ParticleProcessMaterial_h4c3k")
 [node name="HealthComponent" parent="." instance=ExtResource("4_ylyo2")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_n763p")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_ylyo2")]
+_healthComponent = NodePath("../HealthComponent")

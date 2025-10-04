@@ -10,6 +10,8 @@ public partial class BaseEnemy : CharacterBody2D
 	[Export]
 	public HealthComponent HealthComponent { get; set; }
 	[Export]
+	public HurtboxComponent HurtboxComponent { get; set; }
+	[Export]
 	public VelocityComponent VelocityComponent { get; set; }
 	[Export]
 	public GpuParticles2D PoisonParticles { get; set; }
@@ -27,6 +29,7 @@ public partial class BaseEnemy : CharacterBody2D
 		CollisionLayer = 16;
 		CollisionMask = 0 | 16;
 		AddToGroup("enemy");
+		HurtboxComponent.OwnerEntity = this;
 	}
 
 	public override void _PhysicsProcess(double delta)

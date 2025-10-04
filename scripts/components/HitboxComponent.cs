@@ -6,6 +6,7 @@ public partial class HitboxComponent : Area2D
 	[Export]
 	public float Damage { get; set; } = 0f;
 	public List<IEffect> Effects { get; set; } = new();
+	public Node OwnerEntity { get; set; }
 
 	public override void _Ready()
 	{
