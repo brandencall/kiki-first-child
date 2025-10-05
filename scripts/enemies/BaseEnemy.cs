@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class BaseEnemy : CharacterBody2D
+public partial class BaseEnemy : CharacterBody2D, IHasHealth
 {
 
 	[Export]
@@ -45,6 +45,11 @@ public partial class BaseEnemy : CharacterBody2D
 				Animations.FlipH = false;
 			}
 		}
+	}
+
+	public void ApplyDamage(float damage)
+	{
+		HurtboxComponent.DealDamage(damage);
 	}
 
 	private void InitCharacter()

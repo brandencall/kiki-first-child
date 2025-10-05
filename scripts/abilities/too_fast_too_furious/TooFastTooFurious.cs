@@ -25,7 +25,7 @@ public partial class TooFastTooFurious : Node, IAbility
 			case 1:
 				_tooFastTooFurious = _tooFastTooFuriousScene.Instantiate<TooFastTooFuriousAbility>();
 				character.AddChild(_tooFastTooFurious);
-				character.Effects.Add(_tooFastTooFurious);
+				character.ConditionalEffects.Add(_tooFastTooFurious);
 				break;
 			case 2:
 				_tooFastTooFurious.DamageMultiplier += 0.05f;

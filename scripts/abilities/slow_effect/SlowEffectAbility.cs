@@ -10,14 +10,18 @@ public partial class SlowEffectAbility : Node, IEffect
 	[Export]
 	public float SlowDownMultiplier { get; set; } = 0.95f;
 
-	public async Task Apply(BaseEnemy target)
+	public async Task Apply(DamageContext ctx)
 	{
-		target.ApplySlow();
-		target.VelocityComponent.AddSpeedMultiplier(SlowDownMultiplier);
-		GD.Print("Speed updated in the SlowEffectAbility to newSpeed: " + target.VelocityComponent.GetCurrentSpeed());
-		await ToSignal(GetTree().CreateTimer(Duration), "timeout");
-		target.ClearSlow();
-		target.VelocityComponent.RemoveSpeedMultiplier(SlowDownMultiplier);
-		GD.Print("Speed updated in the SlowEffectAbility to baseSpeed: " + target.VelocityComponent.GetCurrentSpeed());
+		// Change this from BaseEnemy to an Interface that the enemy implements
+		if (ctx.Defender is BaseEnemy target)
+		{
+			target.ApplySlow();
+			target.VelocityComponent.AddSpeedMultiplier(SlowDownMultiplier);
+			GD.Print("Speed updated in the SlowEffectAbility to newSpeed: " + target.VelocityComponent.GetCurrentSpeed());
+			await ToSignal(GetTree().CreateTimer(Duration), "timeout");
+			target.ClearSlow();
+			target.VelocityComponent.RemoveSpeedMultiplier(SlowDownMultiplier);
+			GD.Print("Speed updated in the SlowEffectAbility to baseSpeed: " + target.VelocityComponent.GetCurrentSpeed());
+		}
 	}
 }

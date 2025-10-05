@@ -14,20 +14,23 @@ public partial class FireEffectAbility : Node, IEffect
 	[Export]
 	public float SpeedUpMultiplier = 1.05f;
 
-	public async Task Apply(BaseEnemy target)
+	public async Task Apply(DamageContext ctx)
 	{
-		//Should i move this into the ApplyFire() method?
-		target.VelocityComponent.AddSpeedMultiplier(SpeedUpMultiplier);
-		float elapsed = 0f;
-		target.ApplyFire();
-
-		while (elapsed <= Duration)
+		// Change this from BaseEnemy to an Interface that the enemy implements
+		if (ctx.Defender is BaseEnemy target)
 		{
-			await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
-			target.HealthComponent.Damage(Damage);
-			elapsed += TickInterval;
+			target.VelocityComponent.AddSpeedMultiplier(SpeedUpMultiplier);
+			float elapsed = 0f;
+			target.ApplyFire();
+
+			while (elapsed <= Duration)
+			{
+				await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
+				target.HealthComponent.Damage(Damage);
+				elapsed += TickInterval;
+			}
+			target.ClearFire();
+			target.VelocityComponent.RemoveSpeedMultiplier(SpeedUpMultiplier);
 		}
-		target.ClearFire();
-		target.VelocityComponent.RemoveSpeedMultiplier(SpeedUpMultiplier);
 	}
 }

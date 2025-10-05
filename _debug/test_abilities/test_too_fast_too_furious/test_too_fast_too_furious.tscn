@@ -32,9 +32,10 @@ position = Vector2(0, -0.500002)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_hb4yi")
 
-[node name="BaseEnemy" parent="." instance=ExtResource("4_s0m1x")]
+[node name="BaseEnemy" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("4_s0m1x")]
 position = Vector2(219, 195)
 scale = Vector2(0.3, 0.3)
+HurtboxComponent = NodePath("HurtboxComponent2")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]

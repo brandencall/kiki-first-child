@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class BaseCharacter : CharacterBody2D
+public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects 
 {
 
     [Export]
@@ -19,6 +19,7 @@ public partial class BaseCharacter : CharacterBody2D
     public CharacterData CharacterData { get; private set; }
 
     public List<IEffect> Effects { get; set; } = new();
+    public List<IConditionalEffect> ConditionalEffects { get; set; } = new();
 
     private CollisionShape2D _hitboxCollision;
     private bool _isAttacking = false;
@@ -46,7 +47,6 @@ public partial class BaseCharacter : CharacterBody2D
         _baseAttackTimer.Timeout += OnBaseAttackTimerTimeout;
         _baseAttackTimer.Start();
 
-        //await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
         GodotUtilities.RegisterCharacter(this);
     }
 
@@ -59,6 +59,11 @@ public partial class BaseCharacter : CharacterBody2D
     public void CreateAndApplySkillTree()
     {
         SkillTree = new SkillTree(CharacterData.Skills, this);
+    }
+
+    public List<IConditionalEffect> GetConditionalEffects()
+    {
+        return ConditionalEffects;
     }
 
     public void UpdateAttackCooldown(float newCooldown)
