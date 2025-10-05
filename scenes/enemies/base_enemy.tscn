@@ -24,8 +24,8 @@ lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
-emission_box_extents = Vector3(50, 5, 1)
-gravity = Vector3(0, -70, 0)
+emission_box_extents = Vector3(50, 30, 1)
+gravity = Vector3(0, -5, 0)
 scale_min = 10.0
 scale_max = 15.0
 scale_curve = SubResource("CurveTexture_2t7ph")
@@ -50,8 +50,8 @@ lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
-emission_box_extents = Vector3(35, 10, 1)
-gravity = Vector3(0, -70, 0)
+emission_box_extents = Vector3(50, 30, 1)
+gravity = Vector3(0, -5, 0)
 scale_min = 10.0
 scale_max = 15.0
 scale_curve = SubResource("CurveTexture_ylyo2")
@@ -59,16 +59,16 @@ color = Color(0.504994, 0.596086, 0.141458, 1)
 color_ramp = SubResource("GradientTexture1D_n763p")
 
 [sub_resource type="Gradient" id="Gradient_2t7ph"]
-colors = PackedColorArray(0.839216, 0, 0, 1, 1, 0.984314, 0, 1)
+colors = PackedColorArray(0.839216, 0, 0, 1, 1, 0.984314, 0, 0.690196)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_n2ebm"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ylyo2"]
 gradient = SubResource("Gradient_2t7ph")
 
 [sub_resource type="Curve" id="Curve_i1su5"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.483146), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_hwcqj"]
+[sub_resource type="CurveTexture" id="CurveTexture_n2ebm"]
 curve = SubResource("Curve_i1su5")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h4c3k"]
@@ -76,13 +76,13 @@ lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
-emission_box_extents = Vector3(35, 10, 1)
-gravity = Vector3(0, -70, 0)
+emission_box_extents = Vector3(50, 30, 1)
+gravity = Vector3(0, -5, 0)
 scale_min = 10.0
 scale_max = 15.0
-scale_curve = SubResource("CurveTexture_hwcqj")
-color = Color(0.839216, 0, 0, 1)
-color_ramp = SubResource("GradientTexture1D_n2ebm")
+scale_curve = SubResource("CurveTexture_n2ebm")
+color = Color(0.839216, 0, 0, 0.6)
+color_ramp = SubResource("GradientTexture1D_ylyo2")
 
 [node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("_itemDropper", "Animations", "HealthComponent", "HurtboxComponent", "VelocityComponent", "PoisonParticles", "SlowParticles", "FireParticles")]
 script = ExtResource("1_r5xb8")
@@ -95,21 +95,6 @@ PoisonParticles = NodePath("PoisonParticles")
 SlowParticles = NodePath("SlowParticles")
 FireParticles = NodePath("FireParticles")
 
-[node name="SlowParticles" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_n2ebm")
-
-[node name="PoisonParticles" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_n763p")
-
-[node name="FireParticles" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 5
-process_material = SubResource("ParticleProcessMaterial_h4c3k")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="ItemDropper" parent="." instance=ExtResource("2_qf3h2")]
@@ -120,3 +105,21 @@ process_material = SubResource("ParticleProcessMaterial_h4c3k")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_ylyo2")]
 _healthComponent = NodePath("../HealthComponent")
+
+[node name="SlowParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(0.4, 0.4)
+emitting = false
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_n2ebm")
+
+[node name="PoisonParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(0.4, 0.4)
+emitting = false
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_n763p")
+
+[node name="FireParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(0.4, 0.4)
+emitting = false
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_h4c3k")

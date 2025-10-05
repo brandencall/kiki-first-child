@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://4s0ah7tmct76" path="res://scenes/components/health_bar.tscn" id="8_iw1ws"]
 [ext_resource type="PackedScene" uid="uid://c4r3gkpimwmlo" path="res://scenes/components/collision_avoidance.tscn" id="9_lc218"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnmfw"]
-size = Vector2(15.5, 24.25)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmaus"]
 atlas = ExtResource("2_qmaus")
 region = Rect2(32, 0, 32, 32)
@@ -38,6 +35,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnmfw"]
+size = Vector2(15.5, 24.25)
+
 [node name="TK" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_animations") instance=ExtResource("1_axxgj")]
 scale = Vector2(2, 2)
 script = ExtResource("2_uq7ay")
@@ -45,6 +45,10 @@ _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
 _animations = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_cbbhd")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
@@ -78,17 +82,19 @@ FlowFieldWeight = 0.8
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_gnmfw")
 
-[node name="AnimatedSprite2D" parent="." index="8"]
-sprite_frames = SubResource("SpriteFrames_cbbhd")
-autoplay = "default"
-
-[node name="HealthComponent" parent="." index="10"]
+[node name="HealthComponent" parent="." index="7"]
 MaxHealth = 15.0
 
-[node name="VelocityComponent" parent="." index="11"]
+[node name="VelocityComponent" parent="." index="8"]
 _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
 visible = false
 position = Vector2(-0.25, -1)
 shape = SubResource("RectangleShape2D_gnmfw")
+
+[node name="PoisonParticles" parent="." index="11"]
+scale = Vector2(0.2, 0.2)
+
+[node name="FireParticles" parent="." index="12"]
+scale = Vector2(0.2, 0.2)
