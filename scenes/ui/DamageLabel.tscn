@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqapet4r8i3d"]
+
+[ext_resource type="Script" uid="uid://t2pluowqe0rn" path="res://scripts/ui/DamageLabel.cs" id="1_vjryu"]
+
+[node name="DamageLabel" type="Node2D" node_paths=PackedStringArray("_damageLabel")]
+top_level = true
+script = ExtResource("1_vjryu")
+_damageLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.843137, 0.780392, 0.0666667, 1)
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1

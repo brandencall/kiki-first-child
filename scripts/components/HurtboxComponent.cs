@@ -1,7 +1,9 @@
 using Godot;
+using System;
 
 public partial class HurtboxComponent : Area2D
 {
+	public event Action<float> Damaged;
 	[Export]
 	private HealthComponent _healthComponent;
 
@@ -34,5 +36,6 @@ public partial class HurtboxComponent : Area2D
 	public void DealDamage(float damage)
 	{
 		_healthComponent.Damage(damage);
+		Damaged?.Invoke(damage);
 	}
 }

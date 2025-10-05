@@ -19,6 +19,9 @@ public partial class BaseEnemy : CharacterBody2D, IHasHealth
 	public GpuParticles2D SlowParticles { get; set; }
 	[Export]
 	public GpuParticles2D FireParticles { get; set; }
+	[Export]
+	public PackedScene DamageLabelScene { get; set; }
+
 	[Signal]
 	public delegate void OnEnemyDiedEventHandler();
 	protected CharacterBody2D _character;
@@ -30,6 +33,7 @@ public partial class BaseEnemy : CharacterBody2D, IHasHealth
 		CollisionMask = 0 | 16;
 		AddToGroup("enemy");
 		HurtboxComponent.OwnerEntity = this;
+		HurtboxComponent.Damaged += OnDamaged;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -50,6 +54,19 @@ public partial class BaseEnemy : CharacterBody2D, IHasHealth
 	public void ApplyDamage(float damage)
 	{
 		HurtboxComponent.DealDamage(damage);
+	}
+
+	private void OnDamaged(float damage)
+	{
+		if (DamageLabelScene == null) return;
+
+		var label = DamageLabelScene.Instantiate<DamageLabel>();
+		GetTree().CurrentScene.AddChild(label);
+
+		label.GlobalPosition = GlobalPosition;
+
+		label.Position += new Vector2(GD.Randf() * 16 - 8, GD.Randf() * -8);
+		label.Initialize(damage);
 	}
 
 	private void InitCharacter()

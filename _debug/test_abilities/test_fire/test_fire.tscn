@@ -33,7 +33,7 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_s725b")
 
 [node name="BaseEnemy" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("3_2pta0")]
-position = Vector2(219, 195)
+position = Vector2(123, -139)
 scale = Vector2(0.3, 0.3)
 HurtboxComponent = NodePath("HurtboxComponent2")
 metadata/_edit_group_ = true
@@ -42,7 +42,7 @@ metadata/_edit_group_ = true
 texture = ExtResource("2_aq4x8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
-position = Vector2(0, -0.5)
+position = Vector2(-5.08626e-05, -7.12276e-05)
 shape = SubResource("RectangleShape2D_aq4x8")
 
 [node name="HurtboxComponent2" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_1jrbr")]
