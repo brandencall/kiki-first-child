@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s725b"]
 size = Vector2(24.8, 25)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xf4d"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aq4x8"]
 size = Vector2(114, 115)
 
 [node name="test_fire" type="Node2D" node_paths=PackedStringArray("Character", "Upgrade")]
@@ -32,9 +32,10 @@ position = Vector2(0, -0.500002)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_s725b")
 
-[node name="BaseEnemy" parent="." instance=ExtResource("3_2pta0")]
+[node name="BaseEnemy" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("3_2pta0")]
 position = Vector2(219, 195)
 scale = Vector2(0.3, 0.3)
+HurtboxComponent = NodePath("HurtboxComponent2")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]
@@ -42,14 +43,14 @@ texture = ExtResource("2_aq4x8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
 position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_1xf4d")
+shape = SubResource("RectangleShape2D_aq4x8")
 
-[node name="HurtboxComponent" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_1jrbr")]
+[node name="HurtboxComponent2" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_1jrbr")]
 _healthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy/HurtboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy/HurtboxComponent2"]
 position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_1xf4d")
+shape = SubResource("RectangleShape2D_aq4x8")
 
 [node name="HealthBar" parent="BaseEnemy" node_paths=PackedStringArray("_healthComponent") instance=ExtResource("5_lc4e7")]
 offset_left = -116.667
