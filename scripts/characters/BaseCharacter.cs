@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects 
+public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects, IHasHealth
 {
 
     [Export]
@@ -10,6 +10,8 @@ public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects
     public VelocityComponent VelocityComponent { get; set; }
     [Export]
     public HealthComponent HealthComponent { get; set; }
+    [Export]
+    public CharacterHurtbox CharacterHurtbox { get; set; }
     [Export]
     public float BaseAttackCooldown = 1.5f;
     [Export]
@@ -38,6 +40,7 @@ public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects
         CollisionMask = 0;
         AddToGroup("character");
         HealthComponent.Died += Die;
+        CharacterHurtbox.OwnerEntity = this;
         GetNode<Area2D>("PickupArea").AreaEntered += OnPickupAreaEntered;
 
         _baseAttackTimer = new Timer();
@@ -54,6 +57,11 @@ public partial class BaseCharacter : CharacterBody2D, IHasConditionalEffects
     {
         CharacterData = characterData;
         CreateAndApplySkillTree();
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        CharacterHurtbox.DealDamage(damage);
     }
 
     public void CreateAndApplySkillTree()

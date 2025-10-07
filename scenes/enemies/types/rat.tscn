@@ -29,11 +29,12 @@ size = Vector2(51, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
 radius = 38.0132
 
-[node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent") instance=ExtResource("1_exbx4")]
+[node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_hitboxComponent") instance=ExtResource("1_exbx4")]
 script = ExtResource("2_unsun")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
+_hitboxComponent = NodePath("EnemyHitbox")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(3, 3)

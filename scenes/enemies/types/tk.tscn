@@ -38,13 +38,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnmfw"]
 size = Vector2(15.5, 24.25)
 
-[node name="TK" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_animations") instance=ExtResource("1_axxgj")]
+[node name="TK" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_animations", "_hitboxComponent") instance=ExtResource("1_axxgj")]
 scale = Vector2(2, 2)
 script = ExtResource("2_uq7ay")
 _velocityComponent = NodePath("VelocityComponent")
 _pathfindComponent = NodePath("PathfindComponent")
 _healthComponent = NodePath("HealthComponent")
 _animations = NodePath("AnimatedSprite2D")
+_hitboxComponent = NodePath("EnemyHitbox")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_cbbhd")
