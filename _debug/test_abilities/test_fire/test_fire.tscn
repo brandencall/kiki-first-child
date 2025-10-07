@@ -33,7 +33,7 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_s725b")
 
 [node name="BaseEnemy" parent="." node_paths=PackedStringArray("HurtboxComponent") instance=ExtResource("3_2pta0")]
-position = Vector2(123, -139)
+position = Vector2(150, 174)
 scale = Vector2(0.3, 0.3)
 HurtboxComponent = NodePath("HurtboxComponent2")
 metadata/_edit_group_ = true

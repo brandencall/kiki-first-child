@@ -17,11 +17,9 @@ public partial class SlowEffectAbility : Node, IEffect
 		{
 			target.ApplySlow();
 			target.VelocityComponent.AddSpeedMultiplier(SlowDownMultiplier);
-			GD.Print("Speed updated in the SlowEffectAbility to newSpeed: " + target.VelocityComponent.GetCurrentSpeed());
 			await ToSignal(GetTree().CreateTimer(Duration), "timeout");
 			target.ClearSlow();
 			target.VelocityComponent.RemoveSpeedMultiplier(SlowDownMultiplier);
-			GD.Print("Speed updated in the SlowEffectAbility to baseSpeed: " + target.VelocityComponent.GetCurrentSpeed());
 		}
 	}
 }

@@ -19,13 +19,26 @@ public partial class PoisonEffectAbility : Node, IEffect
 			float elapsed = 0f;
 			target.ApplyPoison();
 
-			while (elapsed <= Duration)
+			while (elapsed < Duration)
 			{
+				DamageContext newCtx = CreateDamageContext(ctx);
 				await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
-				target.HealthComponent.Damage(Damage);
+				DamageManager.Resolve(newCtx);
 				elapsed += TickInterval;
 			}
 			target.ClearPoison();
 		}
+	}
+
+	private DamageContext CreateDamageContext(DamageContext ctx)
+	{
+		return new DamageContext
+		{
+			Attacker = ctx.Attacker,
+			Defender = ctx.Defender,
+			BaseDamage = Damage,
+			FinalDamage = Damage,
+		};
+
 	}
 }

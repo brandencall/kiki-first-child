@@ -23,14 +23,27 @@ public partial class FireEffectAbility : Node, IEffect
 			float elapsed = 0f;
 			target.ApplyFire();
 
-			while (elapsed <= Duration)
+			while (elapsed < Duration)
 			{
+				DamageContext newCtx = CreateDamageContext(ctx);
 				await ToSignal(GetTree().CreateTimer(TickInterval), "timeout");
-				target.HealthComponent.Damage(Damage);
+				DamageManager.Resolve(newCtx);
 				elapsed += TickInterval;
 			}
 			target.ClearFire();
 			target.VelocityComponent.RemoveSpeedMultiplier(SpeedUpMultiplier);
 		}
+	}
+
+	private DamageContext CreateDamageContext(DamageContext ctx)
+	{
+		return new DamageContext
+		{
+			Attacker = ctx.Attacker,
+			Defender = ctx.Defender,
+			BaseDamage = Damage,
+			FinalDamage = Damage,
+		};
+
 	}
 }

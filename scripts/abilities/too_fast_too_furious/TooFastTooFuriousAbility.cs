@@ -1,5 +1,4 @@
 using Godot;
-using System.Threading.Tasks;
 
 public partial class TooFastTooFuriousAbility : Node, IConditionalEffect
 {
