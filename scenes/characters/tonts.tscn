@@ -53,6 +53,7 @@ scale = Vector2(2, 2)
 script = ExtResource("2_o75v0")
 BulletScene = ExtResource("4_o75v0")
 Mussel = NodePath("Mussel")
+BaseAttackCooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(2, -1.5)

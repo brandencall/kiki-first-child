@@ -13,7 +13,7 @@ public partial class ExperienceManager : Node
     {
         CurrentExperienceLevel = 1;
         CurrentExperience = 0;
-        MaxExperienceForLevel = 10;
+        MaxExperienceForLevel = 3;
     }
 
     public void IncreaseExperience(float experience)

@@ -26,28 +26,24 @@ public partial class BaseAttackUpgrade : IAbility
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 2:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 3:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 4:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 5:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
@@ -60,21 +56,18 @@ public partial class BaseAttackUpgrade : IAbility
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 7:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 			case 8:
 				newCooldown = character.BaseAttackCooldown - character.BaseAttackCooldown * 0.2f;
 				character.UpdateAttackCooldown(newCooldown);
 				newAttackDamage = character.BaseAttackDamage + 5f;
 				character.UpdateBaseAttackDamage(newAttackDamage);
-				GD.Print("Cooldown: " + character.BaseAttackCooldown);
 				break;
 		}
 	}

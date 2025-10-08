@@ -8,7 +8,7 @@ public partial class Chavz : BaseCharacter
     public override void _Ready()
     {
         base._Ready();
-        BaseAttackDamage = 20;
+        BaseAttackDamage = 10;
         Steak.Initialize(this, BaseAttackDamage);
         Steak.OwnerEntity = this;
     }

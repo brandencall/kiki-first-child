@@ -16,12 +16,14 @@ public partial class AbilityManager : Node
 
     private void LoadAllIAbilities()
     {
-        _allAbilities.Add(new SoundPulse());
+        //_allAbilities.Add(new SoundPulse());
+        //_allAbilities.Add(new Football());
         _allAbilities.Add(new SpeedBoost());
-        _allAbilities.Add(new Football());
         _allAbilities.Add(new PoisonEffect());
         _allAbilities.Add(new SlowEffect());
         _allAbilities.Add(new FireEffect());
+        _allAbilities.Add(new TooFastTooFurious());
+        _allAbilities.Add(new BaseAttackUpgrade());
     }
 
     public List<IAbility> GetRandomAbilities()

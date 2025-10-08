@@ -52,7 +52,7 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("2_422ku")
 Steak = NodePath("Steak")
-_baseAttackCooldown = 1.0
+BaseAttackCooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false

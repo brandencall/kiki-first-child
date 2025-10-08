@@ -52,6 +52,7 @@ animations = [{
 scale = Vector2(2, 2)
 script = ExtResource("2_unbyy")
 Noodle = NodePath("noodle")
+BaseAttackCooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
