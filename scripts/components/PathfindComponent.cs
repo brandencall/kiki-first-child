@@ -28,7 +28,7 @@ public partial class PathfindComponent : Node2D
         Vector2 flowFieldVector = FlowField.GetFlowVector(currentPosition);
         if (_avoidance != null)
         {
-            Vector2 repulsionVector = _avoidance.RepulsionVector;
+            Vector2 repulsionVector = _avoidance.CalculateRepulsionVectors();
             target = _avoidance.FlowFieldWeight * flowFieldVector + _avoidance.RepulsionWeight * repulsionVector;
         }
         else

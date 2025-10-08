@@ -27,7 +27,7 @@ animations = [{
 size = Vector2(51, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4655"]
-radius = 38.0132
+radius = 36.1248
 
 [node name="Rat" node_paths=PackedStringArray("_velocityComponent", "_pathfindComponent", "_healthComponent", "_hitboxComponent") instance=ExtResource("1_exbx4")]
 script = ExtResource("2_unsun")
@@ -42,6 +42,7 @@ sprite_frames = SubResource("SpriteFrames_unsun")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+visible = false
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
@@ -53,6 +54,7 @@ _avoidance = NodePath("../CollisionAvoidance")
 Damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" index="0"]
+visible = false
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")
 
@@ -64,11 +66,10 @@ offset_bottom = 16.0
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionAvoidance" parent="." index="5" instance=ExtResource("9_sw88c")]
-RepulsionWeight = 0.2
-FlowFieldWeight = 0.8
+RepulsionWeight = 0.5
+FlowFieldWeight = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_k4655")
 
 [node name="HealthComponent" parent="." index="7"]
@@ -78,5 +79,6 @@ MaxHealth = 10.0
 _accelerationCoefficient = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+visible = false
 position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_qmsgw")

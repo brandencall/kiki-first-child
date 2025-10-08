@@ -64,6 +64,9 @@ sprite_frames = SubResource("SpriteFrames_5xcsn")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="EnemySpawnPath" parent="." index="5"]
+scale = Vector2(0.65, 0.645)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHurtbox" index="0"]
 visible = false
 position = Vector2(0.5, 1)
