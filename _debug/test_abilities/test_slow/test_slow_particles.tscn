@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://cw2ys142xbx1g"]
+
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_o71cp"]
+[ext_resource type="Script" uid="uid://yo78qswdwsua" path="res://scenes/enemies/TestFireParticles.cs" id="2_5pmaq"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="3_7bxcq"]
+[ext_resource type="Texture2D" uid="uid://cq83mtri4sg6r" path="res://assets/abilities/effects/snowflake-Sheet.png" id="4_5pmaq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eh8ai"]
+size = Vector2(48, 49)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7bxcq"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_eh8ai"]
+colors = PackedColorArray(1, 1, 1, 0.729412, 1, 1, 1, 0.541176)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2t7ph"]
+gradient = SubResource("Gradient_eh8ai")
+
+[sub_resource type="Curve" id="Curve_ggnmo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.460674), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2t7ph"]
+curve = SubResource("Curve_ggnmo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mucv8"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -5, 0)
+emission_shape = 3
+emission_box_extents = Vector3(50, 30, 1)
+gravity = Vector3(0, -5, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_2t7ph")
+color_ramp = SubResource("GradientTexture1D_2t7ph")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="TestSlowParticles" type="Node2D"]
+
+[node name="BaseEnemy" parent="." instance=ExtResource("1_o71cp")]
+position = Vector2(180, 403)
+script = ExtResource("2_5pmaq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
+shape = SubResource("RectangleShape2D_eh8ai")
+
+[node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]
+position = Vector2(1, 0)
+scale = Vector2(0.382812, 0.40625)
+texture = ExtResource("3_7bxcq")
+
+[node name="SlowParticles2" type="GPUParticles2D" parent="BaseEnemy"]
+material = SubResource("CanvasItemMaterial_7bxcq")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5pmaq")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_mucv8")

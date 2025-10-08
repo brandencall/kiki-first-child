@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ddml7p7u4bv13"]
+[gd_scene load_steps=28 format=3 uid="uid://ddml7p7u4bv13"]
 
 [ext_resource type="Script" uid="uid://c6ffktfl81gy8" path="res://scripts/enemies/BaseEnemy.cs" id="1_r5xb8"]
 [ext_resource type="PackedScene" uid="uid://oqapet4r8i3d" path="res://scenes/ui/DamageLabel.tscn" id="2_2t7ph"]
@@ -6,20 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://j8u87iescblp" path="res://scenes/components/velocity_component.tscn" id="4_n763p"]
 [ext_resource type="PackedScene" uid="uid://br12oal7a6123" path="res://scenes/components/health_component.tscn" id="4_ylyo2"]
 [ext_resource type="PackedScene" uid="uid://dsnybhy7l60f7" path="res://scenes/components/hurtbox_component.tscn" id="5_ylyo2"]
+[ext_resource type="Texture2D" uid="uid://cq83mtri4sg6r" path="res://assets/abilities/effects/snowflake-Sheet.png" id="7_hwcqj"]
 [ext_resource type="Texture2D" uid="uid://c5syrr5mry5ic" path="res://assets/abilities/effects/poison-Sheet.png" id="7_n2ebm"]
 [ext_resource type="Texture2D" uid="uid://chqxnev7ifkma" path="res://assets/abilities/effects/fire-Sheet.png" id="8_i1su5"]
 
-[sub_resource type="Gradient" id="Gradient_ylyo2"]
-colors = PackedColorArray(0.435294, 0.764706, 0.858824, 1, 0.768627, 0.917647, 0.960784, 0.890196)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h4c3k"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2t7ph"]
+[sub_resource type="Gradient" id="Gradient_ylyo2"]
+colors = PackedColorArray(1, 1, 1, 0.729412, 1, 1, 1, 0.541176)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hwcqj"]
 gradient = SubResource("Gradient_ylyo2")
 
 [sub_resource type="Curve" id="Curve_ylyo2"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.460674), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_2t7ph"]
+[sub_resource type="CurveTexture" id="CurveTexture_h4c3k"]
 curve = SubResource("Curve_ylyo2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2ebm"]
@@ -29,11 +36,11 @@ emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
 emission_box_extents = Vector3(50, 30, 1)
 gravity = Vector3(0, -5, 0)
-scale_min = 10.0
-scale_max = 15.0
-scale_curve = SubResource("CurveTexture_2t7ph")
-color = Color(0.435666, 0.762781, 0.857443, 1)
-color_ramp = SubResource("GradientTexture1D_2t7ph")
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_h4c3k")
+color_ramp = SubResource("GradientTexture1D_hwcqj")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i1su5"]
 particles_animation = true
@@ -124,8 +131,10 @@ DamageLabelScene = ExtResource("2_2t7ph")
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="SlowParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_h4c3k")
 scale = Vector2(0.4, 0.4)
 emitting = false
+texture = ExtResource("7_hwcqj")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_n2ebm")
 
@@ -133,7 +142,6 @@ process_material = SubResource("ParticleProcessMaterial_n2ebm")
 material = SubResource("CanvasItemMaterial_i1su5")
 scale = Vector2(0.4, 0.4)
 emitting = false
-amount = 12
 texture = ExtResource("7_n2ebm")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_n763p")
@@ -142,7 +150,6 @@ process_material = SubResource("ParticleProcessMaterial_n763p")
 material = SubResource("CanvasItemMaterial_hwcqj")
 scale = Vector2(0.4, 0.4)
 emitting = false
-amount = 12
 texture = ExtResource("8_i1su5")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_h4c3k")
