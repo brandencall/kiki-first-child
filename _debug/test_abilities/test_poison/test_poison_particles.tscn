@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsjrfh7detjo3"]
+
+[ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_dcvp2"]
+[ext_resource type="Script" uid="uid://yo78qswdwsua" path="res://scenes/enemies/TestFireParticles.cs" id="2_dto0i"]
+[ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="3_185rb"]
+[ext_resource type="Texture2D" uid="uid://c5syrr5mry5ic" path="res://assets/abilities/effects/poison-Sheet.png" id="4_dto0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe31u"]
+size = Vector2(48, 49)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dto0i"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_185rb"]
+colors = PackedColorArray(0.505882, 0.596078, 0.141176, 0.815686, 0.796078, 0.929412, 0.317647, 0.286275)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n2ebm"]
+gradient = SubResource("Gradient_185rb")
+
+[sub_resource type="Curve" id="Curve_qe31u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.483146), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1su5"]
+curve = SubResource("Curve_qe31u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m38q6"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -5, 0)
+emission_shape = 3
+emission_box_extents = Vector3(50, 30, 1)
+gravity = Vector3(0, -5, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_i1su5")
+color = Color(0.504994, 0.596086, 0.141458, 1)
+color_ramp = SubResource("GradientTexture1D_n2ebm")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="test_poison_particles" type="Node2D"]
+
+[node name="BaseEnemy" parent="." instance=ExtResource("1_dcvp2")]
+position = Vector2(180, 403)
+script = ExtResource("2_dto0i")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
+shape = SubResource("RectangleShape2D_qe31u")
+
+[node name="Sprite2D" type="Sprite2D" parent="BaseEnemy"]
+position = Vector2(1, 0)
+scale = Vector2(0.382812, 0.40625)
+texture = ExtResource("3_185rb")
+
+[node name="PoisonParticles2" type="GPUParticles2D" parent="BaseEnemy"]
+material = SubResource("CanvasItemMaterial_dto0i")
+scale = Vector2(0.4, 0.4)
+amount = 12
+texture = ExtResource("4_dto0i")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_m38q6")

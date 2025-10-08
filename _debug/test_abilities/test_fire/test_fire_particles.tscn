@@ -1,44 +1,51 @@
-[gd_scene load_steps=10 format=3 uid="uid://55ytuprhnow4"]
+[gd_scene load_steps=12 format=3 uid="uid://55ytuprhnow4"]
 
 [ext_resource type="PackedScene" uid="uid://ddml7p7u4bv13" path="res://scenes/enemies/base_enemy.tscn" id="1_7vqmr"]
 [ext_resource type="Texture2D" uid="uid://dqnfun3irb7un" path="res://assets/icon.svg" id="2_8e4d0"]
 [ext_resource type="Script" uid="uid://yo78qswdwsua" path="res://scenes/enemies/TestFireParticles.cs" id="2_r1vpk"]
+[ext_resource type="Texture2D" uid="uid://chqxnev7ifkma" path="res://assets/abilities/effects/fire-Sheet.png" id="4_r1vpk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1vpk"]
 size = Vector2(48, 49)
 
-[sub_resource type="Gradient" id="Gradient_8e4d0"]
-colors = PackedColorArray(0.839216, 0, 0, 1, 1, 0.984314, 0, 0.690196)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3ssbe"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ylyo2"]
-gradient = SubResource("Gradient_8e4d0")
+[sub_resource type="Gradient" id="Gradient_wio7p"]
+colors = PackedColorArray(1, 1, 1, 0.835294, 1, 1, 1, 0.407843)
 
-[sub_resource type="Curve" id="Curve_r1vpk"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hwcqj"]
+gradient = SubResource("Gradient_wio7p")
+
+[sub_resource type="Curve" id="Curve_ods23"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.483146), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_n2ebm"]
-curve = SubResource("Curve_r1vpk")
+curve = SubResource("Curve_ods23")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ssbe"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_01o0c"]
 lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, -5, 0)
 emission_shape = 3
 emission_box_extents = Vector3(50, 30, 1)
 gravity = Vector3(0, -5, 0)
-scale_min = 10.0
-scale_max = 15.0
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_n2ebm")
-color = Color(0.839216, 0, 0, 0.6)
-color_ramp = SubResource("GradientTexture1D_ylyo2")
+color_ramp = SubResource("GradientTexture1D_hwcqj")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="TestFireParticles" type="Node2D"]
 
 [node name="BaseEnemy" parent="." node_paths=PackedStringArray("FireParticles") instance=ExtResource("1_7vqmr")]
 position = Vector2(180, 403)
 script = ExtResource("2_r1vpk")
-FireParticles = NodePath("FireParticles2")
+FireParticles = NodePath("")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEnemy"]
@@ -50,6 +57,9 @@ scale = Vector2(0.382812, 0.40625)
 texture = ExtResource("2_8e4d0")
 
 [node name="FireParticles2" type="GPUParticles2D" parent="BaseEnemy"]
+material = SubResource("CanvasItemMaterial_3ssbe")
 scale = Vector2(0.4, 0.4)
+amount = 12
+texture = ExtResource("4_r1vpk")
 lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_3ssbe")
+process_material = SubResource("ParticleProcessMaterial_01o0c")
