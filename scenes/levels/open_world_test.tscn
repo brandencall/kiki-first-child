@@ -80,8 +80,6 @@ TileMap = NodePath("../WorldTileSet")
 LowResDebugger = NodePath("../LowResFlowFieldDebug")
 HighResDebugger = NodePath("../HighResFlowFieldDebug")
 FlowField = NodePath("../FlowFieldManager")
-chunkSize = 12
-renderDistance = 3
 
 [node name="SpawnManager" parent="." instance=ExtResource("6_ggxux")]
 
